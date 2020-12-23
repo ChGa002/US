@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+
+        <!-- IMPLEMENTATION BOOTSTRAP CSS -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{asset('/css/bootstrap.min.css')}}">
+        <link rel="stylesheet" href="{{asset('/css/styleAdd.css')}}">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        <!-- TITRE -->
+        <title>{% block title %}University Share{% endblock %}</title>
+    </head>
+    <body>
+        {% block body %}
+                <div class="container-fluid">
+                    <div class="sidenav">
+                        <ul class="nav flex-column">
+                            <li class="nav-item"><a href="#">
+                                <div class="carre">
+                                    <object data="{{asset('/img/$user.png')}}" type="image/png" height="100px" width="100px">
+                                        <img src="{{asset('/img/logo.png')}}" alt="defaut" height="100px" width="100px">
+                                    </object>
+                                </div></li>
+                            </a>
+                            <li class="nav-item"><div class="line"></div></li>
+                            <li class="nav-item"><a href="#">Accueil</a></li>
+                            <li class="nav-item"><a href="#">Répertoire</a></li>
+                            <li class="nav-item"><a href="#">Créer un post</a></li>
+                            <li class="nav-item"><a href="#">Favoris</a></li>
+                            <li class="nav-item"><a href="#">Classement</a></li>
+                            <li class="nav-item"><a href="#">Admin</a></li>
+                            <li class="nav-item"><button class="btn btn-dark btn-circle btn-lg" style="margin-left:10px;margin-bottom:10px;"><span class="glyphicon glyphicon-off"></span></button></li>
+                        </ul>
+                    </div>
+                    <div class="main">
+                    	<div class="row"style="height:100%;">
+                            <div class="col-md-1" style="background-color: blue;height:100%;">
+                                size gauche de 1 
+                            </div>
+                            <div class="col-md-10"style="background-color: red;text-align:center;height:100%;">
+                                <div class="row" style="background-color: pink;text-align:center;margin:10px;height:30%;"> 
+                                
+                                ===Zone Recherche===
+
+                                </div>
+                                <div class="row" style="background-color: purple;text-align:center;margin:10px;height:70%;"> ===Zone Bordel Central=== </div>
+                            </div>
+                            <div class="col-md-1" style="background-color: green;height:100%;">
+                                size droite de 1 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        {% endblock %}
+
+
+        <!-- BLOCK JAVASCRIPT -->
+
+        {% block javascripts %}
+        	 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+            <script src="{{asset('/js/bootstrap.min.js')}}" ></script>
+
+        {% endblock %}
+    </body>
+</html>

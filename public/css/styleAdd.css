@@ -1,0 +1,83 @@
+/* === ZONE NAVIGATION MENU === */
+.sidenav {
+    height: 100%;
+    width: 160px;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgb(69, 69, 69);
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+  
+.sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    letter-spacing: 1px;
+    line-height: 50px;
+    color: #202020;
+    display: block;
+}
+
+.sidenav a:hover {
+    color: #000000;
+}
+  
+.main {
+    margin-left: 160px; /* Same as the width of the sidenav */
+    font-size: 28px; /* Increased text to enable scrolling */
+    padding: 0px 10px;
+}
+  
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+
+.line{
+    height: 0;
+    width: 100px;
+    position: fixed;
+    z-index: 1;
+    border: 1px solid black;
+    margin-left: 17px;    
+}
+
+.btn-circle {
+    width: 1.875rem;
+    height: 1.875rem;
+    text-align: center;
+    padding: 0.375rem 0;
+    font-size: 0.75rem;
+    line-height: 1.428571429;
+    border-radius: 0.938rem;
+  }
+  .btn-circle.btn-lg {
+    width: 3.125rem;
+    height: 3.125rem;
+    padding: 0.625rem 1rem;
+    font-size: 1.125rem;
+    line-height: 1.33;
+    border-radius: 1.563rem;
+  }
+
+/* === FIN ZONE NAVIGATION MENU === */
+/* === ZONE MAIN - CONTAINER PRINCIPALE === */
+html{background-color: grey;}
+/* === FIN ZONE MAIN === */
+/* === ZONE OBJET === */
+
+.carre{
+	height: 100px;
+	width: 100px;
+	border: 2px solid;
+	border-image: white;
+    border-image-slice: 1;
+    /*position: absolute; /* postulat de départ 
+    top: 50%; left: 50%; /* à 50%/50% du parent référent 
+    transform: translate(-50%, -50%); /* décalage de 50% de sa propre taille */
+}
+
+/* === FIN ZONE OBJET === */
