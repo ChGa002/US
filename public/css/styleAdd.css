@@ -1,7 +1,7 @@
 /* === ZONE NAVIGATION MENU === */
 .sidenav {
     height: 100%;
-    width: 160px;
+    width: 10%;
     position: absolute;
     z-index: 1;
     top: 0;
@@ -12,10 +12,10 @@
 }
 
 .sidenav a {
-    padding: 6px 8px 6px 16px;
+    padding: 6% 8% 6% 16%;
     text-decoration: none;
     font-size: 20px;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
     line-height: 50px;
     color: #202020;
     display: block;
@@ -29,6 +29,8 @@
     margin-left: 160px; /* Same as the width of the sidenav */
     font-size: 28px; /* Increased text to enable scrolling */
     padding: 0px 10px;
+    overflow: hidden;
+    background-color: grey;
 }
 
 @media screen and (max-height: 450px) {
@@ -39,10 +41,10 @@
 .line{
     height: 0;
     width: 100px;
-    position: fixed;
+    position: absolute;
     z-index: 1;
     border: 1px solid black;
-    margin-left: 17px;
+    margin-left:17%;
 }
 
 .btn-circle {
@@ -62,6 +64,9 @@
     line-height: 1.33;
     border-radius: 1.563rem;
   }
+  .sidenav .btn-circle{
+
+  }
 
 /* === FIN ZONE NAVIGATION MENU === */
 /* === ZONE MAIN - CONTAINER PRINCIPALE === */
@@ -79,5 +84,7 @@ html{background-color: grey;}
     top: 50%; left: 50%; /* à 50%/50% du parent référent
     transform: translate(-50%, -50%); /* décalage de 50% de sa propre taille */
 }
-
+.col-md-10{background-color: grey;}
+.row{background-color: grey;}
+.container{background-color: grey;}
 /* === FIN ZONE OBJET === */
