@@ -12,7 +12,30 @@
     </head>
     <body>
 
-        {% block body %}{% endblock %}
+      <div class="container-fluid"style="background-color: grey;">
+        <div class="row justify-content-center">
+          <div class="col-md-5">
+          </div>
+          <div class="col-md-2"style="text-align:center;margin:20% 50% 6em;">
+            {% block Image %}
+            === IMAGE ===
+            {%endblock%}
+          </div>
+          <div class="col-md-5">
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-md-1">
+          </div>
+          <div class="col-md-10" style="text-align:center;">
+            {% block contenuBox %}
+            === FORMULAIRE OU TEXTE ===
+            {%endblock%}
+          </div>
+          <div class="col-md-1">
+          </div>
+        </div>
+      </div>
 
 
         <!-- BLOCK JAVASCRIPT -->
