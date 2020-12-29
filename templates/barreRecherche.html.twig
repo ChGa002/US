@@ -15,64 +15,42 @@
         <title>{% block title %}University Share{% endblock %}</title>
     </head>
     <body>
-        {% block body %}
-        <div class="container-fluid">
+      <div class="container-fluid">
           <div class="row">
-            <div class="col-md-2">
-              <div class="sidenav">
-                <ul class="nav flex-column nav-pils">
-                    <li class="nav-item">
-                      <a href="#">
-                        <div class="carre">
-                            <object data="{{asset('/img/$user.png')}}" type="image/png" height="100px" width="100px">
-                                <img src="{{asset('/img/logo.png')}}" alt="defaut" height="100px" width="100px">
-                            </object>
-                        </div></li>
-                    </a>
-                    <li class="nav-item"><div class="line"></div></li>
-                    <li class="nav-item"><a href="#">Accueil</a></li>
-                    <li class="nav-item"><a href="#">Répertoire</a></li>
-                    <li class="nav-item"><a href="#">Créer un post</a></li>
-                    <li class="nav-item"><a href="#">Favoris</a></li>
-                    <li class="nav-item"><a href="#">Classement</a></li>
-                    <li class="nav-item"><a href="#">Admin</a></li>
-                    <li class="nav-item">
-                      <button class="btn btn-dark btn-circle btn-lg" style="position:absolute;bottom:10%;left:30%;">
-                        <i data-feather="log-out"></i>
-                      </button>
-                    </li>
-                </ul>
+              <div class="col-md-2">
+              <nav class="nav flex-column nav-pills nav-fill">
+                <a class="nav-item nav-link active" href="#">
+                  <div class="carre">
+                      <object data="{{asset('/img/$user.png')}}" type="image/png" height="100px" width="100px">
+                          <img src="{{asset('/img/logo.png')}}" alt="defaut" height="100px" width="100px">
+                      </object>
+                  </div>
+                </a>
+                <a class="nav-item nav-link active"><div class="line"></div></a>
+                <a class="nav-item nav-link active" href="#">Accueil</a>
+                <a class="nav-item nav-link active" href="#">Répertoires</a>
+                <a class="nav-link active" href="#">Créer un post</a>
+                <a class="nav-item nav-link active" href="#">Mes favoris</a>
+                <a class="nav-item nav-link active" href="#">Classement</a>
+                {% block admin %}
+                <a class="nav-item nav-link active" href="#">
+                  <button class="btn btn-dark btn-circle btn-lg">
+                    <i data-feather="log-out"></i>
+                  </button>
+                </a>
+                {% endblock %}
+              </nav>
               </div>
-            </div>
-            <div class="col-md-10">
-              <div class="row justify-content-center">
-                <div class="col-md-1">
-                </div>
-                <div class="col-md-10"style="margin:10% 1em 1em 1em;text-align:center;border-color:black;border-size:2px;">
-                  {% block recherche %}
-                  === SEARCH BAR ===
-                  {%endblock%}
-                </div>
-                <div class="col-md-1">
-                </div>
+               <div class="col-md-8">
+              {% block formulairePost %}
+              {% endblock %}
               </div>
-              <div class="row justify-content-center">
-                <div class="col-md-1">
-                </div>
-                <div class="col-md-10"style="margin:10% 1em 1em 1em;text-align:center;border-color:black;border-size:2px;">
-                  {% block BBcolonne %}
-                  === BIG BOX COLONNE ===
-                  {%endblock%}
-                </div>
-                <div class="col-md-1">
-                </div>
-              </div>
-            </div>
-          </div>
-          </div>
-        {% endblock %}
 
-
+              <div class="col-md-2">
+              {% block arborescence %}
+              {% endblock %}
+              </div>
+          </div>
         <!-- BLOCK JAVASCRIPT -->
         <script>
           feather.replace()
