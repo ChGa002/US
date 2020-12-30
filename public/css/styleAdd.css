@@ -1,8 +1,4 @@
 /* === ZONE NAVIGATION MENU === */
-
-a{text-decoration: none;color: #202020;}
-a:hover{color: #000000;}
-
 .line{
     height: 0;
     width: 100px;
@@ -28,6 +24,12 @@ a:hover{color: #000000;}
     border-radius: 1.563rem;
   }
 
+  .btn.btn-primary{
+    background-color: rgb(153, 153, 153);
+    margin-left: 10px;
+    border-color: black;
+  }
+
   #wrapper {
      overflow-x: hidden;
   }
@@ -39,6 +41,7 @@ a:hover{color: #000000;}
    -moz-transition: margin .25s ease-out;
    -o-transition: margin .25s ease-out;
    transition: margin .25s ease-out;
+   justify-content: center;
  }
 
  #sidebar-wrapper .sidebar-heading {
@@ -73,9 +76,17 @@ a:hover{color: #000000;}
    }
  }
 
+a{text-decoration: none;color:black;}
+a:hover{color:#141414;}
+
 /* === FIN ZONE NAVIGATION MENU === */
 /* === ZONE MAIN - CONTAINER PRINCIPALE === */
 html{background-color: grey;}
+
+body{
+  background-color: rgb(51,51,51);
+  color: white;
+}
 /* === FIN ZONE MAIN === */
 /* === ZONE OBJET === */
 
@@ -107,6 +118,6 @@ html{background-color: grey;}
   border-image-slice: 1;
   background-color: #DFDFDF;
 }
-body{background-color: grey;}
+
 
 /* === FIN ZONE OBJET === */

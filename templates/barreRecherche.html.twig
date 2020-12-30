@@ -1,99 +1,104 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
+<html lang="fr">
 
-        <!-- IMPLEMENTATION BOOTSTRAP CSS -->
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="{{asset('/css/bootstrap.min.css')}}">
-        <link rel="stylesheet" href="{{asset('/css/styleAdd.css')}}">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-        <!-- ALTERNATIVE ICONS BOOTSTRAP 3 -->
-        <script src="https://unpkg.com/feather-icons"></script>
-        <!-- TITRE -->
-        <title>{% block title %}University Share - {% endblock %}</title>
-    </head>
-    <body>
-      <div class="container-fluid">
-          <div class="row">
-              <div class="col-md-2">
-                <div class="d-flex" id="wrapper">
+<head>
 
-                  <!-- Sidebar -->
-                  <div class="bg-light border-right" id="sidebar-wrapper">
-                    <div class="sidebar-heading">US </div>
-                    <div class="list-group list-group-flush">
-                      <a href="#" class="list-group-item list-group-item-action bg-light">
-                        <div class="carreIMG">
-                            <object data="{{asset('/img/$user.png')}}" type="image/png" height="100px" width="100px">
-                                <img src="{{asset('/img/logo.png')}}" alt="defaut" height="100px" width="100px">
-                            </object>
-                        </div>
-                      </a>
-                      <a href="#" class="list-group-item list-group-item-action bg-light"><div class="line"></div></a>
-                      <a href="#" class="list-group-item list-group-item-action bg-light">Accueil</a>
-                      <a href="#" class="list-group-item list-group-item-action bg-light">Répertoires</a>
-                      <a href="#" class="list-group-item list-group-item-action bg-light">Créer un post</a>
-                      <a href="#" class="list-group-item list-group-item-action bg-light">Mes favoris</a>
-                      <a href="#" class="list-group-item list-group-item-action bg-light">Classement</a>
-                      <a href="#" class="list-group-item list-group-item-action bg-light">
-                    </div>
-                  </div>
-                  <!-- /#sidebar-wrapper -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-                  <!-- Page Content -->
-                  <div id="page-content-wrapper">
-                  </div>
-              <!--<nav class="nav flex-column nav-fill" style="background-color:#605F5F">
-                <a class="nav-item nav-link" href="#" style="justify-content:center;">
-                  <div class="carreIMG">
-                      <object data="{{asset('/img/$user.png')}}" type="image/png" height="100px" width="100px">
-                          <img src="{{asset('/img/logo.png')}}" alt="defaut" height="100px" width="100px">
-                      </object>
-                  </div>
-                </a>
-                <a class="nav-item nav-link "style="justify-content:center;"><div class="line"></div></a>
-                <a class="nav-item nav-link " href="#">Accueil</a>
-                <a class="nav-item nav-link " href="#">Répertoires</a>
-                <a class="nav-item nav-link " href="#">Créer un post</a>
-                <a class="nav-item nav-link " href="#">Mes favoris</a>
-                <a class="nav-item nav-link " href="#">Classement</a>
-                {% block admin %}
-                <a class="nav-item nav-link" href="#">
-                  <button class="btn btn-dark btn-circle btn-lg">
-                    <i data-feather="log-out"></i>
-                  </button>
-                </a>
-                {% endblock %}
-              </nav>
-              </div>
-               <div class="col-md-8">
-                 {% block barreRecherche %}
-                 <div class="barreRecherche">
+  <!-- IMPLEMENTATION BOOTSTRAP CSS -->
+  <link rel="stylesheet" href="{{asset('/css/bootstrap.min.css')}}">
+  <link rel="stylesheet" href="{{asset('/css/styleAdd.css')}}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <!-- ALTERNATIVE ICONS BOOTSTRAP 3 -->
+  <script src="https://unpkg.com/feather-icons"></script>
+  <!-- TITRE -->
+  <title>{% block title %}University Share - {% endblock %}</title>
 
-                 </div>
-                 {%endblock%}
-                 <div class="carreCont">
-                   {% block grosContainer %}
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-                   {% endblock %}
-                 </div>-->
-              </div>
+  <!-- Custom styles for this template -->
+  <link href="css/simple-sidebar.css" rel="stylesheet">
 
-              <div class="col-md-2">
-              <!--{% block arborescence %}
-              {% endblock %}-->
-              </div>
-          </div>
-        <!-- BLOCK JAVASCRIPT -->
-        <script>
-          feather.replace()
-        </script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
-        <script src="{{asset('/js/bootstrap.min.js')}}" ></script>
-        {% block javascripts %}
+</head>
 
+<body>
+
+  <div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    <div class="bg-secondary border-right justify-content-between align-items-center" id="sidebar-wrapper" style="border:1px solid black;">
+      <ul class="list-group list-group-flush" style="color:black;">
+        <li class="list-group-item list-group-item-action bg-secondary text-dark">
+          <a href="#"><div class="carreIMG">
+                <object data="{{asset('/img/$user.png')}}" type="image/png" height="100px" width="100px">
+                    <img src="{{asset('/img/logo.png')}}" alt="defaut" height="100px" width="100px">
+                </object>
+            </div>
+          </a>
+        </li>
+        <li class="list-group-item list-group-item-action bg-secondary text-dark"><a href="#"><div class="line"></div></a></li>
+        <li class="list-group-item list-group-item-action bg-secondary text-dark"><a href="#">Accueil</a></li>
+        <li class="list-group-item list-group-item-action bg-secondary text-dark"><a href="#">Répertoires</a></li>
+        <li class="list-group-item list-group-item-action bg-secondary text-dark"><a href="#">Créer un post</a></li>
+        <li class="list-group-item list-group-item-action bg-secondary text-dark"><a href="#">Mes favoris</a></li>
+        <li class="list-group-item list-group-item-action bg-secondary text-dark"><a href="#">Classement</a></li>
+        {% block admin %}
+        <li class="list-group-item list-group-item-action bg-secondary text-dark">
+          <a href="#">
+            <button class="btn btn-dark btn-circle btn-lg">
+              <i data-feather="log-out"></i>
+            </button>
+          </a>
+        </li>
         {% endblock %}
-    </body>
+      </ul>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+      <nav class="navbar navbar-expand-lg navbar-light bg-secondary border-bottom" style="border:1px solid black;">
+        <button class="btn btn-primary" id="menu-toggle"><i data-feather="menu"></i></button>
+      </nav>
+
+      <div class="container-fluid">
+        <h1 class="mt-4">Simple Sidebar</h1>
+        <p>The starting state of the menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will change.</p>
+        <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>. The top navbar is optional, and just for demonstration. Just create an element with the <code>#menu-toggle</code> ID which will toggle the menu when clicked.</p>
+      </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- Block JavaScript -->
+  <script>
+    feather.replace()
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+  <script src="{{asset('/js/bootstrap.min.js')}}" ></script>
+  {% block javascripts %}
+
+  {% endblock %}
+
+  <!-- Menu Toggle Script -->
+  <script>
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+  </script>
+
+</body>
+
 </html>
