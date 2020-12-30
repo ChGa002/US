@@ -12,28 +12,28 @@
         <!-- ALTERNATIVE ICONS BOOTSTRAP 3 -->
         <script src="https://unpkg.com/feather-icons"></script>
         <!-- TITRE -->
-        <title>{% block title %}University Share{% endblock %}</title>
+        <title>{% block title %}University Share - {% endblock %}</title>
     </head>
     <body>
       <div class="container-fluid">
           <div class="row">
               <div class="col-md-2">
-              <nav class="nav flex-column nav-pills nav-fill">
-                <a class="nav-item nav-link active" href="#">
-                  <div class="carre">
+              <nav class="nav flex-column nav-fill" style="background-color:#605F5F">
+                <a class="nav-item nav-link" href="#" style="justify-content:center;">
+                  <div class="carreIMG">
                       <object data="{{asset('/img/$user.png')}}" type="image/png" height="100px" width="100px">
                           <img src="{{asset('/img/logo.png')}}" alt="defaut" height="100px" width="100px">
                       </object>
                   </div>
                 </a>
-                <a class="nav-item nav-link active"><div class="line"></div></a>
-                <a class="nav-item nav-link active" href="#">Accueil</a>
-                <a class="nav-item nav-link active" href="#">Répertoires</a>
-                <a class="nav-link active" href="#">Créer un post</a>
-                <a class="nav-item nav-link active" href="#">Mes favoris</a>
-                <a class="nav-item nav-link active" href="#">Classement</a>
+                <a class="nav-item nav-link "style="justify-content:center;"><div class="line"></div></a>
+                <a class="nav-item nav-link " href="#">Accueil</a>
+                <a class="nav-item nav-link " href="#">Répertoires</a>
+                <a class="nav-item nav-link " href="#">Créer un post</a>
+                <a class="nav-item nav-link " href="#">Mes favoris</a>
+                <a class="nav-item nav-link " href="#">Classement</a>
                 {% block admin %}
-                <a class="nav-item nav-link active" href="#">
+                <a class="nav-item nav-link" href="#">
                   <button class="btn btn-dark btn-circle btn-lg">
                     <i data-feather="log-out"></i>
                   </button>
@@ -42,13 +42,21 @@
               </nav>
               </div>
                <div class="col-md-8">
-              {% block formulairePost %}
-              {% endblock %}
+                 {% block barreRecherche %}
+                 <div class="barreRecherche">
+
+                 </div>
+                 {%endblock%}
+                 <div class="carreCont">
+                   {% block grosContainer %}
+
+                   {% endblock %}
+                 </div>
               </div>
 
               <div class="col-md-2">
-              {% block arborescence %}
-              {% endblock %}
+              <!--{% block arborescence %}
+              {% endblock %}-->
               </div>
           </div>
         <!-- BLOCK JAVASCRIPT -->
