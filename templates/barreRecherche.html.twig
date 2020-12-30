@@ -18,7 +18,34 @@
       <div class="container-fluid">
           <div class="row">
               <div class="col-md-2">
-              <nav class="nav flex-column nav-fill" style="background-color:#605F5F">
+                <div class="d-flex" id="wrapper">
+
+                  <!-- Sidebar -->
+                  <div class="bg-light border-right" id="sidebar-wrapper">
+                    <div class="sidebar-heading">US </div>
+                    <div class="list-group list-group-flush">
+                      <a href="#" class="list-group-item list-group-item-action bg-light">
+                        <div class="carreIMG">
+                            <object data="{{asset('/img/$user.png')}}" type="image/png" height="100px" width="100px">
+                                <img src="{{asset('/img/logo.png')}}" alt="defaut" height="100px" width="100px">
+                            </object>
+                        </div>
+                      </a>
+                      <a href="#" class="list-group-item list-group-item-action bg-light"><div class="line"></div></a>
+                      <a href="#" class="list-group-item list-group-item-action bg-light">Accueil</a>
+                      <a href="#" class="list-group-item list-group-item-action bg-light">Répertoires</a>
+                      <a href="#" class="list-group-item list-group-item-action bg-light">Créer un post</a>
+                      <a href="#" class="list-group-item list-group-item-action bg-light">Mes favoris</a>
+                      <a href="#" class="list-group-item list-group-item-action bg-light">Classement</a>
+                      <a href="#" class="list-group-item list-group-item-action bg-light">
+                    </div>
+                  </div>
+                  <!-- /#sidebar-wrapper -->
+
+                  <!-- Page Content -->
+                  <div id="page-content-wrapper">
+                  </div>
+              <!--<nav class="nav flex-column nav-fill" style="background-color:#605F5F">
                 <a class="nav-item nav-link" href="#" style="justify-content:center;">
                   <div class="carreIMG">
                       <object data="{{asset('/img/$user.png')}}" type="image/png" height="100px" width="100px">
@@ -51,7 +78,7 @@
                    {% block grosContainer %}
 
                    {% endblock %}
-                 </div>
+                 </div>-->
               </div>
 
               <div class="col-md-2">
