@@ -11,6 +11,7 @@
   <!-- IMPLEMENTATION BOOTSTRAP CSS -->
   <link rel="stylesheet" href="{{asset('/css/bootstrap.min.css')}}">
   <link rel="stylesheet" href="{{asset('/css/styleAdd.css')}}">
+  <link rel="stylesheet" href="{{asset('/css/hamburgers.css')}}">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <!-- ALTERNATIVE ICONS BOOTSTRAP 3 -->
@@ -64,13 +65,24 @@
     <div id="page-content-wrapper">
 
       <nav class="navbar navbar-expand-lg navbar-light bg-secondary border-bottom" style="border:1px solid black;">
-        <button class="btn btn-primary" id="menu-toggle"><i data-feather="menu"></i></button>
+        <!--<button class="btn btn-primary" id="menu-toggle"><i data-feather="menu"></i></button>-->
+        <button class="hamburger hamburger--elastic-r" type="button" id="menu-toggle">
+          <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+          </span>
+        </button>
+        {%block search%}
+        <form action="" class="search-bar">
+          <input type="search" name="search" pattern=".*\S.*" required>
+          <button class="search-btn" type="submit">
+            <span>Search</span>
+          </button>
+        </form>
+        {%endblock%}
       </nav>
 
       <div class="container-fluid">
-        <h1 class="mt-4">Simple Sidebar</h1>
-        <p>The starting state of the menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will change.</p>
-        <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>. The top navbar is optional, and just for demonstration. Just create an element with the <code>#menu-toggle</code> ID which will toggle the menu when clicked.</p>
+        {%block contenuPage%}{%endblock%}
       </div>
     </div>
     <!-- /#page-content-wrapper -->
@@ -98,6 +110,17 @@
       $("#wrapper").toggleClass("toggled");
     });
   </script>
+  <!--Animation Toggle Menu hamburger-->
+  <script>
+  // Look for .hamburger
+  var hamburger = document.querySelector(".hamburger");
+  // On click
+  hamburger.addEventListener("click", function() {
+    // Toggle class "is-active"
+    hamburger.classList.toggle("is-active");
+    // Do something else, like open/close menu
+  });
+</script>
 
 </body>
 
