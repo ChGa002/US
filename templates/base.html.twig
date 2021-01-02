@@ -5,8 +5,8 @@
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+  <meta name="description" content="Template de base pour le site us - university share.">
+  <meta name="author" content="Ewen Blandin">
 
   <!-- IMPLEMENTATION BOOTSTRAP CSS -->
   <link rel="stylesheet" href="{{asset('/css/bootstrap.min.css')}}">
@@ -29,7 +29,7 @@
 
 <body>
 
-  <div class="d-flex" id="wrapper">
+  <div class="d-flex toggled" id="wrapper">
 
     <!-- Sidebar -->
     <div class="bg-secondary border-right justify-content-between align-items-center" id="sidebar-wrapper" style="border:1px solid black;">
@@ -49,6 +49,8 @@
         <li class="list-group-item list-group-item-action bg-secondary text-dark"><a href="#">Mes favoris</a></li>
         <li class="list-group-item list-group-item-action bg-secondary text-dark"><a href="#">Classement</a></li>
         {% block admin %}
+        <li class="list-group-item list-group-item-action bg-secondary text-dark"><a href="#">Admin</a></li>
+        {% endblock %}
         <li class="list-group-item list-group-item-action bg-secondary text-dark">
           <a href="#">
             <button class="btn btn-dark btn-circle btn-lg">
@@ -56,7 +58,6 @@
             </button>
           </a>
         </li>
-        {% endblock %}
       </ul>
     </div>
     <!-- /#sidebar-wrapper -->
@@ -66,7 +67,7 @@
 
       <nav class="navbar navbar-expand-lg navbar-light bg-secondary border-bottom" style="border:1px solid black;">
         <!--<button class="btn btn-primary" id="menu-toggle"><i data-feather="menu"></i></button>-->
-        <button class="hamburger hamburger--elastic-r" type="button" id="menu-toggle">
+        <button class="hamburger hamburger--elastic" type="button" id="menu-toggle">
           <span class="hamburger-box">
             <span class="hamburger-inner"></span>
           </span>
