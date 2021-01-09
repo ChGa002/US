@@ -22,6 +22,23 @@ class Note
      */
     private $note;
 
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $date;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Post::class, inversedBy="notes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $post;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Utilisateur::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $utilisateur;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -35,6 +52,42 @@ class Note
     public function setNote(?int $note): self
     {
         $this->note = $note;
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): self
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    public function getPost(): ?Post
+    {
+        return $this->post;
+    }
+
+    public function setPost(?Post $post): self
+    {
+        $this->post = $post;
+
+        return $this;
+    }
+
+    public function getUtilisateur(): ?Utilisateur
+    {
+        return $this->utilisateur;
+    }
+
+    public function setUtilisateur(?Utilisateur $utilisateur): self
+    {
+        $this->utilisateur = $utilisateur;
 
         return $this;
     }

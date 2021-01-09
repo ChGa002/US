@@ -32,6 +32,12 @@ class Ressource
      */
     private $emplacement;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Post::class, inversedBy="ressources")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $post;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,6 +75,18 @@ class Ressource
     public function setEmplacement(string $emplacement): self
     {
         $this->emplacement = $emplacement;
+
+        return $this;
+    }
+
+    public function getPost(): ?Post
+    {
+        return $this->post;
+    }
+
+    public function setPost(?Post $post): self
+    {
+        $this->post = $post;
 
         return $this;
     }
