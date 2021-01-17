@@ -1,80 +1,3 @@
-/* === ZONE NAVIGATION MENU === */
-.line{
-    height: 0;
-    width: 100px;
-    z-index: 1;
-    border: 1px solid black;
-}
-
-.btn-circle {
-    width: 1.875rem;
-    height: 1.875rem;
-    text-align: center;
-    padding: 0.375rem 0;
-    font-size: 0.75rem;
-    line-height: 1.428571429;
-    border-radius: 0.938rem;
-  }
-  .btn-circle.btn-lg {
-    width: 3.125rem;
-    height: 3.125rem;
-    padding: 0.625rem 1rem;
-    font-size: 1.125rem;
-    line-height: 1.33;
-    border-radius: 1.563rem;
-  }
-
-  .btn.btn-primary{
-    background-color: rgb(153, 153, 153);
-    margin-left: 10px;
-    border-color: black;
-  }
-
-  #wrapper {
-     overflow-x: hidden;
-  }
-
- #sidebar-wrapper {
-   min-height: 100vh;
-   margin-left: -15rem;
-   -webkit-transition: margin .25s ease-out;
-   -moz-transition: margin .25s ease-out;
-   -o-transition: margin .25s ease-out;
-   transition: margin .25s ease-out;
-   justify-content: center;
- }
-
- #sidebar-wrapper .sidebar-heading {
-   padding: 0.875rem 1.25rem;
-   font-size: 1.2rem;
- }
-
- #sidebar-wrapper .list-group {
-   width: 15rem;
- }
-
- #page-content-wrapper {
-   min-width: 100vw;
- }
-
- #wrapper.toggled #sidebar-wrapper {
-   margin-left: 0;
- }
-
- @media (min-width: 768px) {
-   #sidebar-wrapper {
-     margin-left: 0;
-   }
-
-   #page-content-wrapper {
-     min-width: 0;
-     width: 100%;
-   }
-
-   #wrapper.toggled #sidebar-wrapper {
-     margin-left: -15rem;
-   }
- }
 
 a{text-decoration: none;color:black;}
 a:hover{color:#141414;}
@@ -254,11 +177,7 @@ body{
 	height: 100px; 	width: 100px;
 	border: 2px solid;
 	border-image: white;
-  border-image-slice: 1;
-    /*=== Centrer l'objet sur lui même===
-    position: absolute; /* postulat de départ
-    top: 50%; left: 50%; /* à 50%/50% du parent référent
-    transform: translate(-50%, -50%); /* décalage de 50% de sa propre taille */
+  	border-image-slice: 1;
 }
 
 .carreCont{
@@ -288,3 +207,6 @@ body{
 }
 
 /* === FIN ZONE OBJET === */
+
+.sidebar{background:linear-gradient(#d35e35,#db683e);}
+.bg-white{background-color: 	#3d4251;}
