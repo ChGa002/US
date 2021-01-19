@@ -36,7 +36,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="#.html">
                     <div class="text-center">
-                        <img src="/img/logo.png" class="img-thumbnail" alt="image profil" height="100px" width="100px">
+                        <img src="$UserPdp" class="img-thumbnail" alt="defaultPdp" height="100px" width="100px">
                     </div>
                 </a>
             </li>
@@ -50,48 +50,46 @@
             <!-- Nav Item -->
             <li class="nav-item">
                 <a class="nav-link" href="#.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i data-feather="home" height="20px" width="20px"></i>
                     <span>Accueil</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#.html">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i data-feather="folder" height="20px" width="20px"></i>
                     <span>Repertoires</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#.html">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i data-feather="file" height="20px" width="20px"></i>
                     <span title="Créer un post">Poster</span></a><!--Info bulle créer un post-->
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#.html">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i data-feather="star" height="20px" width="20px"></i>
                     <span title="Accèder à mes favoris">Favoris</span></a><!--Accès a mes favoris-->
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#.html">
-                    <i class=""></i>
+                    <i data-feather="bar-chart-2" height="20px" width="20px"></i>
                     <span>Classement</span></a>
             </li>
             {%if is_granted('role_admin') %}
             <li class="nav-item">
                 <a class="nav-link" href="#.html">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i data-feather="user" height="20px" width="20px"></i>
                     <span>Admin</span></a>
             </li>
             {% endif %}
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
-            <!-- Sidebar Toggler (Sidebar) id="sidebarToggle" -->
+            <!-- footer button sidebar -->
             <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle" id="sidebarToggle"><span class="text-center" data-feather="log-out"></span></button>
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
-
-            <!-- Deconnexion -->
             <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle" id="sidebarToggle"></button>
-            </div>
+                <button class="rounded-circle border-0">D</button>
+            </div> 
 
         </ul>
         <!-- End of Sidebar -->
@@ -103,7 +101,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                <nav class="navbar navbar-expand navbar-light topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
@@ -112,12 +110,12 @@
 
                     <!-- Topbar Search -->
                     <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-5 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
                             <input type="text" class="form-control bg-light border-0 small" placeholder="Rechercher pour.."
                                 aria-label="Rechercher" aria-describedby="basic-addon2">
                             <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
+                                <button class="btn boutonColor" type="button">
                                     <i data-feather="search"></i>
                                 </button>
                             </div>
@@ -159,9 +157,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                        <h1 class="h3 mb-0 text-gray-800">{%block titlePage%}Error - Wrong Title{% endblock %}</h1>
                     </div>
 
                     <!-- Content Row -->
@@ -169,7 +165,7 @@
                     <div class="row">
 
                         <!-- Area Chart -->
-                        <div class="col-xl-8 col-lg-7">
+                        <div class="col-xl-10 col-lg-9">
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -188,7 +184,7 @@
                         </div>
 
                         <!-- Pie Chart -->
-                        <div class="col-xl-4 col-lg-5">
+                        <div class="col-xl-2 col-lg-3">
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
                                 <div
@@ -207,12 +203,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Content Row -->
-                    <div class="row">
-
-                    </div>
-
                 </div>
                 <!-- /.container-fluid -->
 
@@ -220,10 +210,12 @@
             <!-- End of Main Content -->
 
             <!-- Footer -->
-            <footer class="sticky-footer bg-white">
+            <footer class="sticky-footer">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
+                        <img src="/img/US.png" alt="logo page" height="25px" width="25px">
+                        <span>Copyright &copy; University Share 2021</span>
+                        <img src="/img/logo.png" alt="logo iut" height="50px" width="25px">
                     </div>
                 </div>
             </footer>
@@ -270,6 +262,13 @@
     <!-- JavaScript du template-->
     <script src="js/sb-admin-2.min.js"></script>
 
+    <!-- Page level plugins -->
+    <script src="vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script>
+
     <!-- Additionnal icon for Bootstrap by Feather Librairie -->
     <script>feather.replace()</script>
 
@@ -277,20 +276,7 @@
     <script src="{{ asset('vendor/datatables/jquery.dataTables.js') }}"></script>
     <script src="{{ asset('vendor/datatables/dataTables.bootstrap4.js') }}"></script>
     <script src="{{ asset('vendor/datatables/pluginDate.js') }}"></script>
-    <script src="{{ asset('vendor/datatables/fnSortPlugin.js') }}"></script>
-    <script type="text/javascript"> <!-- script permettant de cocher toutes les cases -->
-        function cocherToutesLesCases(nameCases, caseCochee) 
-        {
-            $("input[name='" + nameCases + "']").each(function () 
-            {
-                if (!this.disabled) 
-                {
-                    this.checked = caseCochee;
-                }
-            })
-        }
-    </script>
-   
+    <script src="{{ asset('vendor/datatables/fnSortPlugin.js') }}"></script>   
 
 </body>
 
