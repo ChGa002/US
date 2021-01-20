@@ -24,7 +24,6 @@ button:focus{outline: 0;}
   color: black;
 }
 
-
 #centrer{
   /*=== Centrer l'objet sur lui même===*/
   position: absolute; /* postulat de départ */
@@ -36,18 +35,14 @@ button:focus{outline: 0;}
 
 .sidebar{
   background:linear-gradient(#cd533d,#bd4833);
-  transition: 0.5s;
-  transition-property: left;
 }
 .topbar{background-color:#3d4251;}
 .sticky-footer{background-color:#3d4251;}
 .boutonColor{background-color: #666F88;};}
 
 .bouton-menu {
-  position: fixed;
-  /*bottom: 10px;*/
-  left: 10px;
-  z-index: 997;
+  position: relative;
+  z-index: 1;
   box-shadow: 3px 3px 3px rgba(51, 51, 51, 0.2);
 }
 
@@ -73,7 +68,6 @@ a.btn-customized {
   border: 0;
   border-radius: 4px;
   box-shadow: none;
-  bottom: 10px;
 }
 
 a.btn-customized:hover, 
@@ -91,5 +85,4 @@ a.btn-customized.btn.btn-primary:not(:disabled):not(.disabled):active:focus {
   box-shadow: none;
 }
 
-/*=== TOPBAR ===*/
-
+/*=== test ===*/
