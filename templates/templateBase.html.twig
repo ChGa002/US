@@ -8,18 +8,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Template de stratBootstrap template remis à jour">
     <meta name="Ewen Blandin" content="BootstrapTemplate">
-
-    <title>US - University Share</title>
+    <link rel="shortcut icon" href="{{ asset('/img/us_logo.png') }}"/>
+    <title>{% block titleOnglet %}US - University Share{% endblock %}</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
-    <!-- ALTERNATIVE ICONS BOOTSTRAP 3 -->
-    <script src="https://unpkg.com/feather-icons"></script>
+    <!-- Bootstrap Icon -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('/css/styleAdd.css')}}">
+    <link rel="stylesheet" href="{{asset('/css/hamburger.css')}}">
 
 </head>
 
@@ -36,7 +37,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="#.html">
                     <div class="text-center">
-                        <img src="$UserPdp" class="img-thumbnail" alt="defaultPdp" height="100px" width="100px">
+                        <img src="{{ asset('/img/user_alti.png') }}" class="img-thumbnail" alt="defaultPdp" height="100px" width="100px">
                     </div>
                 </a>
             </li>
@@ -50,33 +51,33 @@
             <!-- Nav Item -->
             <li class="nav-item">
                 <a class="nav-link" href="#.html">
-                    <i data-feather="home" height="20px" width="20px"></i>
+                    <i class="fas fa-home" height="20px" width="20px"></i>
                     <span>Accueil</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#.html">
-                    <i data-feather="folder" height="20px" width="20px"></i>
+                    <i class="fas fa-folder" height="20px" width="20px"></i>
                     <span>Repertoires</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#.html">
-                    <i data-feather="file" height="20px" width="20px"></i>
+                    <i class="fas fa-file" height="20px" width="20px"></i>
                     <span title="Créer un post">Poster</span></a><!--Info bulle créer un post-->
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#.html">
-                    <i data-feather="star" height="20px" width="20px"></i>
+                    <i class="fas fa-star" height="20px" width="20px"></i>
                     <span title="Accèder à mes favoris">Favoris</span></a><!--Accès a mes favoris-->
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#.html">
-                    <i data-feather="bar-chart-2" height="20px" width="20px"></i>
+                    <i class="fas fa-chart-bar" height="20px" width="20px"></i>
                     <span>Classement</span></a>
             </li>
             {%if is_granted('role_admin') %}
             <li class="nav-item">
                 <a class="nav-link" href="#.html">
-                    <i data-feather="user" height="20px" width="20px"></i>
+                    <i class="fas fa-user" height="20px" width="20px"></i>
                     <span>Admin</span></a>
             </li>
             {% endif %}
@@ -84,12 +85,18 @@
             <hr class="sidebar-divider d-none d-md-block">
 
             <!-- footer button sidebar -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0">D</button>
-            </div> 
+            <a class="btn btn-primary btn-customized bouton-menu" id="menu-toggle" href="#" role="button">
+                <div class="hamburger hamburger--minus is-active">
+                <!--<i class="fas fa-times" title="Menu"></i><span style="margin-left:5px;">Menu</span>-->
+                    <span class="hamburger-box">
+                        <span class="hamburger-inner"></span>
+                    </span>
+                </div>
+            </a>
+
+            <a class="btn btn-primary btn-customized bouton-menu" href="#" role="button">
+                <i class="fas fa-sign-out-alt" title="Déconnexion"></i><span style="margin-left:5px;">Déconnexion</span>
+            </a>
 
         </ul>
         <!-- End of Sidebar -->
@@ -104,19 +111,17 @@
                 <nav class="navbar navbar-expand navbar-light topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i data-feather="arrow-left-circle"></i>
-                    </button>
+
 
                     <!-- Topbar Search -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-5 my-2 my-md-0 mw-100 navbar-search">
+                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-5 my-2 my-md-0 mw-100 navbar-search"
+                    style="margin-left:50%;">
                         <div class="input-group">
                             <input type="text" class="form-control bg-light border-0 small" placeholder="Rechercher pour.."
                                 aria-label="Rechercher" aria-describedby="basic-addon2">
                             <div class="input-group-append">
                                 <button class="btn boutonColor" type="button">
-                                    <i data-feather="search"></i>
+                                    <i class="fas fa-search" style="color:white;"></i>
                                 </button>
                             </div>
                         </div>
@@ -213,9 +218,9 @@
             <footer class="sticky-footer">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <img src="/img/US.png" alt="logo page" height="25px" width="25px">
+                        <img src="{{ asset('/img/us_logo.png') }}" alt="logo page" height="25px" width="25px">
                         <span>Copyright &copy; University Share 2021</span>
-                        <img src="/img/logo.png" alt="logo iut" height="50px" width="25px">
+                        <img src="{{ asset('/img/iut_logo.png') }}" alt="logo iut" height="50px" width="25px">
                     </div>
                 </div>
             </footer>
@@ -251,6 +256,26 @@
             </div>
         </div>
     </div>
+    
+    <!-- Menu Toggle Script -->
+    <script>
+        $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+        });
+    </script>
+
+    <!-- Menu Hamgurger -->
+    <script>
+    // Look for .hamburger
+    var hamburger = document.querySelector(".hamburger");
+    // On click
+    hamburger.addEventListener("click", function() {
+        // Toggle class "is-active"
+        hamburger.classList.toggle("is-active");
+        // Do something else, like open/close menu
+    });
+    </script>
 
     <!-- Bootstrap core JavaScript (Bootstrap)-->
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -268,9 +293,6 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
-
-    <!-- Additionnal icon for Bootstrap by Feather Librairie -->
-    <script>feather.replace()</script>
 
     <!-- Additional Plugin Datables-->
     <script src="{{ asset('vendor/datatables/jquery.dataTables.js') }}"></script>
