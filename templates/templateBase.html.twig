@@ -75,12 +75,13 @@
                     <i class="fas fa-chart-bar" height="20px" width="20px"></i>
                     <span>Classement</span></a>
             </li>
-            
+            {% if is_granted("role_admin") %}
             <li class="nav-item">
                 <a class="nav-link" href="#.html" title="Admin">
                     <i class="fas fa-user" height="20px" width="20px"></i>
                     <span>Admin</span></a>
             </li>
+            {% endif %}
             
 
             <!-- Divider -->
@@ -127,7 +128,12 @@
                                     <i class="fas fa-search" style="color:white;"></i>
                                 </button>
                             </div>
-                        </div>
+                            <div class="input-group-apend" title="Recherche Avancée">
+                                <button class="btn boutonColor" href="#">
+                                    <i class="fas fa-cog" style="color:white;"></i>
+                                </button>
+                            </div>
+                        </div>                        
                     </form>
 
                     <!-- Topbar Navbar -->
@@ -150,8 +156,18 @@
                                             <button class="btn boutonMinRech" type="button">
                                                 <i class="fas fa-search fa-sm" style="color:white;"></i>
                                             </button>
-                                        </div>
+                                        </div> 
+                                        <div class="input-group-apend" title="Recherche Avancée">
+                                            <button class="btn boutonMinRech" href="#">
+                                                <i class="fas fa-cog" style="color:white;"></i>
+                                            </button>
+                                        </div>                                                                          
                                     </div>
+                                    <div class="text-center d-none d-md-inline" title="Paramètre Avancé">
+                                        <button class="btn btn-primary btn-customized bouton-menu" href="#" style="background-color:#666F88">
+                                            <i class="fas fa-cog"></i>
+                                        </button>
+                                    </div>    
                                 </form>
                             </div>
                         </li>
@@ -178,8 +194,6 @@
                                 <!-- Card Body -->
                                 <div class="card-body">
                                     {% block contenuCentral %}
-                                    <p> "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                                    </p>
                                     {% endblock %}
                                 </div>
                             </div>
@@ -266,6 +280,9 @@
 
     <!-- Additional Plugin Datables-->
  
+
+    <!--JavaScript additionel-->
+    {%block Javascript%}{%endblock%}
 
 </body>
 
