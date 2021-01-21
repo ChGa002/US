@@ -18,7 +18,7 @@
     <!-- Bootstrap Icon -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <!-- Custom styles for this template-->
-    <link href="{{asset("css/sb-admin-2.min.css")}}" rel="stylesheet">
+    <link href="{{asset("css/sb-admin-2.css")}}" rel="stylesheet">
     <link href="{{ asset("vendor/datatables/dataTables.bootstrap4.css") }}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset("/css/styleAdd.css")}}">
     <link rel="stylesheet" href="{{asset("/css/hamburgers.css")}}">
@@ -36,7 +36,7 @@
             <!-- Sidebar - Brand -->
 
             <li class="nav-item">
-                <a class="nav-link" href="#.html">
+                <a class="nav-link" href="#.html" title="Profil">
                     <div class="text-center">
                         <img src="{{ asset("/img/user_alti.png") }}" class="img-thumbnail" alt="defaultPdp" height="100px" width="100px">
                     </div>
@@ -51,56 +51,53 @@
 
             <!-- Nav Item -->
             <li class="nav-item">
-                <a class="nav-link" href="#.html">
+                <a class="nav-link" href="#.html" title="Accueil">
                     <i class="fas fa-home" height="20px" width="20px"></i>
                     <span>Accueil</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#.html">
+                <a class="nav-link" href="#.html" title="Repertoires">
                     <i class="fas fa-folder" height="20px" width="20px"></i>
                     <span>Repertoires</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#.html">
+                <a class="nav-link" href="#.html"title="Créer un post">
                     <i class="fas fa-file" height="20px" width="20px"></i>
-                    <span title="Créer un post">Poster</span></a><!--Info bulle créer un post-->
+                    <span>Poster</span></a><!--Info bulle créer un post-->
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#.html">
+                <a class="nav-link" href="#.html" title="Accèder à mes favoris">
                     <i class="fas fa-star" height="20px" width="20px"></i>
-                    <span title="Accèder à mes favoris">Favoris</span></a><!--Accès a mes favoris-->
+                    <span>Favoris</span></a><!--Accès a mes favoris-->
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#.html">
+                <a class="nav-link" href="#.html" title="Classement">
                     <i class="fas fa-chart-bar" height="20px" width="20px"></i>
                     <span>Classement</span></a>
             </li>
-            {%if is_granted("role_admin") %}
+            
             <li class="nav-item">
-                <a class="nav-link" href="#.html">
+                <a class="nav-link" href="#.html" title="Admin">
                     <i class="fas fa-user" height="20px" width="20px"></i>
                     <span>Admin</span></a>
             </li>
-            {% endif %}
+            
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
-            <!-- footer button sidebar -->
+            <!-- footer button sidebar-->
 
 
-            <div class="text-center d-none d-md-inline">
-                <button class="btn btn-primary btn-customized bouton-menu border-0" id="sidebarToggle"></button>
+            <div class="text-center d-none d-md-inline" title="Afficher / Masquer menu">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
 
-            <a class="btn btn-primary btn-customized bouton-menu" href="#" role="button">
-                <i class="fas fa-sign-out-alt" title="Déconnexion"></i><span style="margin-left:5px;">Déconnexion</span>
-            </a>
-
-                        <a class="btn btn-primary btn-customized bouton-menu" id="sidebar-toggle" href="#" role="button" data-toggle="button" aria-pressed="false">
-                <i class="fas fa-times" title="Menu"></i><span style="margin-left:5px;">Menu</span>
-            </a>
-
+            <div class="text-center d-none d-md-inline" title="Déconnexion">
+                <button class="btn btn-primary btn-customized bouton-menu" href="#">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
 
         </ul>
         <!-- End of Sidebar -->
@@ -115,11 +112,13 @@
                 <nav class="navbar navbar-expand navbar-light topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3" title="Afficher/masquer menu">
+                        <i class="fa fa-bars"></i>
+                    </button>
 
                     {% block barreRecherche %}
                     <!-- Topbar Search -->
-                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-5 my-2 my-md-0 mw-100 navbar-search"
-                    style="margin-left:50%;">
+                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-5 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
                             <input type="text" class="form-control bg-light border-0 small" placeholder="Rechercher pour.."
                                 aria-label="Rechercher" aria-describedby="basic-addon2">
@@ -136,8 +135,8 @@
                         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                         <li class="nav-item dropdown no-arrow d-sm-none">
                             <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Afficher/masquer bar de recherche">
+                                <i class="fas fa-search fa-fw" style="color:white;"></i>
                             </a>
                             <!-- Dropdown - Messages -->
                             <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
@@ -145,11 +144,11 @@
                                 <form class="form-inline mr-auto w-100 navbar-search">
                                     <div class="input-group">
                                         <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Search for..." aria-label="Search"
+                                            placeholder="Rechercher pour.." aria-label="Search"
                                             aria-describedby="basic-addon2">
                                         <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
+                                            <button class="btn boutonMinRech" type="button">
+                                                <i class="fas fa-search fa-sm" style="color:white;"></i>
                                             </button>
                                         </div>
                                     </div>
@@ -179,12 +178,13 @@
                                 <!-- Card Body -->
                                 <div class="card-body">
                                     {% block contenuCentral %}
-
+                                    <p> "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                                    </p>
                                     {% endblock %}
                                 </div>
                             </div>
                         </div>
-
+                        {% block boxDroit%}
                         <!-- Contenu Droit -->
                         <div class="col-xl-2 col-lg-3">
                             <div class="card shadow mb-4">
@@ -196,6 +196,7 @@
                                 </div>
                             </div>
                         </div>
+                        {% endblock %}
                     </div>
                 </div>
                 <!-- /.container-fluid -->

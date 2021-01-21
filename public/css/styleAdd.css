@@ -2,15 +2,24 @@ a{text-decoration: none;color:black;}
 a:hover{color:#141414;}
 button:focus{outline: 0;}
 
-/* === ZONE MAIN - CONTAINER PRINCIPALE === */
+/* === Variable === */
+:root
+{
 
-/* === FIN ZONE MAIN === */
+  /*Couleur*/
+  --brique: #cd533d;
+  --deep: #3d4251;
+  --ocean: #666F88;
+  --cloud: #fff;
+
+}
+
 /* === ZONE OBJET === */
 
 .carreIMG{
 	height: 100px; 	width: 100px;
 	border: 2px solid;
-	border-image: white;
+	border-image: var(--cloud);
   	border-image-slice: 1;
 }
 
@@ -18,9 +27,9 @@ button:focus{outline: 0;}
   padding: 2%; margin: 10%;
 	height: auto; width: 80%;
 	border: 1px solid;
-	border-image: white;
+	border-image: var(--cloud);
   border-image-slice: 1;
-  background-color: #DFDFDF;
+  background-color: var(--cloud);
   color: black;
 }
 
@@ -36,9 +45,10 @@ button:focus{outline: 0;}
 .sidebar{
   background:linear-gradient(#cd533d,#bd4833);
 }
-.topbar{background-color:#3d4251;}
-.sticky-footer{background-color:#3d4251;}
-.boutonColor{background-color: #666F88;};}
+.topbar{background-color: var(--deep);}
+.sticky-footer{background-color:var(--deep);}
+.boutonColor{background-color: var(--ocean);}
+.boutonMinRech{background-color: var(--brique);}
 
 .bouton-menu {
   position: relative;
@@ -59,30 +69,28 @@ button:focus{outline: 0;}
 
 /* Style for all buttons with the class btn-customized */
 
-a.btn-customized {
+button.btn-customized {
   margin-left: 10%;
   margin-right: 10%;
   margin-top: 10px;
-  padding: .75rem 1.5rem;
+  padding: 10px 15px;
   background: #f35b3f;
   border: 0;
-  border-radius: 4px;
+  border-radius: 50%;
   box-shadow: none;
 }
 
-a.btn-customized:hover, 
-a.btn-customized:active, 
-a.btn-customized:focus, 
-a.btn-customized:active:focus, 
-a.btn-customized.active:focus,
-a.btn-customized.btn.btn-primary:not(:disabled):not(.disabled):active,
-a.btn-customized.btn.btn-primary:not(:disabled):not(.disabled):active:focus {
+button.btn-customized:hover, 
+button.btn-customized:active, 
+button.btn-customized:focus, 
+button.btn-customized:active:focus, 
+button.btn-customized.active:focus,
+button.btn-customized.btn.btn-primary:not(:disabled):not(.disabled):active,
+button.btn-customized.btn.btn-primary:not(:disabled):not(.disabled):active:focus {
   outline: 0;
-  background: #cd533d; /* for browsers that don't recognize rgba */
+  background: var(--brique); /* for browsers that don't recognize rgba */
   background: rgba(243, 91, 63, 0.7);
   border: 0;
-  color: #fff;
+  color: var(--cloud);
   box-shadow: none;
 }
-
-/*=== test ===*/
