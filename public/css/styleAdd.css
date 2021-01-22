@@ -1,0 +1,96 @@
+a{text-decoration: none;color:black;}
+a:hover{color:#141414;}
+button:focus{outline: 0;}
+
+/* === Variable === */
+:root
+{
+
+  /*Couleur*/
+  --brique: #cd533d;
+  --deep: #3d4251;
+  --ocean: #666F88;
+  --cloud: #fff;
+
+}
+
+/* === ZONE OBJET === */
+
+.carreIMG{
+	height: 100px; 	width: 100px;
+	border: 2px solid;
+	border-image: var(--cloud);
+  	border-image-slice: 1;
+}
+
+.carreCont{
+  padding: 2%; margin: 10%;
+	height: auto; width: 80%;
+	border: 1px solid;
+	border-image: var(--cloud);
+  border-image-slice: 1;
+  background-color: var(--cloud);
+  color: black;
+}
+
+#centrer{
+  /*=== Centrer l'objet sur lui même===*/
+  position: absolute; /* postulat de départ */
+  top: 50%; left: 50%; /* à 50%/50% du parent référent*/
+  transform: translate(-50%, -50%); /* décalage de 50% de sa propre taille */
+}
+
+/* === SIDEBAR === */
+
+.sidebar{
+  background:linear-gradient(#cd533d,#bd4833);
+}
+.topbar{background-color: var(--deep);}
+.sticky-footer{background-color:var(--deep);}
+.boutonColor{background-color: var(--ocean);}
+.boutonMinRech{background-color: var(--brique);}
+
+.bouton-menu {
+  position: relative;
+  z-index: 1;
+  box-shadow: 3px 3px 3px rgba(51, 51, 51, 0.2);
+}
+
+.bouton-menu.btn-customized,
+.bouton-menu.btn-customized:hover, 
+.bouton-menu.btn-customized:active, 
+.bouton-menu.btn-customized:focus, 
+.bouton-menu.btn-customized:active:focus, 
+.bouton-menu.btn-customized.active:focus,
+.bouton-menu.btn-customized.btn.btn-primary:not(:disabled):not(.disabled):active,
+.bouton-menu.btn-customized.btn.btn-primary:not(:disabled):not(.disabled):active:focus {
+  box-shadow: 3px 3px 3px rgba(51, 51, 51, 0.2);
+}
+
+/* Style for all buttons with the class btn-customized */
+
+button.btn-customized {
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 10px;
+  padding: 10px 15px;
+  background: #f35b3f;
+  border: 0;
+  border-radius: 50%;
+  box-shadow: none;
+}
+
+button.btn-customized:hover, 
+button.btn-customized:active, 
+button.btn-customized:focus, 
+button.btn-customized:active:focus, 
+button.btn-customized.active:focus,
+button.btn-customized.btn.btn-primary:not(:disabled):not(.disabled):active,
+button.btn-customized.btn.btn-primary:not(:disabled):not(.disabled):active:focus {
+  outline: 0;
+  background: var(--brique); /* for browsers that don't recognize rgba */
+  background: rgba(243, 91, 63, 0.7);
+  border: 0;
+  color: var(--cloud);
+  box-shadow: none;
+}
