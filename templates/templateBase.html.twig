@@ -93,7 +93,7 @@
             </div>
 
             <div class="text-center d-none d-md-inline" title="Déconnexion">
-                <a href="{{ path('us_login')}}">
+                <a href="#">
                     <button class="btn btn-primary btn-customized bouton-menu">
                         <i class="fas fa-sign-out-alt"></i>
                     </button>
@@ -115,7 +115,7 @@
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3" title="Afficher/masquer menu">
                         <i class="fa fa-bars"></i>
-                    </button>
+                    </button>                   
 
                     {% block barreRecherche %}
                     <!-- Topbar Search -->
@@ -173,6 +173,10 @@
                         </li>
                     </ul>
                     {% endblock %}
+                    <!-- Déconnexion visible que en format tel-->
+                    <button class="btn btn-link d-md-none rounded-circle mr-3" title="Déconnexion" href="#">
+                        <i class="fa fa-sign-out-alt"></i>
+                    </button> 
                 </nav>
                 <!-- End of Topbar -->
 
