@@ -42,7 +42,7 @@ class Utilisateur
     /**
      * @ORM\Column(type="boolean")
      */
-    private $admin;
+    private $admin = false;
 
     /**
      * @ORM\Column(type="date", nullable=true)
@@ -52,7 +52,7 @@ class Utilisateur
     /**
      * @ORM\Column(type="boolean")
      */
-    private $valide;
+    private $valide = false;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
