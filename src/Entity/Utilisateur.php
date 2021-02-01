@@ -2,15 +2,16 @@
 
 namespace App\Entity;
 
-use App\Repository\UtilisateurRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\UtilisateurRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UtilisateurRepository::class)
  */
-class Utilisateur
+class Utilisateur implements UserInterface
 {
     /**
      * @ORM\Id
@@ -40,11 +41,6 @@ class Utilisateur
     private $pseudo;
 
     /**
-     * @ORM\Column(type="boolean")
-     */
-    private $admin;
-
-    /**
      * @ORM\Column(type="date", nullable=true)
      */
     private $derniereConnexion;
@@ -62,7 +58,7 @@ class Utilisateur
     /**
      * @ORM\Column(type="string", length=30, nullable=true)
      */
-    private $motDePasse;
+    private $motDePasse;    
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -93,6 +89,11 @@ class Utilisateur
      * @ORM\OneToMany(targetEntity=Post::class, mappedBy="createur", orphanRemoval=true)
      */
     private $posts;
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];    
 
     public function __construct()
     {
@@ -152,18 +153,6 @@ class Utilisateur
     public function setPseudo(?string $pseudo): self
     {
         $this->pseudo = $pseudo;
-
-        return $this;
-    }
-
-    public function getAdmin(): ?bool
-    {
-        return $this->admin;
-    }
-
-    public function setAdmin(bool $admin): self
-    {
-        $this->admin = $admin;
 
         return $this;
     }
@@ -352,5 +341,35 @@ class Utilisateur
         }
 
         return $this;
+    }
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        $roles[] = 'ROLE_USER';
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+        return $this;
+    }
+
+    public function getPassword()
+    {
+
+    }
+
+    public function getSalt()
+    {
+ 
+    }
+
+    public function getUsername()
+    {
+ 
+    }
+
+    public function eraseCredentials()
+    {
     }
 }

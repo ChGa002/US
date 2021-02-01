@@ -13,7 +13,7 @@ button:focus{outline: 0;}
   --cloud: #fff;
 
 }
-
+.colorCloud{color:var(--cloud);}
 /* === ZONE OBJET === */
 
 .carreIMG{
