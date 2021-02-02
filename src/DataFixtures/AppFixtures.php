@@ -29,6 +29,7 @@ class AppFixtures extends Fixture
             $uti->setNom($faker->lastName);
             $uti->setPrenom($faker->firstName);
             $uti->setMail($faker->email);
+            $uti->setValide(false);
             $uti->setRoles(['ROLE_USER']);
             $manager->persist($uti);
         }
@@ -70,6 +71,8 @@ class AppFixtures extends Fixture
             $cg->setNom("Gandolfi");
             $cg->setPrenom("Chiara");
             $cg->setMail("cgandolfi@iutbayonne.univ-pau.fr");
+            $cg->setPseudo("Kiki");
+            $cg->setValide(true);
             $cg->setDerniereConnexion(\DateTime::createFromFormat('Y-m-d', "2021-01-24"));
             $cg->setMotDePasse("password");
             $eb->setRoles(['ROLE_ADMIN']);
@@ -79,6 +82,8 @@ class AppFixtures extends Fixture
             $cg->setNom("Etcheverry");
             $cg->setPrenom("Patrick");
             $cg->setMail("petcheverry@iutbayonne.univ-pau.fr");
+            $cg->setPseudo("Petche");
+            $cg->setValide(true);
             $cg->setDerniereConnexion(\DateTime::createFromFormat('Y-m-d', "2021-01-24"));
             $cg->setMotDePasse("password");
             $eb->setRoles(['ROLE_USER']);

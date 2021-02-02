@@ -93,7 +93,7 @@ class Utilisateur implements UserInterface
     /**
      * @ORM\Column(type="json")
      */
-    private $roles = [];    
+    private $roles = []; 
 
     public function __construct()
     {
@@ -346,13 +346,15 @@ class Utilisateur implements UserInterface
     {
         $roles = $this->roles;
         $roles[] = 'ROLE_USER';
+
         return array_unique($roles);
+
     }
 
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
-        return $this;
+        return $this; 
     }
 
     public function getPassword()

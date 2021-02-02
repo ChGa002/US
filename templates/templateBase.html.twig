@@ -93,7 +93,7 @@
             </div>
 
             <div class="text-center d-none d-md-inline" title="Déconnexion">
-                <a href="#">
+                <a href="{{ path('app_login') }}">
                     <button class="btn btn-primary btn-customized bouton-menu">
                         <i class="fas fa-sign-out-alt"></i>
                     </button>
@@ -174,7 +174,7 @@
                     </ul>
                     {% endblock %}
                     <!-- Déconnexion visible que en format tel-->
-                    <a href="#">
+                    <a href="{{ path('app_login') }}">
                         <button class="btn btn-link d-md-none rounded-circle mr-3" title="Déconnexion">
                             <i class="fa fa-sign-out-alt"></i>
                         </button>

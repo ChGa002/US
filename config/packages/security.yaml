@@ -1,14 +1,20 @@
 security:
+    encoders:
+        App\Entity\Utilisateur:
+            algorithm: bcrypt #Pour encoder le mot de passe
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        users_in_memory: { memory: null }
+        app_user_provider:
+            entity:
+                class: App\Entity\Utilisateur
+                property: pseudo
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            anonymous: lazy
-            provider: users_in_memory
+            provider: app_user_provider
+            anonymous: false
             guard:
                 authenticators:
                     - App\Security\LoginFormAuthenticator
