@@ -17,4 +17,12 @@ class USController extends AbstractController
             'controller_name' => 'USController',
         ]);
     }
+	
+	/**
+	 * @Route("/repertoire", name="us_repertoires")
+	 */
+	 public function repertoires(): Response
+	 {
+		 return $this->render('us/repertoires.html.twig', ['controller_name' => 'USController', ]);
+	 }
 }
