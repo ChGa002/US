@@ -23,6 +23,8 @@ class USController extends AbstractController
 	 */
 	 public function repertoires(): Response
 	 {
-		 return $this->render('us/repertoires.html.twig', ['controller_name' => 'USController', ]);
+		 $repositorySemstre = $this->getDoctrine()->getRepository(Semestre::class);
+		 $Semestres = $repositorySemstre->findAll();
+		 return $this->render('us/repertoires.html.twig', ['semestre' => '$Semestre', ]);
 	 }
 }
