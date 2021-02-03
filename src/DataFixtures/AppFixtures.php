@@ -42,7 +42,7 @@ class AppFixtures extends Fixture
             $eb->setValide(true);
             $eb->setDerniereConnexion(\DateTime::createFromFormat('Y-m-d', "2021-01-24"));
             $eb->setMotDePasse("password");
-            $eb->setRoles(['ROLE_ADMIN']);
+            $eb->setRoles(['ROLE_USER','ROLE_ADMIN']);
             $manager->persist($eb);
 
             $ac = new Utilisateur();
@@ -53,7 +53,7 @@ class AppFixtures extends Fixture
             $ac->setValide(true);
             $ac->setDerniereConnexion(\DateTime::createFromFormat('Y-m-d', "2021-01-24"));
             $ac->setMotDePasse("password");
-            $eb->setRoles(['ROLE_ADMIN']);
+            $eb->setRoles(['ROLE_USER','ROLE_ADMIN']);
             $manager->persist($ac);
 
             $pm = new Utilisateur();
@@ -64,7 +64,7 @@ class AppFixtures extends Fixture
             $pm->setValide(true);
             $pm->setDerniereConnexion(\DateTime::createFromFormat('Y-m-d', "2021-01-24"));
             $pm->setMotDePasse("password");
-            $eb->setRoles(['ROLE_ADMIN']);
+            $eb->setRoles(['ROLE_USER','ROLE_ADMIN']);
             $manager->persist($pm);
 
             $cg = new Utilisateur();
@@ -75,7 +75,7 @@ class AppFixtures extends Fixture
             $cg->setValide(true);
             $cg->setDerniereConnexion(\DateTime::createFromFormat('Y-m-d', "2021-01-24"));
             $cg->setMotDePasse("password");
-            $eb->setRoles(['ROLE_ADMIN']);
+            $eb->setRoles(['ROLE_USER','ROLE_ADMIN']);
             $manager->persist($cg);
 
             $cg = new Utilisateur();

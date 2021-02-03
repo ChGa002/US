@@ -14,6 +14,9 @@ button:focus{outline: 0;}
 
 }
 .colorCloud{color:var(--cloud);}
+.colorOcean{color:var(--ocean);}
+.colorBrique{color:var(--brique);}
+.colorDeep{color:var(--deep);}
 /* === ZONE OBJET === */
 
 .carreIMG{
@@ -33,11 +36,33 @@ button:focus{outline: 0;}
   color: black;
 }
 
+.carreLog{
+  padding: 2%; margin: 10%;
+	height: auto; width: 80%;
+	border: 1px solid var(--ocean);
+	border-image: var(--ocean);
+  border-image-slice: 1;
+  background-color: var(--ocean);
+  color: black;
+  border-radius: 5%;
+  box-shadow: 3px 3px 3px rgba(51, 51, 51, 0.2);
+}
+
 #centrer{
   /*=== Centrer l'objet sur lui même===*/
   position: absolute; /* postulat de départ */
   top: 50%; left: 50%; /* à 50%/50% du parent référent*/
   transform: translate(-50%, -50%); /* décalage de 50% de sa propre taille */
+}
+
+.vl {
+  border-left: 6px solid var(--deep);
+  height: 500px;
+}
+
+.hl {
+  border-left: 6px solid var(--deep);
+  width: 500px;
 }
 
 /* === SIDEBAR === */

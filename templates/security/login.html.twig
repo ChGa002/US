@@ -43,10 +43,10 @@
 										{% endif %}
 
 										{% if app.user %}
-											<div class="mb-3">
-												You are logged in as {{ app.user.pseudo }}<br> 
-                                                <a href="{{ path('app_logout') }}">Partir</a>
-                                                <a href="{{ path('us_accueil') }}">Entrer<a>
+											<div class="mb-3 text-center carreLog">
+												<h3>Dernière Connexion: {{ app.user.pseudo }}</h3><br>
+                                                <a style="margin-right:10px;" href="{{ path('app_logout') }}"><i class="fas fa-sign-out-alt"></i> Déconnexion </a>
+                                                <a href="{{ path('app_login') }}"><i class="fas fa-greater-than"></i> Connexion </a>
 											</div>
 										{% endif %}
 
@@ -68,10 +68,13 @@
 												</label>
 											</div>
 										#}
-
-										<button class="btn btn-lg btn-primary text-center" type="submit">
-											Connexion
-										</button>
+                                        <div class="text-center colorOcean">
+                                            <a href="{{ path('app_login') }}">
+                                                <button class="btn btn-primary btn-customized bouton-menu" type="submit" title="Connexion">
+                                                    <i class="fas fa-greater-than"></i>
+                                                </button>
+                                            </a>
+                                        </div>
 									</form>
                                     <hr>
                                     <div class="text-center">
