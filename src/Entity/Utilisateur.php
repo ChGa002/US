@@ -367,9 +367,9 @@ class Utilisateur implements UserInterface
  
     }
 
-    public function getUsername()
+    public function getUsername() : string
     {
- 
+        return $this->pseudo;
     }
 
     public function eraseCredentials()
