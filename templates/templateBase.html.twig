@@ -275,7 +275,7 @@
     <script src="{{ asset("vendor/bootstrap/js/bootstrap.bundle.min.js")}}"></script>
 
     <!-- JavaScript du template-->
-    <script src="js/sb-admin-2.min.js"></script>
+    <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
 
     <!-- Additional Plugin Datables-->
     <script src="{{ asset('vendor/datatables/jquery.dataTables.js') }}"></script>
@@ -283,7 +283,7 @@
 
 
     <!--JavaScript additionel-->
-    {%block Javascript%}{%endblock%}
+    {% block Javascript %}{% endblock %}
 
 </body>
 
