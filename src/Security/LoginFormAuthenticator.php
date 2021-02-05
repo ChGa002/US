@@ -75,6 +75,8 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     public function checkCredentials($credentials, UserInterface $user)
     {
+        $user->setDerniereConnexion(new \DateTime('now'));
+        $this->entityManager->flush();
         return true;
     }
 
