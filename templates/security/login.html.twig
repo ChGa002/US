@@ -42,14 +42,6 @@
 											<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 										{% endif %}
 
-										{% if app.user %}
-											<div class="mb-3 text-center carreLog">
-												<h3>Dernière Connexion: {{ app.user.pseudo }}</h3><br>
-                                                <a style="margin-right:10px;" href="{{ path('app_logout') }}"><i class="fas fa-sign-out-alt"></i> Déconnexion </a>
-                                                <a href="{{ path('us_accueil') }}"><i class="fas fa-greater-than"></i> Connexion </a>
-											</div>
-										{% endif %}
-
 										<h1 class="h3 mb-3 font-weight-normal text-center colorCloud">Bienvenue</h1><br/>
                                         <div class="form-group">
 										<input type="text" placeholder="Pseudo.." value="{{ last_username }}" name="pseudo" id="inputPseudo" class="form-control" required autofocus>
