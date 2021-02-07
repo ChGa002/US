@@ -98,7 +98,7 @@ class Utilisateur implements UserInterface
     private $roles = [];
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $activation_token; 
 

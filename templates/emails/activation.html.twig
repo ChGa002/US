@@ -6,10 +6,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Adaptation de la template login de sbAdmin2 pour la faire correspondre à notre inscription">
+    <meta name="description" content="Adaptation de la template login de sbAdmin2">
     <meta name="author" content="Ewen Blandin">
     <link rel="shortcut icon" href="{{ asset('/img/us_logo.png') }}"/>
-    <title>US - Inscription</title>
+    <title>US - Login</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -18,40 +18,38 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{asset("/css/styleAdd.css")}}">
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+    <!--Surchage du css-->
+    <style>
+        h1,p {color:#FFF}
+    </style>
+
 </head>
 
 <body style="background:var(--deep);">
 
     <div class="container">
-
-        <!-- Outer Row -->
+        
         <div class="row justify-content-center">
 
             <div class="col-xl-8 col-lg-10 col-md-9">
 
-                <div class="card o-hidden border-0 shadow-lg my-5" style="background:var(--brique);">
+                <div class="card o-hidden border-0 shadow-lg my-5" style="background:var(--brique)";>
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row justify-content-center">
                             <div class="col-lg-6">
-                                <div class="p-5">
-                                    {% for flashError in app.flashes('verify_email_error') %}
-                                        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
-                                    {% endfor %}
-                                
-                                    <h1 class="h3 mb-3 font-weight-normal text-center colorCloud">Inscription</h1><br/>
-                                    <div class="text-center">
-                                    {{ form_start(registrationForm) }}
-                                        {{ form_row(registrationForm.pseudo, {label:false}) }}
-                                        {{ form_row(registrationForm.plainPassword, {label: false }) }}
-                                        {{ form_row(registrationForm.agreeTerms) }}
-                                        <button class="btn btn-primary btn-customized bouton-menu" type="submit" title="S'inscrire">
-                                            <i class="fas fa-plus"></i>
-                                         </button>
-                                    {{ form_end(registrationForm) }}
-                                    </div>
+                                <div class="p-5 text-center">
+                                    <h1><u>Créer votre compte</u> </h1>
+                                    <p>
+                                        Vous avez été invité à créer votre compte sur notre site: <br> "University Share". <br> <br>
+                                       <i>Veuillez cliquer sur le bouton si dessous.</i> 
+                                    </p>
+                                    <p>
+                                        <button href='{{ absolute_url(path("activation", {"token": token})) }}' class="btn btn-danger btn-lg">Créer</button>
+                                    </p>
                                 </div>
                             </div>
                         </div>

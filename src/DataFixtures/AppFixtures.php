@@ -31,6 +31,7 @@ class AppFixtures extends Fixture
             $uti->setMail($faker->email);
             $uti->setValide(false);
             $uti->setRoles(['ROLE_USER']);
+            $uti->setActivationToken(md5(uniqid()));
             $manager->persist($uti);
         }
 
@@ -42,7 +43,7 @@ class AppFixtures extends Fixture
             $eb->setValide(true);
             $eb->setDerniereConnexion(\DateTime::createFromFormat('Y-m-d', "2021-01-24"));
             $eb->setMotDePasse("password");
-            $eb->setRoles(['ROLE_USER','ROLE_ADMIN']);
+            $eb->setRoles(['ROLE_ADMIN']);
             $manager->persist($eb);
 
             $ac = new Utilisateur();
@@ -53,7 +54,7 @@ class AppFixtures extends Fixture
             $ac->setValide(true);
             $ac->setDerniereConnexion(\DateTime::createFromFormat('Y-m-d', "2021-01-24"));
             $ac->setMotDePasse("password");
-            $eb->setRoles(['ROLE_USER','ROLE_ADMIN']);
+            $ac->setRoles(['ROLE_ADMIN']);
             $manager->persist($ac);
 
             $pm = new Utilisateur();
@@ -64,7 +65,7 @@ class AppFixtures extends Fixture
             $pm->setValide(true);
             $pm->setDerniereConnexion(\DateTime::createFromFormat('Y-m-d', "2021-01-24"));
             $pm->setMotDePasse("password");
-            $eb->setRoles(['ROLE_USER','ROLE_ADMIN']);
+            $pm->setRoles(['ROLE_ADMIN']);
             $manager->persist($pm);
 
             $cg = new Utilisateur();
@@ -75,18 +76,18 @@ class AppFixtures extends Fixture
             $cg->setValide(true);
             $cg->setDerniereConnexion(\DateTime::createFromFormat('Y-m-d', "2021-01-24"));
             $cg->setMotDePasse("password");
-            $eb->setRoles(['ROLE_USER','ROLE_ADMIN']);
+            $cg->setRoles(['ROLE_ADMIN']);
             $manager->persist($cg);
 
-            $cg = new Utilisateur();
-            $cg->setNom("Etcheverry");
-            $cg->setPrenom("Patrick");
-            $cg->setMail("petcheverry@iutbayonne.univ-pau.fr");
-            $cg->setPseudo("Petche");
-            $cg->setValide(true);
-            $cg->setDerniereConnexion(\DateTime::createFromFormat('Y-m-d', "2021-01-24"));
-            $cg->setMotDePasse("password");
-            $eb->setRoles(['ROLE_USER']);
+            $pe = new Utilisateur();
+            $pe->setNom("Etcheverry");
+            $pe->setPrenom("Patrick");
+            $pe->setMail("petcheverry@iutbayonne.univ-pau.fr");
+            $pe->setPseudo("Petche");
+            $pe->setValide(true);
+            $pe->setDerniereConnexion(\DateTime::createFromFormat('Y-m-d', "2021-01-24"));
+            $pe->setMotDePasse("password");
+            $pe->setRoles(['ROLE_USER']);
             $manager->persist($cg);
 
 
