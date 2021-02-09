@@ -58,7 +58,7 @@ class Utilisateur implements UserInterface
     private $description;
 
     /**
-     * @ORM\Column(type="string", length=30, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $motDePasse;
 
@@ -96,11 +96,6 @@ class Utilisateur implements UserInterface
      * @ORM\Column(type="json")
      */
     private $roles = [];
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $activation_token; 
 
     public function __construct()
     {
@@ -381,17 +376,5 @@ class Utilisateur implements UserInterface
 
     public function eraseCredentials()
     {
-    }
-
-    public function getActivationToken(): ?string
-    {
-        return $this->activation_token;
-    }
-
-    public function setActivationToken(?string $activation_token): self
-    {
-        $this->activation_token = $activation_token;
-
-        return $this;
     }
 }

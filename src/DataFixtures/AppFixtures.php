@@ -30,8 +30,6 @@ class AppFixtures extends Fixture
             $uti->setPrenom($faker->firstName);
             $uti->setMail($faker->email);
             $uti->setValide(false);
-            $uti->setRoles(['ROLE_USER']);
-            $uti->setActivationToken(md5(uniqid()));
             $manager->persist($uti);
         }
 

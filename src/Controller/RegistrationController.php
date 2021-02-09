@@ -23,28 +23,37 @@ class RegistrationController extends AbstractController
         $user = new Utilisateur();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
-        $emailCheck = $users->findOneBy(['mail']);
+     
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if(!$emailCheck)
+
+           $userExistant = $users->findOneByMail($user->getMail());
+            if($userExistant == null || $userExistant->getValide()==true)
             {
                 throw $this->createNotFoundException('Votre adresse ne peut permettre de créer un compte.');
+                return $this->render('registration/register.html.twig', [
+                    'registrationForm' => $form->createView(),
+                ]);
             }
+            $userExistant->setPseudo($user->getPseudo());
             // encode the plain password
-            $user->setMotDePasse(
+            $userExistant->setMotDePasse(
                 $passwordEncoder->encodePassword(
-                    $user,
+                    $userExistant,
                     $form->get('plainPassword')->getData()
                 )
             );
+            $userExistant->setValide(true);
+            $userExistant->setDerniereConnexion(new \DateTime('now'));
+            $userExistant->setRoles(['ROLE_USER']);
 
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
+            $entityManager->persist($userExistant);
             $entityManager->flush();
             // do anything else you need here, like send an email
-
+            dump($userExistant);
             return $guardHandler->authenticateUserAndHandleSuccess(
-                $user,
+                $userExistant,
                 $request,
                 $authenticator,
                 'main' // firewall name in security.yaml
@@ -54,32 +63,5 @@ class RegistrationController extends AbstractController
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
-    }
-
-    /**
-     * @Route("/activation/{token}", name="activation")
-     */
-    public function activation($token, UtilisateurRepository $users)
-    {
-        // On recherche si un utilisateur avec ce token existe dans la base de données
-        $user = $users->findOneBy(['activation_token' => $token]);
-
-        // Si aucun utilisateur n'est associé à ce token
-        if(!$user){
-            // On renvoie une erreur correspondant à la création d'un compte
-            throw $this->createNotFoundException('Vous n\'êtes pas éligible à la création d\un compte.');
-        }
-
-        // On supprime le token
-        $user->setActivationToken(null);
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($user);
-        $entityManager->flush();
-
-        // On génère un message
-        $this->addFlash('message', 'Utilisateur éligible !');
-
-        // On envoie à l'inscription
-        return $this->redirectToRoute('app_register');
     }
 }
