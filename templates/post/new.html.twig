@@ -1,11 +1,38 @@
-<!DOCTYPE html>
+{% extends 'templateBase.html.twig' %}
 
-<title>New Post</title>
+{% block titlePage %} <!-- *** BLOCK TITRE *** -->
 
-{% block body %}
-    <h1>Create new Post</h1>
+Créer un post
 
-    {{ include('post/_form.html.twig') }}
+{% endblock %}
 
-    <a href="{{ path('post_index') }}">back to list</a>
+{% block contenuCentral %} <!-- *** BLOCK CONTENU DU CENTRE *** -->
+
+ {{form_start(form)}}
+
+    {{form_row(form.emplacementPhoto, {'label': 'Lien photo','attr':{ 'placeholder':'Emplacement de la vignette du post...'}})}}
+
+    {{form_row(form.titre, {'attr':{'placeholder':'Titre du post...'}})}}
+
+    {{form_row(form.description, {'attr':{'placeholder':'Description du contenu...'}})}}
+
+    RESSOURCES
+
+    {{ form_row(form.motsCles, {'label': 'Mots clés','attr':{ 'placeholder':'algorithmique'}}) }}
+
+{% endblock %}
+
+{% block contenuDroit %} <!-- *** BLOCK CONTENU DE DROITE *** -->
+
+	
+	{% for module in form.modules %}
+
+		{{form(module)}}
+	
+	
+	{% endfor %}
+	
+	{{form_end(form)}}
+
+
 {% endblock %}
