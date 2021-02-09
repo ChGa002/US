@@ -119,3 +119,76 @@ button.btn-customized.btn.btn-primary:not(:disabled):not(.disabled):active:focus
   color: var(--cloud);
   box-shadow: none;
 }
+
+
+/************ STYLE POSTS ************/
+
+/*** Tooltips modules ***/
+
+/* Tooltip container */
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+ 
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+/*** Affichage semestres/modules dynamique ***/
+
+/* Remove default bullets */
+ul, #myUL {
+  list-style-type: none;
+}
+
+/* Remove margins and padding from the parent ul */
+#myUL {
+  margin: 0;
+  padding: 0;
+}
+
+/* Style the caret/arrow */
+.caret {
+  cursor: pointer;
+  user-select: none; /* Prevent text selection */
+}
+
+/* Create the folder with a unicode, and style it */
+.caret::before {
+  content: "\1F5C0";
+  color: black;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+/* Change folder icon to opened when clicked on (using JavaScript) */
+.caret-down::before {
+  content: "\1F5C1";
+}
+
+/* Hide the nested list */
+.nested {
+  display: none;
+}
+
+/* Show the nested list when the user clicks on the caret/arrow (with JavaScript) */
+.active {
+  display: block;
+}

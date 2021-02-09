@@ -23,16 +23,66 @@ Créer un post
 {% endblock %}
 
 {% block contenuDroit %} <!-- *** BLOCK CONTENU DE DROITE *** -->
-
+	
+	<ul id="myUL">
+	{% set semestreCourant = 0 %}
 	
 	{% for module in form.modules %}
 
-		{{form(module)}}
-	
+		{% set semestreModule = module.vars.label|slice(1,1) %}
+
+		{% if semestreModule > semestreCourant %}
+
+			{% set semestreCourant = semestreModule %}
+
+			{% if loop.first == false %}
+				</li>
+					</ul> 
+			{% endif %}
+
+				<li><span class='caret'> Semestre {{semestreCourant}} </span>
+					<ul class='nested'> 
+		{% endif %}
+		
+		<span data-toggle="tooltip" title="{{ module.vars.attr[module.vars.label]}}" data-placement="left"> 
+			<li> {{ form_widget(module) }} </li>
+		</span>
 	
 	{% endfor %}
 	
+				</li>
+					</ul>
+	
 	{{form_end(form)}}
 
+
+{% endblock %}
+
+{% block Javascript %}
+
+
+<script>	// * Gere les tooltips * //
+
+// Fonction activant les tooltips (affiche les noms complets des modules en survol)
+
+	$(function () {
+  		$('[data-toggle="tooltip"]').tooltip()
+	})
+
+</script>
+
+
+<script> 	// * Gere l'affichage dynamique Modules/Semestres' * //
+
+	var toggler = document.getElementsByClassName('caret');
+	var i;
+
+	for (i = 0; i < toggler.length; i++) {
+		toggler[i].addEventListener('click', function() {
+		this.parentElement.querySelector('.nested').classList.toggle('active');						this.classList.toggle('caret-down');
+		});
+	}
+
+</script>
 
 {% endblock %}
