@@ -7,11 +7,13 @@
 {% block contenuCentral %}
 
 
-{{ module.sigle ~ '-' ~ module.nom }}
+{% for postCourant in posts %}
+	{{ postCourant.titre }}
+{% endfor %}
 
 
 
 
-{%endblock%}
+{% endblock %}
 
 {% block boxDroit %} {% endblock %}

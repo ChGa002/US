@@ -6,6 +6,7 @@
 
 {% block contenuCentral %}
 
+
 <div class="accordion" id="accordionExample">
 	<!-- on definit une variable- compteur qui permetrra de modifier les identifiants du html-->
 	{% set id=0 %}
@@ -15,15 +16,16 @@
 		<div class="card">
 			<div class="card-header" id="heading{{ id }}"> <!-- on utilise la variable définie plus haut-->
 				<h5 class="mb-0">
+					<i id="etoileFavoris{{ id }}" class="icon-star-empty" ></i>
 					<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{ id }}" aria-expanded="true" aria-controls="collapse{{ id }}">
-						{{ semestreCourant.nom }} <!-- on va récuperer le nom du semestre courant de la boucle pour l'afficher en header d'accordeon-->
+						 <i class="icon-folder"></i> - {{ semestreCourant.nom }} <!-- on va récuperer le nom du semestre courant de la boucle pour l'afficher en header d'accordeon-->
 					</button>
 				</h5>
 			</div>
 		<div id="collapse{{ id }}" class="collapse" aria-labelledby="heading{{ id }}" data-parent="#accordionExample">
 			<div class="card-body">
 				{% for moduleCourant in semestreCourant.modules %} <!-- Boucle parcourant les modules associés au semestre courant-->
-					<a href="{{ path('us_postModule' , {'id' : '{{ moduleCourant.id }}'}) }}">{{ moduleCourant.sigle ~ '-' ~ moduleCourant.nom }} <br>	</a>
+					<i class="icon-star-empty"> </i><a href="{{ path('us_postModule' , {'id' : ' moduleCourant.id '}) }}"> {{ moduleCourant.sigle ~ '-' ~ moduleCourant.nom }} <br>	</a>
 				{% endfor %} 									<!-- ci-dessus on affiche le sigle suivi du nom du module ,séléctioné dans la boucle au préalable-->
 			</div>
 			{% set id=id+1 %}  <!-- On incrémente le compteur-->
@@ -41,5 +43,48 @@
 	
 	
 {%endblock%}
+
+{%block Javascript%}
+	<script type="text/javascript">
+
+		$(document).ready(function(){
+			$('#etoileFavoris0').click(function(){
+				if($(this).hasClass('icon-star-empty')){
+					$(this).removeClass('icon-star-empty').addClass('icon-star');
+				}
+				else if($(this).hasClass('icon-star')){
+					$(this).removeClass('icon-star').addClass('icon-star-empty');
+				}
+			});
+			$('#etoileFavoris1').click(function(){
+				if($(this).hasClass('icon-star-empty')){
+					$(this).removeClass('icon-star-empty').addClass('icon-star');
+				}
+				else if($(this).hasClass('icon-star')){
+					$(this).removeClass('icon-star').addClass('icon-star-empty');
+				}
+			}); 
+			$('#etoileFavoris2').click(function(){
+				if($(this).hasClass('icon-star-empty')){
+					$(this).removeClass('icon-star-empty').addClass('icon-star');
+				}
+				else if($(this).hasClass('icon-star')){
+					$(this).removeClass('icon-star').addClass('icon-star-empty');
+				}
+			}); 
+			$('#etoileFavoris3').click(function(){
+				if($(this).hasClass('icon-star-empty')){
+					$(this).removeClass('icon-star-empty').addClass('icon-star');
+				}
+				else if($(this).hasClass('icon-star')){
+					$(this).removeClass('icon-star').addClass('icon-star-empty');
+				}
+			}); 
+		});
+
+	</script>
+{%endblock%}
+
+
 
 {% block boxDroit %} {% endblock %}

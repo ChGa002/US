@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Module;
 use App\Entity\Post;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -47,4 +48,30 @@ class PostRepository extends ServiceEntityRepository
         ;
     }
     */
+	
+	
+	/**
+	 * @return Post[] Returns an array of Post objects
+	 */
+	 public function findByModule($id)
+	 {
+		 // Récupération du gestionnaire d'entité 
+
+		$gestionnaireEntite = $this->getEntityManager ();
+
+		//Construction de la requête
+
+		$requete = $gestionnaireEntite->createQuery('SELECT p
+													FROM App\Entity\Post p 
+													JOIN  p.modules m
+													WHERE m.id = :identifiant'); 
+		
+		// Définiton des paramètres de la requête
+		$requete->setParameters('identifiant', $id);
+		
+		// Exécution de la requête et envoi des résultats 
+		return $requete->execute (); 
+		 
+		 
+	 }
 }
