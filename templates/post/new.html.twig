@@ -16,8 +16,35 @@ Créer un post
 
     {{form_row(form.description, {'attr':{'placeholder':'Description du contenu...'}})}}
 
-    RESSOURCES
+    <br>
 
+<!-- SAISIES RESSOURCES -->
+	<div class="card">
+		<div class="card-header" id="headingOne">
+  			<button class="btn btn-light"  type="button" data-toggle="collapse" data-target="#collapseRessources" aria-expanded="false" aria-controls="collapseRessources">
+    			Ressources
+  			</button>
+		</div>
+		<div class="collapse show" id="collapseRessources">
+  			<div class="card card-body">
+   
+				<ul class="ressources" data-prototype="{{ form_widget(form.ressources.vars.prototype)|e('html_attr') }}">
+
+					<button type="button" class="btn add_item_link" data-collection-holder-class="ressources" style="float:center">
+						<i class="far fa-plus-square"></i> 
+					</button>
+
+					<!-- Pour ne pas avoir un label 'ressources' affiché à la fin du formulaire -->
+					
+	    			{% for ressource in form.ressources %}
+	    				<li> {{ form(ressource) }} </li> <!-- Formulaire entier 1 ressource -->
+    				{% endfor %}
+				</ul>
+ 			 </div>
+		</div>
+	</div>
+	<br> <hr>
+	
     {{ form_row(form.motsCles, {'label': 'Mots clés','attr':{ 'placeholder':'algorithmique'}}) }}
 
 {% endblock %}
@@ -61,7 +88,9 @@ Créer un post
 {% block Javascript %}
 
 
-<script>	// * Gere les tooltips * //
+<!--- * Gere les tooltips * -->
+<script>	
+
 
 // Fonction activant les tooltips (affiche les noms complets des modules en survol)
 
@@ -72,7 +101,8 @@ Créer un post
 </script>
 
 
-<script> 	// * Gere l'affichage dynamique Modules/Semestres' * //
+<!-- * Gere l'affichage dynamique Modules/Semestres * -->
+<script>
 
 	var toggler = document.getElementsByClassName('caret');
 	var i;
@@ -85,4 +115,65 @@ Créer un post
 
 </script>
 
+
+<!-- * Gere la generation dynamique d'un nouveau form de Ressource * -->
+<script>	
+
+jQuery(document).ready(function() {
+
+ 	var $collectionHolder = $('ul.ressources');
+
+    // add a delete link to all of the existing tag form li elements
+    $collectionHolder.find('li').each(function() {
+        addTagFormDeleteLink($(this));
+    });
+
+	    // Get the ul that holds the collection of ressources
+    var $entiteCollectionHolder = $('ul.ressources');
+
+    // count the current form inputs we have (e.g. 2), use that as the new
+    // index when inserting a new item (e.g. 2)
+    $entiteCollectionHolder.data('index', $entiteCollectionHolder.find('input').length);
+
+    $('body').on('click', '.add_item_link', function(e) {
+        var $collectionHolderClass = $(e.currentTarget).data('collectionHolderClass');
+        // add a new tag form (see next code block)
+        addFormToCollection($collectionHolderClass);
+    })
+});
+
+function addFormToCollection($collectionHolderClass) {
+    // Get the ul that holds the collection of ressources
+    var $collectionHolder = $('.' + $collectionHolderClass);
+
+    // Get the data-prototype explained earlier
+    var prototype = $collectionHolder.data('prototype');
+
+    // get the new index
+    var index = $collectionHolder.data('index');
+
+    var newForm = prototype;
+
+    // increase the index with one for the next item
+    $collectionHolder.data('index', index + 1);
+
+    // Display the form in the page in an li, before the "Add a tag" link li
+    var $newFormLi = $('<li></li>').append(newForm);
+    // Add the new form at the end of the list
+    $collectionHolder.append($newFormLi)
+
+     addTagFormDeleteLink($newFormLi);
+}
+
+function addTagFormDeleteLink($tagFormLi) {
+    var $removeFormButton = $('<button type="button" class="btn" style="float: right;"><i class="fas fa-trash"></i></button><br><hr>');
+    $tagFormLi.append($removeFormButton);
+
+    $removeFormButton.on('click', function(e) {
+        // remove the li for the tag form
+        $tagFormLi.remove();
+    });
+}
+
+</script>
 {% endblock %}
