@@ -73,7 +73,7 @@
                     <i class="fas fa-chart-bar" height="20px" width="20px"></i>
                     <span>Classement</span></a>
             </li>
-            {% if is_granted("role_admin") %}
+            {% if is_granted("ROLE_ADMIN") %}
             <li class="nav-item">
                 <a class="nav-link" href="#.html" title="Admin">
                     <i class="fas fa-user" height="20px" width="20px"></i>
@@ -93,7 +93,7 @@
             </div>
 
             <div class="text-center d-none d-md-inline" title="Déconnexion">
-                <a href="#">
+                <a href="{{ path('app_logout') }}">
                     <button class="btn btn-primary btn-customized bouton-menu">
                         <i class="fas fa-sign-out-alt"></i>
                     </button>
@@ -174,7 +174,7 @@
                     </ul>
                     {% endblock %}
                     <!-- Déconnexion visible que en format tel-->
-                    <a href="#">
+                    <a href="{{ path('app_logout') }}">
                         <button class="btn btn-link d-md-none rounded-circle mr-3" title="Déconnexion">
                             <i class="fa fa-sign-out-alt"></i>
                         </button>
@@ -275,7 +275,7 @@
     <script src="{{ asset("vendor/bootstrap/js/bootstrap.bundle.min.js")}}"></script>
 
     <!-- JavaScript du template-->
-    <script src="js/sb-admin-2.min.js"></script>
+    <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
 
     <!-- Additional Plugin Datables-->
     <script src="{{ asset('vendor/datatables/jquery.dataTables.js') }}"></script>
@@ -283,7 +283,7 @@
 
 
     <!--JavaScript additionel-->
-    {%block Javascript%}{%endblock%}
+    {% block Javascript %}{% endblock %}
 
 </body>
 
