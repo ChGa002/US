@@ -28,7 +28,7 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('plainPassword', PasswordType::class, [
+            ->add('motDePasse', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
@@ -44,6 +44,15 @@ class RegistrationFormType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
+            ])
+            ->add('confirm_mdp',PasswordType::class,[
+                'attr'=>['placeholder'=>'Confirmation'],
+                'constraints'=>[
+                    new EqualTo([
+                        'propertyPath'=>'motDePasse',
+                        'message'=>'Vous devez saisir les mêmes mots de passe.',
+                    ])
+                ]
             ])
         ;
     }

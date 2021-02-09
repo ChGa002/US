@@ -60,7 +60,7 @@ class Utilisateur implements UserInterface
     /**
      * @ORM\Column(type="string", length=30, nullable=true)
      */
-    private $motDePasse;    
+    private $motDePasse;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)

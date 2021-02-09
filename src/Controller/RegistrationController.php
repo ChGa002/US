@@ -18,13 +18,18 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/inscription", name="app_register")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator): Response
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator, UtilisateurRepository $users): Response
     {
         $user = new Utilisateur();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
+        $emailCheck = $users->findOneBy(['mail']);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if(!$emailCheck)
+            {
+                throw $this->createNotFoundException('Votre adresse ne peut permettre de créer un compte.');
+            }
             // encode the plain password
             $user->setMotDePasse(
                 $passwordEncoder->encodePassword(
