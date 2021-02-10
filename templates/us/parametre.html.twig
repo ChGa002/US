@@ -1,11 +1,45 @@
 {% extends 'templateBase.html.twig' %}
 
-{% block titleOnglet %}US - Paramêtre{% endblock %}
+{% block titleOnglet %}US - Paramètre{% endblock %}
 
-{% block titlePage %} Paramêtre {% endblock %}
+{% block titlePage %} Paramètre {% endblock %}
 
 {% block contenuCentral %}
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-7">
+            <div class="toggle">
+                <input type="checkbox" class="checkbox" id="dark-mode"/>
+                <label for="dark-mode" class="label">
+                    <i class="fas fa-moon"></i>
+                    <i class="fas fa-sun"></i>
+                    <div class="ball"></div>
+                </label>
+            </div>
+            <a href="">Changer mon pseudo</a><br>
+            <a href="">Changer mon mot de passe</a><br>
+            <a href="">Supprimer mon compte</a>
+		</div>
+		<div class="col-md-5">
+            <div class="text-center">
+                <img src="{{ asset('/img/us_logo.png') }}" alt="" height="200px" width="200px">
+            </div>
+		</div>
+	</div>
+</div>
 
 {% endblock %}
 
 {% block boxDroit %} {% endblock %}
+
+{% block barreRecherche %} {% endblock %}
+
+{% block Javascprit %}
+    <script>
+        const darkMode = document.getElementById('dark-mode');
+        darkMode.addEventListener('change', () => {
+        document.body.classList.toggle('dark');
+        });
+    </script>
+{% endblock %}
