@@ -9,6 +9,8 @@ use App\Entity\Semestre;
 use App\Entity\Module;
 use App\Entity\Post;
 use App\Repository\SemestreRepository;
+use App\Repository\PostRepository;
+use App\Repository\ModuleRepository;
 
 class USController extends AbstractController
 {
@@ -22,31 +24,34 @@ class USController extends AbstractController
         ]);
     }
 	
+	
 	/**
 	 * @Route("/repertoires", name="us_repertoires")
 	 */
-	 public function repertoires()
+	 public function repertoires(SemestreRepository $semestreRepository)
 	 {
-		 $semestreRepository = $this->getDoctrine()->getRepository(Semestre::class);
+			// On va récupérer au sein de la variable post le contenu du repository après la méthode findAll
 		 $semestres = $semestreRepository->findAll();
+		 
+			// Ici on va afficher la page définie par le fichier repertoires.html.twig en transmettant la variable $semestres
 		 return $this->render('us/repertoires.html.twig', ['semestres' => $semestres]);
 	 }
 	 
 	 
 	 
-	 
-	
-	 
-	 
 	/**
 	 * @Route("/module/{id}", name="us_postModule")
 	 */
-	 public function triPostParModule($id)
-	 {
-		 $posts= $this->getDoctrine()->getRepository(Post::class)->findByModule($id);
-		 return $this->render('us/postParModule.html.twig', ['posts' => $posts]);
+	 public function triPostParModule(Module $module)
+	 {	
+			// Ici on va afficher la page définie par le fichier postParModule.html.twig en transmettant la variable $posts
+		 return $this->render('us/postParModule.html.twig', ['module' => $module]);
 		 
 
 	 }
+	 
+	 
+	 
+
 		 
 }

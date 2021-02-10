@@ -9,26 +9,26 @@
 
 <div class="accordion" id="accordionExample">
 	<!-- on definit une variable- compteur qui permetrra de modifier les identifiants du html-->
-	{% set id=0 %}
+	{% set idPourDiv=0 %}
 	<!-- On rentre dans la boucle qui parcourt les semestres récupérés dans l'action métier réalisé par le controlleur-->
 	{% for semestreCourant in semestres %}
 
 		<div class="card">
-			<div class="card-header" id="heading{{ id }}"> <!-- on utilise la variable définie plus haut-->
+			<div class="card-header" id="heading{{ idPourDiv }}"> <!-- on utilise la variable définie plus haut-->
 				<h5 class="mb-0">
-					<i id="etoileFavoris{{ id }}" class="icon-star-empty" ></i>
-					<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{ id }}" aria-expanded="true" aria-controls="collapse{{ id }}">
+					<i id="etoileFavoris{{ idPourDiv }}" class="icon-star-empty" ></i>
+					<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{ idPourDiv }}" aria-expanded="true" aria-controls="collapse{{ idPourDiv }}">
 						 <i class="icon-folder"></i> - {{ semestreCourant.nom }} <!-- on va récuperer le nom du semestre courant de la boucle pour l'afficher en header d'accordeon-->
 					</button>
 				</h5>
 			</div>
-		<div id="collapse{{ id }}" class="collapse" aria-labelledby="heading{{ id }}" data-parent="#accordionExample">
+		<div id="collapse{{ idPourDiv }}" class="collapse" aria-labelledby="heading{{ idPourDiv }}" data-parent="#accordionExample">
 			<div class="card-body">
 				{% for moduleCourant in semestreCourant.modules %} <!-- Boucle parcourant les modules associés au semestre courant-->
-					<i class="icon-star-empty"> </i><a href="{{ path('us_postModule' , {'id' : ' moduleCourant.id '}) }}"> {{ moduleCourant.sigle ~ '-' ~ moduleCourant.nom }} <br>	</a>
+					<i id="etoileFavoris_Module" class="icon-star-empty"> </i><a href="{{ path('us_postModule' , {'id' : moduleCourant.id }) }}"> {{ moduleCourant.sigle ~ '-' ~ moduleCourant.nom }} </a><br>
 				{% endfor %} 									<!-- ci-dessus on affiche le sigle suivi du nom du module ,séléctioné dans la boucle au préalable-->
 			</div>
-			{% set id=id+1 %}  <!-- On incrémente le compteur-->
+			{% set idPourDiv=idPourDiv+1 %}  <!-- On incrémente le compteur-->
 		</div>
 		
 	{% endfor %}
@@ -46,7 +46,7 @@
 
 {%block Javascript%}
 	<script type="text/javascript">
-
+		
 		$(document).ready(function(){
 			$('#etoileFavoris0').click(function(){
 				if($(this).hasClass('icon-star-empty')){
@@ -80,7 +80,12 @@
 					$(this).removeClass('icon-star').addClass('icon-star-empty');
 				}
 			}); 
+
 		});
+		
+		
+
+
 
 	</script>
 {%endblock%}

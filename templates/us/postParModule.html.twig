@@ -1,14 +1,25 @@
 {% extends 'templateBase.html.twig' %}
 
-{% block titleOnglet %}US - Répertoires{% endblock %}
+{% block titleOnglet %}US - Module{% endblock %}
 
-{% block titlePage %} Répertoires {% endblock %}
+{% block titlePage %} Posts du Module {% endblock %}
 
 {% block contenuCentral %}
 
 
-{% for postCourant in posts %}
-	{{ postCourant.titre }}
+
+{% for postCourant in module.posts %}
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{ postCourant.titre }}</h5>
+    <p class="card-text">{{ postCourant.description }}</p>
+    <a href="#" class="btn btn-primary">Voir le post</a>
+  </div>
+</div>
+<br>
+
+{% else %}
+<p> Aucun résultat ne correspond a votre recherche </p>
 {% endfor %}
 
 
