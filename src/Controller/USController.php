@@ -17,5 +17,14 @@ class USController extends AbstractController
             'controller_name' => 'USController',
         ]);
     }
+     /**
+     * @Route("/us/parametre", name="us_parametre")
+     */
+    public function param(): Response
+    {
+        return $this->render('parametre/index.html.twig', [
+            'controller_name' => 'ParametreController',
+        ]);
+    }
 
 }

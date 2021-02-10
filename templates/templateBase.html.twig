@@ -80,6 +80,11 @@
                     <span>Admin</span></a>
             </li>
             {% endif %}
+            <li class="nav-item">
+                <a class="nav-link" href="#.html" title="Paramêtre">
+                    <i class="fas fa-cog" height="20px" width="20px"></i>
+                    <span>Paramêtre</span></a>
+            </li>
             
 
             <!-- Divider -->
@@ -193,7 +198,7 @@
                     <!-- Content Row -->
 
                     <div class="row">
-
+                        {% block AjoutBody %}{% endblock %}
                         <!-- Contenu Central -->
                         <div class="col-xl-10 col-lg-9">
                             <div class="card shadow mb-4">
