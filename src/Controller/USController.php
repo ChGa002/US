@@ -27,5 +27,12 @@ class USController extends AbstractController
             'controller_name' => 'USController',
         ]);
     }
+     /**
+     * @Route("/us/parametre/changerPseudo", name="changerPseudo")
+     */
+    public function changerPseudo(): Response
+    {
+        
+    }
 
 }

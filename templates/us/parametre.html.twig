@@ -17,7 +17,7 @@
                     <div class="ball"></div>
                 </label>
             </div>
-            <a href="">Changer mon pseudo</a><br>
+            <a href="#switchPseudoModal" data-toggle='modal' data-target="#switchPseudoModal">Changer mon pseudo</a><br>
             <a href="">Changer mon mot de passe</a><br>
             <a href="">Supprimer mon compte</a>
 		</div>
@@ -27,6 +27,27 @@
             </div>
 		</div>
 	</div>
+</div>
+
+<div class="modal fade" id="switchPseudoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Changement de pseudo ?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <input type="password" placeholder="pseudo">
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Retour</button>
+            <button class="btn btn-secondary" type="submit" href="">Changer</input>
+        </div>
+    </div>
+</div>
 </div>
 
 {% endblock %}
