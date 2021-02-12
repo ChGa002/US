@@ -192,3 +192,14 @@ ul, #myUL {
 .active {
   display: block;
 }
+
+/*** Autre ***/
+
+/* Bouton creer */
+.posHD{
+  position: absolute;
+  top: 10%;
+  right:3%;
+  background-color: var(--brique);
+  color:white;
+}

@@ -4,6 +4,8 @@
 
 Créer un post
 
+
+    <button type="submit" class="btn posHD">Enregistrer </button>
 {% endblock %}
 
 {% block contenuCentral %} <!-- *** BLOCK CONTENU DU CENTRE *** -->
@@ -35,7 +37,9 @@ Créer un post
 					</button>
 
 					<!-- Pour ne pas avoir un label 'ressources' affiché à la fin du formulaire -->
-					
+					{{form(form.ressources, {'label': ''})}}
+
+					<!-- affiche ressources deja associees au post -->
 	    			{% for ressource in form.ressources %}
 	    				<li> {{ form(ressource) }} </li> <!-- Formulaire entier 1 ressource -->
     				{% endfor %}

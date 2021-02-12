@@ -18,10 +18,6 @@ class MotCleType extends AbstractType
     {
         $subscriber = new AddEntityChoiceSubscriber($options['em'], $options['class']);
         $builder->addEventSubscriber($subscriber);
-        /*$builder
-            ->add('motCle')
-            
-        ;*/
     }
 
      /**
