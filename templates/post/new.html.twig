@@ -176,4 +176,18 @@ function addTagFormDeleteLink($tagFormLi) {
 }
 
 </script>
+
+<!-- * Bundle select2 permet l'affichage de saisie à la volee des mots-cles * -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script src="{{ asset('bundles/tetranzselect2entity/js/select2entity.js') }}"></script>
+
+<script>
+  const select = document.querySelector('.js-select2');
+  $(select).select2({
+    tags: true,
+  });
+</script>
+
 {% endblock %}

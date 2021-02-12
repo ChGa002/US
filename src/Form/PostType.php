@@ -17,7 +17,9 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\ChoiceList\ChoiceList;
 use Symfony\Component\Form\ChoiceList\ArrayChoiceList;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Tetranz\Select2EntityBundle\Form\Type\Select2EntityType;
 use App\Form\RessourceType;
+use App\Form\MotCleType;
 
 class PostType extends AbstractType
 {
@@ -27,7 +29,12 @@ class PostType extends AbstractType
             ->add('titre', TextType::class)
             ->add('description', TextareaType::class, ['attr'=> ['style'=>'resize:none', 'rows'=>'2']])
             ->add('emplacementPhoto', UrlType::class)
-            ->add('motsCles', TextType::class, ['attr' => ['class' => 'js-user-autocomplete']])
+            ->add("motsCles", MotCleType::class, [
+                'required' => true,
+                'class' => 'App\Entity\MotCle',
+                'multiple' => true,
+                'attr' => ['class' => 'js-select2',],
+                ])
             ->add('modules', EntityType::class, array('class' => Module::class,
                 'choice_label' => function(Module $module)
                 {return $module->getSigle() ;}, 
