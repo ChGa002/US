@@ -2,28 +2,22 @@
 
 {% block titleOnglet %}US - Paramètre{% endblock %}
 
-{% block titlePage %} Paramètre {% endblock %}
+{% block titlePage %} Paramètre : {{app.user.pseudo}} {% endblock %}
 
 {% block contenuCentral %}
 
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-7">
-            <div class="toggle">
-                <input type="checkbox" class="checkbox" id="dark-mode"/>
-                <label for="dark-mode" class="label">
-                    <i class="fas fa-moon"></i>
-                    <i class="fas fa-sun"></i>
-                    <div class="ball"></div>
-                </label>
-            </div>
-            <a href="#switchPseudoModal" data-toggle='modal' data-target="#switchPseudoModal">Changer mon pseudo</a><br>
-            <a href="">Changer mon mot de passe</a><br>
-            <a href="">Supprimer mon compte</a>
+            <ul class="list-group" style="text-align: center;">
+                <a href="#switchPseudoModal" data-toggle='modal' data-target="#switchPseudoModal"> <li class="list-group-item"> Changer mon pseudo</li></a>
+                <a href=""><li class="list-group-item">Changer mon mot de passe</li></a>
+                <a href=""><li class="list-group-item">Supprimer mon compte</li></a>
+            </ul>
 		</div>
 		<div class="col-md-5">
             <div class="text-center">
-                <img src="{{ asset('/img/us_logo.png') }}" alt="" height="200px" width="200px">
+                <img src="{{ asset('/img/us_logo.png') }}" alt="" height="150px" width="150px">
             </div>
 		</div>
 	</div>
@@ -34,17 +28,19 @@ aria-hidden="true">
 <div class="modal-dialog" role="document">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Changement de pseudo ?</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Changement de pseudo :</h5>
             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">×</span>
             </button>
         </div>
         <div class="modal-body">
-            <input type="password" placeholder="pseudo">
+            {{ form_start(formPseudo) }}
+            {{ form_row(formPseudo.pseudo, {label:false}) }}
+            {{ form_end(formPseudo) }}
         </div>
         <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">Retour</button>
-            <button class="btn btn-secondary" type="submit" href="">Changer</input>
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
+            <button class="btn btn-secondary" type="submit" href="{{path('us_changePseudo')}}">Enregistrer</input>
         </div>
     </div>
 </div>

@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\Persistence\ObjectManager;
+use App\Repository\UtilisateurRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class USController extends AbstractController
 {
@@ -28,11 +31,17 @@ class USController extends AbstractController
         ]);
     }
      /**
-     * @Route("/us/parametre/changerPseudo", name="changerPseudo")
+     * @Route("/us/parametre/changerPseudo", name="us_changePseudo")
      */
-    public function changerPseudo(): Response
+    public function changerPseudo(Request $request): Response
     {
-        
+            $user = new Utilisateur();
+
+            $form = $this->createFormBuilder($user)
+                                  ->add('pseudo', TextType::class,  array( 'attr' => array ( 'placeholder' => 'Pseudo') ) )
+                                  ->getForm();
+
+        return $this->render('us/parametre.html.twig', [ 'formPseudo'=>$form->createView()]);
     }
 
 }
