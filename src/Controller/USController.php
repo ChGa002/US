@@ -33,15 +33,33 @@ class USController extends AbstractController
      /**
      * @Route("/us/parametre/changerPseudo", name="us_changePseudo")
      */
-    public function changerPseudo(Request $request): Response
+    public function changerPseudo(Request $request, ObjectManager $manager): Response
     {
-            $user = new Utilisateur();
+        $user = new Utilisateur();
+        $form = $this->createForm(switchPseudoForm::class, $user);
+        $form->handleRequest($request);
 
-            $form = $this->createFormBuilder($user)
-                                  ->add('pseudo', TextType::class,  array( 'attr' => array ( 'placeholder' => 'Pseudo') ) )
-                                  ->getForm();
+        if ($form->isSubmitted() && $form->isValid()) {
 
-        return $this->render('us/parametre.html.twig', [ 'formPseudo'=>$form->createView()]);
+           $userExistant = $users->findOneByPseudo($user->getPseudo());
+            if($userExistant == null || $userExistant->getValide()==true)
+            {
+                throw $this->createNotFoundException('Vous ne pouvez pas modifier votre pseudo.');
+                return $this->render('us/parametre.html.twig', [
+                    'changerPseudoForm' => $form->createView(),
+                ]);
+            }
+            $userExistant->setPseudo($user->getPseudo());
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($userExistant);
+            $entityManager->flush();
+
+        
+        }
+        return $this->render('us/parametre.html.twig', [
+            'user' => $user,
+             'changerPseudoForm' => $form->createView()
+             ]);
     }
-
 }
