@@ -16,7 +16,6 @@
 		<div class="card">
 			<div class="card-header" id="heading{{ idPourDiv }}"> <!-- on utilise la variable définie plus haut-->
 				<h5 class="mb-0">
-					<i id="etoileFavoris{{ idPourDiv }}" class="icon-star-empty" ></i>
 					<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{ idPourDiv }}" aria-expanded="true" aria-controls="collapse{{ idPourDiv }}">
 						 <i class="icon-folder"></i> - {{ semestreCourant.nom }} <!-- on va récuperer le nom du semestre courant de la boucle pour l'afficher en header d'accordeon-->
 					</button>
@@ -25,7 +24,7 @@
 		<div id="collapse{{ idPourDiv }}" class="collapse" aria-labelledby="heading{{ idPourDiv }}" data-parent="#accordionExample">
 			<div class="card-body">
 				{% for moduleCourant in semestreCourant.modules %} <!-- Boucle parcourant les modules associés au semestre courant-->
-					<i id="etoileFavoris_Module" class="icon-star-empty"> </i><a href="{{ path('us_postModule' , {'id' : moduleCourant.id }) }}"> {{ moduleCourant.sigle ~ '-' ~ moduleCourant.nom }} </a><br>
+					<a href="{{ path('us_postModule' , {'id' : moduleCourant.id }) }}"> {{ moduleCourant.sigle ~ '-' ~ moduleCourant.nom }} </a><br>
 				{% endfor %} 									<!-- ci-dessus on affiche le sigle suivi du nom du module ,séléctioné dans la boucle au préalable-->
 			</div>
 			{% set idPourDiv=idPourDiv+1 %}  <!-- On incrémente le compteur-->

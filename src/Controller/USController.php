@@ -38,7 +38,6 @@ class USController extends AbstractController
 	 }
 	 
 	 
-	 
 	/**
 	 * @Route("/module/{id}", name="us_postModule")
 	 */
