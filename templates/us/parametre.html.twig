@@ -2,7 +2,7 @@
 
 {% block titleOnglet %}US - Paramètre{% endblock %}
 
-{% block titlePage %} Paramètre : {{app.user.pseudo}} {% endblock %}
+{% block titlePage %} Paramètres : {{app.user.pseudo}} {% endblock %}
 
 {% block contenuCentral %}
 
@@ -17,46 +17,41 @@
 		</div>
 		<div class="col-md-5">
             <div class="text-center">
-                <img src="{{ asset('/img/us_logo.png') }}" alt="" height="150px" width="150px">
+                <img src="{{ asset('/img/us_logo.png') }}" alt="" height="150px" width="150px">               
             </div>
 		</div>
 	</div>
 </div>
+
 
 <div class="modal fade" id="switchPseudoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 aria-hidden="true">
 <div class="modal-dialog" role="document">
     <div class="modal-content">
         <div class="modal-header">
-            {{ form_start(changerPseudoForm)}}
+            
             <h5 class="modal-title" id="exampleModalLabel">Changement de pseudo :</h5>
             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">×</span>
             </button>
         </div>
+        {{ form_start(pseudoForm) }}
         <div class="modal-body">
-            {{ form_row(changerPseudoForm.pseudo) }}
+            {{ form_row(pseudoForm.pseudo) }}   
         </div>
+        {{ form_end(pseudoForm)}}
         <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
             <button class="btn btn-secondary" type="submit" href="{{path('us_changePseudo')}}">Enregistrer</input>
-                {{ form_end(changerPseudoForm)}}
+                
         </div>
     </div>
 </div>
 </div>
+
 
 {% endblock %}
 
 {% block boxDroit %} {% endblock %}
 
 {% block barreRecherche %} {% endblock %}
-
-{% block Javascprit %}
-    <script>
-        const darkMode = document.getElementById('dark-mode');
-        darkMode.addEventListener('change', () => {
-        document.body.classList.toggle('dark');
-        });
-    </script>
-{% endblock %}
