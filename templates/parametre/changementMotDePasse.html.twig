@@ -1,10 +1,10 @@
 {% extends '/parametre/parametre.html.twig' %}
 
 {% block ChangementParametre %}
-    <h2>Changement de pseudo</h2>
-    {{ form_start(pseudoForm)}}
-    {{ form_row(pseudoForm.pseudo)}}
+    <h2>Changement de mot de passe</h2>
+    {{ form_start(mdpForm)}}
+    {{ form_row(mdpForm.motDePasse)}}
     <a href="{{path('us_parametre')}}"><button class="btn btn-danger" type="button">Annuler</button></a> 
     <button class="btn btn-success" type="submit">Enregistrer</input>
-    {{ form_end(pseudoForm)}}
+    {{ form_end(mdpForm)}}
 {% endblock %}

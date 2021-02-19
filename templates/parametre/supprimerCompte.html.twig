@@ -1,0 +1,21 @@
+{% extends '/parametre/parametre.html.twig' %}
+
+{% block ChangementParametre %}
+
+<h2>Souhaitez-vous réellement supprimer votre compte ?*</h2>
+<i><h3>(*Attention ceci sera irréversible)</h3></i>
+<p>
+    Ceci entrainera la suppression:
+    <ul>
+        <li>du profil</li>
+        <li>des posts</li>
+        <li>des favoris</li>
+        <li>des points attribués</li>
+    </ul>
+</p>
+{{ form_start(suppForm) }}
+{{ form_row(suppForm.pseudo) }}
+<a href="{{path('us_parametre')}}"><button class="btn btn-danger" type="button">Annuler</button></a> 
+<a href="{{path('us_parametre')}}"><button class="btn btn-success" type="button">Supprimer</button></a> 
+{{ form_end(suppForm) }}
+{% endblock %}
