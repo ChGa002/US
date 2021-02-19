@@ -41,7 +41,8 @@ class PostType extends AbstractType
                 'choice_attr' => function(Module $module)
                 {return array($module->getSigle() => $module->getNom()) ;},
                 'expanded' => true,
-                'multiple' => true
+                'multiple' => true,
+                'by_reference' => false,
                 ))
              ->add('ressources', CollectionType::class, [
                         'entry_type' => RessourceType::class,

@@ -45,7 +45,7 @@ class Post
     private $emplacementPhoto;
 
     /**
-     * @ORM\OneToMany(targetEntity=Ressource::class, mappedBy="post", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Ressource::class, mappedBy="post", orphanRemoval=true, cascade={"persist"})
      */
     private $ressources;
 
@@ -55,7 +55,7 @@ class Post
     private $motsCles;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Module::class, mappedBy="posts")
+     * @ORM\ManyToMany(targetEntity=Module::class, mappedBy="posts",cascade={"persist"})
      */
     private $modules;
 

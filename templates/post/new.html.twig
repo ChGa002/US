@@ -4,13 +4,11 @@
 
 Créer un post
 
-
-    <button type="submit" class="btn posHD">Enregistrer </button>
+ 	{{form_start(form)}}
+    <button type="submit" class="btn posHD">Enregistrer</button>
 {% endblock %}
 
 {% block contenuCentral %} <!-- *** BLOCK CONTENU DU CENTRE *** -->
-
- {{form_start(form)}}
 
     {{form_row(form.emplacementPhoto, {'label': 'Lien photo','attr':{ 'placeholder':'Emplacement de la vignette du post...'}})}}
 
@@ -21,6 +19,8 @@ Créer un post
     <br>
 
 <!-- SAISIES RESSOURCES -->
+		
+
 	<div class="card">
 		<div class="card-header" id="headingOne">
   			<button class="btn btn-light"  type="button" data-toggle="collapse" data-target="#collapseRessources" aria-expanded="false" aria-controls="collapseRessources">
@@ -28,29 +28,31 @@ Créer un post
   			</button>
 		</div>
 		<div class="collapse show" id="collapseRessources">
-  			<div class="card card-body">
-   
-				<ul class="ressources" data-prototype="{{ form_widget(form.ressources.vars.prototype)|e('html_attr') }}">
+  			<div class="card card-body" id="exp_list" data-prototype="{{ form_widget(form.ressources.vars.prototype)|e('html_attr') }}">
 
-					<button type="button" class="btn add_item_link" data-collection-holder-class="ressources" style="float:center">
-						<i class="far fa-plus-square"></i> 
-					</button>
+				{% for row in form.ressources %}
+					<div class="panel panel-warning">
+						<div class="panel-heading">
+							<strong>{{ row.vars.value.nom }}</strong>
+						</div>
+						<div class="panel-body">
+							{{ form_row(row) }}
+						</div>
+					</div>
+				{% endfor %}
 
-					<!-- Pour ne pas avoir un label 'ressources' affiché à la fin du formulaire -->
-					{{form(form.ressources, {'label': ''})}}
+			<!-- Permet de ne pas afficher "Ressources" a la fin du formulaire -->
+			{{ form_widget(form.ressources, {'label': ''}) }}		
 
-					<!-- affiche ressources deja associees au post -->
-	    			{% for ressource in form.ressources %}
-	    				<li> {{ form(ressource) }} </li> <!-- Formulaire entier 1 ressource -->
-    				{% endfor %}
-				</ul>
- 			 </div>
+			</div>
 		</div>
 	</div>
-	<br> <hr>
-	
-    {{ form_row(form.motsCles, {'label': 'Mots clés','attr':{ 'placeholder':'algorithmique'}}) }}
 
+
+	
+
+{{ form_row(form.motsCles, {'label': 'Mots clés','attr':{ 'placeholder':'algorithmique'}}) }}
+    
 {% endblock %}
 
 {% block contenuDroit %} <!-- *** BLOCK CONTENU DE DROITE *** -->
@@ -122,61 +124,100 @@ Créer un post
 
 <!-- * Gere la generation dynamique d'un nouveau form de Ressource * -->
 <script>	
+<script>
 
-jQuery(document).ready(function() {
+	var toggler = document.getElementsByClassName('caret');
+	var i;
 
- 	var $collectionHolder = $('ul.ressources');
+	for (i = 0; i < toggler.length; i++) {
+		toggler[i].addEventListener('click', function() {
+		this.parentElement.querySelector('.nested').classList.toggle('active');						this.classList.toggle('caret-down');
+		});
+	}
 
-    // add a delete link to all of the existing tag form li elements
-    $collectionHolder.find('li').each(function() {
-        addTagFormDeleteLink($(this));
+</script>
+<script>
+// this variable is the list in the dom, it's initiliazed when the document is ready
+var $collectionHolder;
+// the link which we click on to add new items
+var $addNewItem = $('<a href="#" class="btn btn-light"><i class="far fa-plus-square"></i> Ajouter une ressource</a>');
+// when the page is loaded and ready
+$(document).ready(function () {
+    // get the collectionHolder, initilize the var by getting the list;
+    $collectionHolder = $('#exp_list');
+    // append the add new item link to the collectionHolder
+    $collectionHolder.append($addNewItem);
+    // add an index property to the collectionHolder which helps track the count of forms we have in the list
+    $collectionHolder.data('index', $collectionHolder.find('.panel').length)
+    // finds all the panels in the list and foreach one of them we add a remove button to it
+    // add remove button to existing items
+    $collectionHolder.find('.panel').each(function () {
+        // $(this) means the current panel that we are at
+        // which means we pass the panel to the addRemoveButton function
+        // inside the function we create a footer and remove link and append them to the panel
+        // more informations in the function inside
+        addRemoveButton($(this));
     });
-
-	    // Get the ul that holds the collection of ressources
-    var $entiteCollectionHolder = $('ul.ressources');
-
-    // count the current form inputs we have (e.g. 2), use that as the new
-    // index when inserting a new item (e.g. 2)
-    $entiteCollectionHolder.data('index', $entiteCollectionHolder.find('input').length);
-
-    $('body').on('click', '.add_item_link', function(e) {
-        var $collectionHolderClass = $(e.currentTarget).data('collectionHolderClass');
-        // add a new tag form (see next code block)
-        addFormToCollection($collectionHolderClass);
+    // handle the click event for addNewItem
+    $addNewItem.click(function (e) {
+        // preventDefault() is your  homework if you don't know what it is
+        // also look up preventPropagation both are usefull
+        e.preventDefault();
+        // create a new form and append it to the collectionHolder
+        // and by form we mean a new panel which contains the form
+        addNewForm();
     })
 });
-
-function addFormToCollection($collectionHolderClass) {
-    // Get the ul that holds the collection of ressources
-    var $collectionHolder = $('.' + $collectionHolderClass);
-
-    // Get the data-prototype explained earlier
+/*
+ * creates a new form and appends it to the collectionHolder
+ */
+function addNewForm() {
+    // getting the prototype
+    // the prototype is the form itself, plain html
     var prototype = $collectionHolder.data('prototype');
-
-    // get the new index
+    // get the index
+    // this is the index we set when the document was ready, look above for more info
     var index = $collectionHolder.data('index');
-
+    // create the form
     var newForm = prototype;
-
-    // increase the index with one for the next item
-    $collectionHolder.data('index', index + 1);
-
-    // Display the form in the page in an li, before the "Add a tag" link li
-    var $newFormLi = $('<li></li>').append(newForm);
-    // Add the new form at the end of the list
-    $collectionHolder.append($newFormLi)
-
-     addTagFormDeleteLink($newFormLi);
+    // replace the __name__ string in the html using a regular expression with the index value
+    newForm = newForm.replace(/__name__/g, index);
+    // incrementing the index data and setting it again to the collectionHolder
+    $collectionHolder.data('index', index+1);
+    // create the panel
+    // this is the panel that will be appending to the collectionHolder
+    var $panel = $('<div class="panel panel-warning"><div class="panel-heading"></div></div>');
+    // create the panel-body and append the form to it
+    var $panelBody = $('<div class="panel-body"></div>').append(newForm);
+    // append the body to the panel
+    $panel.append($panelBody);
+    // append the removebutton to the new panel
+    addRemoveButton($panel);
+    // append the panel to the addNewItem
+    // we are doing it this way to that the link is always at the bottom of the collectionHolder
+    $addNewItem.before($panel);
 }
 
-function addTagFormDeleteLink($tagFormLi) {
-    var $removeFormButton = $('<button type="button" class="btn" style="float: right;"><i class="fas fa-trash"></i></button><br><hr>');
-    $tagFormLi.append($removeFormButton);
-
-    $removeFormButton.on('click', function(e) {
-        // remove the li for the tag form
-        $tagFormLi.remove();
+/**
+ * adds a remove button to the panel that is passed in the parameter
+ * @param $panel
+ */
+function addRemoveButton ($panel) {
+    // create remove button
+    var $removeButton = $('<a href="#" class="btn btn-light"><i class="fas fa-trash"></i> Supprimer</a><hr>');
+    // appending the removebutton to the panel footer
+    var $panelFooter = $('<div class="panel-footer"></div>').append($removeButton);
+    // handle the click event of the remove button
+    $removeButton.click(function (e) {
+        e.preventDefault();
+        // gets the parent of the button that we clicked on "the panel" and animates it
+        // after the animation is done the element (the panel) is removed from the html
+        $(e.target).parents('.panel').slideUp(1000, function () {
+            $(this).remove();
+        })
     });
+    // append the footer to the panel
+    $panel.append($panelFooter);
 }
 
 </script>

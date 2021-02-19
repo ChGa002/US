@@ -33,7 +33,7 @@ class Ressource
     private $emplacement;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Post::class, inversedBy="ressources")
+     * @ORM\ManyToOne(targetEntity=Post::class, inversedBy="ressources", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $post;

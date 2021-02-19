@@ -36,6 +36,10 @@ class PostController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $post->setDatePubli(new \DateTime('now'));
+            $post->setCreateur($this->getUser());
+            $post->setSignale(false);
+            
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($post);
             $entityManager->flush();
