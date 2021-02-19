@@ -9,11 +9,13 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-7">
+            {% block ChangementParametre %}
             <ul class="list-group" style="text-align: center;">
-                <a href="#switchPseudoModal" data-toggle='modal' data-target="#switchPseudoModal"> <li class="list-group-item"> Changer mon pseudo</li></a>
+                <a href=""><li class="list-group-item">Changer mon pseudo</li></a>
                 <a href=""><li class="list-group-item">Changer mon mot de passe</li></a>
                 <a href=""><li class="list-group-item">Supprimer mon compte</li></a>
             </ul>
+            {% endblock %}
 		</div>
 		<div class="col-md-5">
             <div class="text-center">
