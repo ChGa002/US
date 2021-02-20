@@ -8,9 +8,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -39,8 +41,8 @@ class ParametreController extends AbstractController
             $manager->persist($user);
             $manager->flush();
 
-            return $this->redirectToRoute('us_parametre'); 
-            $request->getSession()->getFlashBag()->add('notice', "Votre pseudo a été mis à jour.");             
+            $request->getSession()->getFlashBag()->add('notice', "Votre pseudo a été mis à jour.");
+            return $this->redirectToRoute('us_parametre');  
         }
         return $this->render('/parametre/changementPseudo.html.twig', 
         [ 
@@ -54,12 +56,15 @@ class ParametreController extends AbstractController
     public function changerMotDePasse(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $manager): Response
     {
         $user  = $this->getUser();
-
         $mdpForm = $this->createFormBuilder($user)
-        ->add('motDePasse', PasswordType::class, [
-            'attr'=>['placeholder'=>'Nouveau Mot de Passe'],
+        ->add('motDePasse', RepeatedType::class, [
+            'type' => PasswordType::class,
+            'invalid_message' => 'Les deux saisies doivent correspondre.',
             /*'mapped' => false,*/
-            'label' => false,
+            'options' => ['attr' => ['class' => 'password-field']],
+            'required' => true,
+            'first_options'  => ['label' => false,'attr' =>['placeholder' => 'Nouveau mot de passe' ]],
+            'second_options' =>  ['label' => false,'attr' =>['placeholder' => 'Retaper le mot de passe' ]],
             'constraints' => [
                 new NotBlank(['message' => 'Entrer le mot de passe.', ]),
                 new Length([
@@ -69,7 +74,7 @@ class ParametreController extends AbstractController
                     'max' => 4096,
                      ])
                     ]
-                ])
+                ])  
         ->getForm();
         $mdpForm->handleRequest($request);
 
@@ -102,39 +107,39 @@ class ParametreController extends AbstractController
         $user = $this->getUser();
          
         $suppForm = $this->createFormBuilder()
-                                    ->add('motDePasse', PasswordType::class, [
-                                        'attr'=>['placeholder'=>'Nouveau Mot de Passe'],
-                                        /*'mapped' => false,*/
-                                        'label' => false,
-                                        'constraints' => [
-                                            new NotBlank(['message' => 'Entrer le mot de passe.', ]),
-                                            new Length([
-                                                'min' => 8,
-                                                'minMessage' => 'Votre mot de passe doit faire 8 caractères',
-                                                // max length allowed by Symfony for security reasons
-                                                'max' => 4096,
-                                                 ])
-                                                ]
+                                ->add('motDePasse', RepeatedType::class, [
+                                    'type' => PasswordType::class,
+                                    'invalid_message' => 'Les deux saisies doivent correspondre.',
+                                    /*'mapped' => false,*/
+                                    'options' => ['attr' => ['class' => 'password-field']],
+                                    'required' => true,
+                                    'first_options'  => ['label' => false,'attr' =>['placeholder' => 'Saisir le mot de passe' ]],
+                                    'second_options' =>  ['label' => false,'attr' =>['placeholder' => 'Retaper le mot de passe' ]],
+                                    'constraints' => [
+                                        new NotBlank(['message' => 'Entrer le mot de passe.', ]),
+                                        new Length([
+                                            'min' => 8,
+                                            'minMessage' => 'Votre mot de passe doit faire 8 caractères',
+                                            // max length allowed by Symfony for security reasons
+                                            'max' => 4096,
                                             ])
+                                            ]
+                                        ])  
                                     ->getForm();
          
-        if($suppForm->handleRequest($request)->isValid())
-        {
-            $em = $this->getDoctrine()
-                       ->getManager()
-                       ;
-                        
-            $em->remove($user);
-            $em->flush();
-             
-            //$this->get('security.context')->setToken(null);
-            $this->get('request')->getSession()->invalidate();
-             
-            $request->getSession()->getFlashBag()->add('notice', "Votre compte a bien été supprimé.");
-         
-            return $this->redirect($this->generateUrl('app_login'));
+        if($suppForm->isSubmitted() && $suppForm->isValid())
+        {   
+            if($suppForm->handleRequest($request)->isValid()){
+                $usrRepo = $em->getRepository(User::class);
+                $em->remove($user);
+                $em->flush();
+                 
+                $this->get('security.context')->setToken(null);
+                $this->get('request')->getSession()->invalidate();  
+                $request->getSession()->getFlashBag()->add('compteSupp', "Votre compte a bien été supprimé.");      
+                return $this->redirectToRoute('app_login');  
+            }
         }
-         
         return $this->render('/parametre/supprimerCompte.html.twig', [
             'suppForm' => $suppForm->createView(),
             'active' => $active

@@ -1,6 +1,11 @@
 {% extends '/parametre/parametre.html.twig' %}
 
 {% block ChangementParametre %}
+    {% for message in app.flashes('erreurSaisieAncienMDP') %}
+    <div class="alert alert-danger">
+        {{ message }}
+    </div>
+    {% endfor %}
     <h2>Changement de mot de passe</h2>
     {{ form_start(mdpForm)}}
     {{ form_row(mdpForm.motDePasse)}}

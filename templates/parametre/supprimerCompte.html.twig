@@ -14,8 +14,8 @@
     </ul>
 </p>
 {{ form_start(suppForm) }}
-{{ form_row(suppForm.pseudo) }}
+{{ form_row(suppForm.motDePasse) }}
 <a href="{{path('us_parametre')}}"><button class="btn btn-danger" type="button">Annuler</button></a> 
-<a href="{{path('us_parametre')}}"><button class="btn btn-success" type="button">Supprimer</button></a> 
+<button class="btn btn-success" type="submit">Supprimer</input>
 {{ form_end(suppForm) }}
 {% endblock %}
