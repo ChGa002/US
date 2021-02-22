@@ -1,0 +1,49 @@
+{% extends 'templateBase.html.twig' %}
+
+{% block titleOnglet %}US - Favoris{% endblock %}
+
+{% block titlePage %} Favoris {% endblock %}
+
+{% block contenuCentral %}
+<p> 
+	Bonjour {{ app.user.pseudo }} ici vous pouvez visualiser vos favoris ! <br>
+</p>
+
+<h2> Semestres </h2>
+
+{% for semestreCourant in app.user.semestresFavoris %}
+	{{ semestreCourant.nom }}<br>
+{% else %}
+<p> Aucun semestre n'est votre favoris !</p>
+{% endfor %}
+<br>
+
+
+<h2> Modules </h2>
+
+{% for moduleCourant in app.user.modulesFavoris %}
+	{{ moduleCourant.nom }}<br>
+{% else %}
+<p> Aucun module n'est votre favoris !</p>
+{% endfor %}
+<br>
+
+
+<h2> Posts </h2>
+
+{% for postCourant in app.user.postsFavoris %}
+	{{ postCourant.nom }} <br>
+{% else %}
+<p> Aucun post n'est votre favoris !</p>
+{% endfor %}
+<br>
+
+<br>
+<br>
+
+
+
+
+{%endblock%}
+
+{% block boxDroit %} {% endblock %}

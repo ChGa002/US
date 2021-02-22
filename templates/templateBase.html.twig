@@ -49,12 +49,12 @@
 
             <!-- Nav Item -->
             <li class="nav-item">
-                <a class="nav-link" href="#.html" title="Accueil">
+                <a class="nav-link" href="{{ path('us_accueil') }}" title="Accueil">
                     <i class="fas fa-home" height="20px" width="20px"></i>
                     <span>Accueil</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#.html" title="Repertoires">
+                <a class="nav-link" href="{{ path('us_repertoires') }}" title="Repertoires">
                     <i class="fas fa-folder" height="20px" width="20px"></i>
                     <span>Repertoires</span></a>
             </li>
@@ -64,7 +64,7 @@
                     <span>Poster</span></a><!--Info bulle créer un post-->
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#.html" title="Accèder à mes favoris">
+                <a class="nav-link" href="{{ path('us_favoris') }}" title="Accèder à mes favoris">
                     <i class="fas fa-star" height="20px" width="20px"></i>
                     <span>Favoris</span></a><!--Accès a mes favoris-->
             </li>
@@ -267,6 +267,11 @@
         </div>
     </div>
 
+	
+	<!-- Ajax axios -->
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	
+	
     <!-- Jquery-->
     <script src="{{ asset("vendor/jquery/jquery.min.js") }}"></script>
     <script src="{{ asset("vendor/jquery-easing/jquery.easing.min.js")}}"></script>
@@ -281,6 +286,8 @@
     <script src="{{ asset('vendor/datatables/jquery.dataTables.js') }}"></script>
     <script src="{{ asset('vendor/datatables/dataTables.bootstrap4.js') }}"></script>
 
+
+	<script src="{{ asset('js/scriptFavoris.js') }}"></script>
 
     <!--JavaScript additionel-->
     {% block Javascript %}{% endblock %}

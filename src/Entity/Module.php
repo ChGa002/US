@@ -109,4 +109,15 @@ class Module
 
         return $this;
     }
+	
+	
+		public function estUnFavori(Utilisateur $user): bool
+	{
+		foreach($user->getModulesFavoris() as $module)
+		{
+			if ($module == $this) return true;
+		}
+
+		return false;
+	}
 }
