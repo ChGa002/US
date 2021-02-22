@@ -11,7 +11,6 @@ button:focus{outline: 0;}
   --deep: #3d4251;
   --ocean: #666F88;
   --cloud: #fff;
-
 }
 .colorCloud{color:var(--cloud);}
 .colorOcean{color:var(--ocean);}

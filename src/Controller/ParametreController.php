@@ -19,13 +19,6 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class ParametreController extends AbstractController
 {
      /**
-     * @Route("/us/parametre/parametre", name="us_parametre")
-     */
-    public function param(): Response
-    {
-        return $this->render('/parametre/parametre.html.twig');
-    }
-     /**
      * @Route("/us/parametre/changementPseudo", name="us_changePseudo")
      */
     public function changerPseudo(Request $request, EntityManagerInterface $manager): Response
@@ -101,11 +94,10 @@ class ParametreController extends AbstractController
     /**
      * @Route("/us/parametre/supprimerCompte", name="us_supprimerCompte")
      */
-    public function supprimerCompte(Request $request)
+    public function supprimerCompte(Request $request, EntityManagerInterface $em)
     {
-        $active = 'delete';
-        $user = $this->getUser();
-         
+        $user = $this->getUser(); // Recupère l'user courant
+         //Set un form pour le mot de passe
         $suppForm = $this->createFormBuilder()
                                 ->add('motDePasse', RepeatedType::class, [
                                     'type' => PasswordType::class,
@@ -126,23 +118,22 @@ class ParametreController extends AbstractController
                                             ]
                                         ])  
                                     ->getForm();
-         
-        if($suppForm->isSubmitted() && $suppForm->isValid())
+
+        $suppForm->handleRequest($request);
+         //regarde si tout est valide et donc faire le contenu du if
+        if( $suppForm->isSubmitted() && $suppForm->isValid() )
         {   
-            if($suppForm->handleRequest($request)->isValid()){
-                $usrRepo = $em->getRepository(User::class);
+                $this->container->get('security.token_storage')->setToken(null);
                 $em->remove($user);
                 $em->flush();
                  
-                $this->get('security.context')->setToken(null);
-                $this->get('request')->getSession()->invalidate();  
-                $request->getSession()->getFlashBag()->add('compteSupp', "Votre compte a bien été supprimé.");      
-                return $this->redirectToRoute('app_login');  
-            }
+                $currentSession = $request->getSession();
+                $currentSession->invalidate();
+                $this->addFlash('success', 'Votre compte utilisateur a bien été supprimé !'); 
+                return $this->redirectToRoute('app_login');
         }
         return $this->render('/parametre/supprimerCompte.html.twig', [
             'suppForm' => $suppForm->createView(),
-            'active' => $active
         ]);
     }
 

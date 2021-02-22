@@ -1,9 +1,9 @@
-{% extends '/parametre/parametre.html.twig' %}
+{% extends '/us/parametre.html.twig' %}
 
 {% block ChangementParametre %}
 
 <h2>Souhaitez-vous réellement supprimer votre compte ?*</h2>
-<i><h3>(*Attention ceci sera irréversible)</h3></i>
+<i style="text-align: right;"><h6 style="font-size:10px;">(<mark style="background-color: #cd533d6b;">*Attention ceci sera irréversible</mark>)</h6></i>
 <p>
     Ceci entrainera la suppression:
     <ul>
@@ -13,8 +13,10 @@
         <li>des points attribués</li>
     </ul>
 </p>
+<h6>Confirmation de votre choix:</h6> <br>
 {{ form_start(suppForm) }}
 {{ form_row(suppForm.motDePasse) }}
+
 <a href="{{path('us_parametre')}}"><button class="btn btn-danger" type="button">Annuler</button></a> 
 <button class="btn btn-success" type="submit">Supprimer</input>
 {{ form_end(suppForm) }}

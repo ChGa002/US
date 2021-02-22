@@ -46,6 +46,11 @@
                                                 {{ message }}
                                             </div>
                                         {% endfor %}
+                                        {% for message in app.flashes('success') %}
+                                            <div class="alert alert-success">
+                                                {{ message }}
+                                            </div>
+                                        {% endfor %}
 
 										<h1 class="h3 mb-3 font-weight-normal text-center colorCloud">Bienvenue</h1><br/>
                                         <div class="form-group">
