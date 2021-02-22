@@ -36,7 +36,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="#.html" title="Profil">
                     <div class="text-center">
+                        {% if  app.user.emplacementPhoto == null %}
+                        <img src="{{asset('/img/avDefault.png')}}" class="img-thumbnail" alt="defaultAvatar" height="100px" width="100px">
+                        {% else %}
                         <img src="{{app.user.emplacementPhoto}}" class="img-thumbnail" alt="defaultAvatar" height="100px" width="100px">
+                        {% endif %}
                     </div>
                 </a>
             </li>
