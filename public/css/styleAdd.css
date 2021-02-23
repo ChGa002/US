@@ -203,3 +203,12 @@ ul, #myUL {
   background-color: var(--brique);
   color:white;
 }
+
+/* Boutons en bas à droite */
+.posBD{
+position:relative;
+margin:10px;
+float:right;
+background-color: var(--ocean);
+color:white;
+}

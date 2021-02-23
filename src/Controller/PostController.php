@@ -96,4 +96,17 @@ class PostController extends AbstractController
 
         return $this->redirectToRoute('post_index');
     }
+    /**
+     * @Route("/{id}/signaler", name="post_signaler", methods={"GET"})
+     */
+    public function signaler(Post $post, $id): Response
+    {
+        $post->setSignale(true);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($post);
+        $em->flush();
+        return $this->redirectToRoute('post_show', [
+            'id' => $id]);
+    }
 }
