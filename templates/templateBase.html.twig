@@ -53,14 +53,14 @@
 
             <!-- Nav Item -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ path('us_accueil') }}" title="Accueil">
+                <a class="nav-link" href="{{ path('us_accueil') }}" title="Accueil du site.">
                     <i class="fas fa-home" height="20px" width="20px"></i>
                     <span>Accueil</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#.html" title="Repertoires">
+                <a class="nav-link" href="#.html" title="Accès à l'arborescense.">
                     <i class="fas fa-folder" height="20px" width="20px"></i>
-                    <span>Repertoires</span></a>
+                    <span>Répertoires</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#.html"title="Créer un post">
@@ -73,19 +73,19 @@
                     <span>Favoris</span></a><!--Accès a mes favoris-->
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#.html" title="Classement">
+                <a class="nav-link" href="#.html" title="Accès au classement des utilisateurs.">
                     <i class="fas fa-chart-bar" height="20px" width="20px"></i>
                     <span>Classement</span></a>
             </li>
             {% if is_granted("ROLE_ADMIN") %}
             <li class="nav-item">
-                <a class="nav-link" href="#.html" title="Admin">
+                <a class="nav-link" href="#.html" title="Gestion des utilisateurs et de l'arborescense.">
                     <i class="fas fa-user" height="20px" width="20px"></i>
                     <span>Admin</span></a>
             </li>
             {% endif %}
             <li class="nav-item">
-                <a class="nav-link" href="{{ path('us_parametre') }}" title="Paramètre">
+                <a class="nav-link" href="{{ path('us_parametre') }}" title="Changer le pseudo, mot de passe et suppression de compte.">
                     <i class="fas fa-cog" height="20px" width="20px"></i>
                     <span>Paramètres</span></a>
             </li>
@@ -104,7 +104,7 @@
             <div class="text-center d-none d-md-inline" title="Déconnexion">
                 <a href="{{ path('app_logout') }}">
                     <button class="btn btn-primary btn-customized bouton-menu">
-                        <i class="fas fa-sign-out-alt"></i>
+                        <i class="fas fa-door-open" style="font-size: 14px;"></i>
                     </button>
                 </a>    
             </div>
@@ -185,7 +185,7 @@
                     <!-- Déconnexion visible que en format tel-->
                     <a href="{{ path('app_logout') }}">
                         <button class="btn btn-link d-md-none rounded-circle mr-3" title="Déconnexion">
-                            <i class="fa fa-sign-out-alt"></i>
+                            <i class="fa fa-door-open"></i>
                         </button>
                     </a>
                 </nav>
