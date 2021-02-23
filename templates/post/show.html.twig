@@ -38,8 +38,18 @@
 {% endblock %}
 
 {% block contenuDroit %}
-
+    <div style="text-align:center;">
+        <a href="{{ path('post_enFavori', {'id':post.id}) }}" class="btn js-favori">
+            {% if post.estUnFavori(app.user) %}
+                <i class="fas fa-star"></i>
+            {% else %}
+                <span id="js-fav-text"> <b> Mettre en favori </b> </span>
+                <i class="far fa-star"></i>
+            {% endif %}
+        </a>
+    </div>    
     <br>
+
     <b> Modules: </b> 
 
 
@@ -59,12 +69,12 @@
     
     {% if post.createur != app.user and is_granted("ROLE_ADMIN") == false %}
         {% if post.signale %}
-            <a class="btn posBD disabled" href="{{ path('post_signaler', {'id': post.id}) }}" role="button">Signaler</a>
+            <a class="btn posBD disabled">Signaler</a>
         {% else %}
-            <a class="btn posBD " href="{{ path('post_signaler', {'id': post.id}) }}" role="button">Signaler</a>
+            <a class="btn posBD signaler" href="{{ path('post_signaler', {'id': post.id}) }}" role="button">Signaler</a>
         {% endif %}
     {% else %}
-        <button type="button" class="btn posBD" href="{{ path('post_edit', {'id': post.id}) }}"> Modifier </button>
+        <a class="btn posBD" href="{{ path('post_edit', {'id': post.id}) }}"> Modifier </a>
         {{ include('post/_delete_form.html.twig') }} 
     {% endif %}
 

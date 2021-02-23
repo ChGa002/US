@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\MotCle;
+use Doctrine\ORM\EntityManagerInterface;
 /**
  * @Route("/post")
  */
@@ -106,7 +107,33 @@ class PostController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $em->persist($post);
         $em->flush();
-        return $this->redirectToRoute('post_show', [
-            'id' => $id]);
+        return $this->json(['message' => 'Post bien signalé'], 200);
     }
+
+    /**
+     * @Route("/{id}/favori", name="post_enFavori")
+     */
+    public function postEnFavori(Post $post, EntityManagerInterface $manager, $id): Response
+    {
+        $user = $this->getUser();
+
+        if ($post->estUnFavori($user)) {
+
+            $user->removePostsFavori($post);
+
+            $manager->persist($user);
+            $manager->flush();
+
+        return $this->json([ 'message' => 'Favori bien supprimé'], 200);
+      
+        }
+        
+        $user->addPostsFavori($post);
+        $manager->persist($user);
+        $manager->flush();
+
+        return $this->json(['message' => 'Favori bien ajouté'], 200);
+
+    }
+
 }

@@ -212,3 +212,9 @@ float:right;
 background-color: var(--ocean);
 color:white;
 }
+
+/* Icones étoiles en jaune */
+
+.fa-star{
+  color:gold;
+}

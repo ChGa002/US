@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
  * @ORM\Entity(repositoryClass=PostRepository::class)
  */
@@ -264,5 +265,16 @@ class Post
         $this->createur = $createur;
 
         return $this;
+    }
+
+    // Retourne true si l'utilisateur en question a ce post en favori
+    public function estUnFavori(Utilisateur $user): bool
+    {
+        foreach($user->getPostsFavoris() as $post)
+        {
+            if ($post == $this) return true;
+        }
+
+        return false;
     }
 }
