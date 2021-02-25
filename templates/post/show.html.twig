@@ -1,13 +1,26 @@
 {% extends 'templateBase.html.twig' %}
 
-{% block titlePage %} {% endblock %}
+
+{% block titlePage %} </h1>
+<div class="col-md-8 "> </div>
+<div class="col-md-2" style="text-align:center;">
+<!-- Notation de l'utilisateur, 'noteARemplacer' sera remplacé dynamiquement en JS -->
+<span style="display: inline-block;"> Ma note: <div class='rateYo' data-rating="5" href="{{path('post_noter', {'id':post.id, 'noteEtoiles': 'noteARemplacer'})}}"></div> </span>
+
+        </div>
+<div class="col-md-2 ">
+
+Note moyenne: <div class='rateYo' data-rating="3" data-readonly=true></div>
+
+ </div>
+{% endblock %}
 {% block contenuCentral %}
 
     <div class="row">
         <div class="col-md-3">
              <img src=" {{ post.emplacementPhoto }}" class="img-thumbnail" height="100px" width="100px">  
         </div>
-        <div class="col-md-9" style="display: flex;align-items: center;"5%;"> 
+        <div class="col-md-9" style="display: flex; align-items: center;"5%;"> 
             <h3>
                  {{post.titre}}
             </h3>  
@@ -17,8 +30,11 @@
 
 
     <dl class="row">
+        <dt class="col-sm-3">Createur</dt>
+        <dd class="col-sm-9"> {{ post.createur.pseudo }} </dd>
+
         <dt class="col-sm-3">Date</dt>
-        <dd class="col-sm-9"> {{ post.datePubli ? post.datePubli|date('d-m-Y') : '' }} </dd>
+        <dd class="col-sm-9"> {{ post.datePubli|date('d-m-Y') }} </dd>
 
         <dt class="col-sm-3">Description</dt>
         <dd class="col-sm-9"> {{ post.description }} </dd>
@@ -27,7 +43,17 @@
         <dd class="col-sm-9">   
             {% for ressource in post.ressources %} 
 
-                    <a href="{{ressource.emplacement}}" target="_blank" style="color: var(--brique)"> {{ressource.nom}} </a> <br>
+                    <a href="{{ressource.emplacement}}" target="_blank" style="color: var(--brique)"> {{ressource.nom}}{{ressource.typeDeFichier}} </a> <br>
+
+            {% endfor %}
+        </dd>
+
+        <dt class="col-sm-3">Mots clés</dt>
+        <dd class="col-sm-9">   
+            {% for motCle in post.motsCles %} 
+
+                    {{ motCle.motCle }}
+                    {% if loop.last == false %} , {% endif %}
 
             {% endfor %}
         </dd>
@@ -80,10 +106,38 @@
 
 {% endblock %}
 
-{% block javascript %}
+{% block Javascript %}
+<script>
 
 
 
 
+    $.each($('.rateYo'), function(){
 
+    var $self = $(this);
+
+    $self.rateYo({
+        rating: $self.data('rating'),
+        fullStar: true,
+        ratedFill: "gold",
+        starWidth: "20px",
+        readOnly: $self.data('readonly'),
+
+        onSet: function (rating, rateYoInstance) {
+    console.log($self.data('read'));
+        var href = $(this).attr('href');
+
+
+        // on remplace la valeur 'placeholder' dans la route par la note attribuée
+        href = href.replace('noteARemplacer', rating);
+
+        console.log(href);
+        axios.get(href).then(function(response){
+        }) 
+
+        } 
+    });
+    });
+
+</script>
 {% endblock %}

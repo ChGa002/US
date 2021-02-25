@@ -99,6 +99,9 @@
     "fzaninotto/faker": {
         "version": "v1.9.2"
     },
+    "kartik-v/bootstrap-star-rating": {
+        "version": "4.0.x-dev"
+    },
     "laminas/laminas-code": {
         "version": "3.5.1"
     },

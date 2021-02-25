@@ -218,3 +218,11 @@ color:white;
 .fa-star{
   color:gold;
 }
+
+/* Boutons en bas à droite */
+.notation{
+position:relative;
+margin:10px;
+align-items:center;
+}
+

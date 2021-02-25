@@ -47,3 +47,28 @@ function onClickSignaler(event){
 
  signaler = document.querySelector('a.signaler')
  if (signaler != null) signaler.addEventListener('click', onClickSignaler);
+
+
+ function onClickNoter(event){
+
+    event.preventDefault();
+
+
+        const anchor = this.querySelector('a'); // tag qui contient le path pour enregistrer la note
+        url = anchor.href; // route à declencher en ajax
+
+        // récupération de la note qui vient d'être cliquée
+        const note = $(".starrr").data('starrr').options.rating;
+
+        // on remplace la valeur 'placeholder' dans la route par la note attribuée
+        url = url.replace('noteARemplacer', note);
+
+        console.log(url);
+        axios.get(url).then(function(response){
+        }) 
+
+    }
+   
+ noter = document.querySelector('div.starrr')
+ if (noter != null) noter.addEventListener('click', onClickNoter);
+

@@ -5,11 +5,13 @@ namespace App\Controller;
 use App\Entity\Post;
 use App\Form\PostType;
 use App\Repository\PostRepository;
+use App\Repository\NoteRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\MotCle;
+use App\Entity\Note;
 use Doctrine\ORM\EntityManagerInterface;
 /**
  * @Route("/post")
@@ -133,6 +135,41 @@ class PostController extends AbstractController
         $manager->flush();
 
         return $this->json(['message' => 'Favori bien ajouté'], 200);
+
+    }
+
+        /**
+     * @Route("/{id}/noter/{noteEtoiles}", name="post_noter")
+     */
+    public function noterPost(Post $post, $noteEtoiles, EntityManagerInterface $manager, NoteRepository $noteRepo): Response
+    {
+        $user = $this->getUser();
+
+        if ($post->estNoteParUtilisateur($user)) {
+
+            $note = $noteRepo->findOneBy(
+                ['post' => $post,
+                'utilisateur' => $user]);
+            $note->setNote($noteEtoiles);
+            $note->setDate(new \DateTime('now'));
+
+            $manager->persist($note);
+            $manager->flush();
+
+        return $this->json([ 'message' => 'Note mise à jour'], 200);
+      
+        }
+        
+        $note = new Note();
+        $note->setPost($post);
+        $note->setUtilisateur($user);
+        $note->setDate(new \DateTime('now'));
+        $note->setNote($noteEtoiles);
+
+        $manager->persist($note);
+        $manager->flush();
+
+        return $this->json(['message' => 'Note créée'], 200);
 
     }
 

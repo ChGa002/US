@@ -61,7 +61,7 @@ class Post
     private $modules;
 
     /**
-     * @ORM\OneToMany(targetEntity=Note::class, mappedBy="post", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Note::class, mappedBy="post", orphanRemoval=true, cascade={"persist"})
      */
     private $notes;
 
@@ -277,4 +277,17 @@ class Post
 
         return false;
     }
+
+    // Retourne true si l'utilisateur a déjà noté ce post
+    public function estNoteParUtilisateur(Utilisateur $user): bool
+    {
+        foreach($this->getNotes() as $note)
+        {
+            if ($note->getUtilisateur() == $user) return true;
+        }
+
+        return false;
+    }
+
+    
 }
