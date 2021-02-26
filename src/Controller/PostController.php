@@ -91,6 +91,13 @@ class PostController extends AbstractController
      */
     public function edit(Request $request, Post $post): Response
     {
+        $user = $this->getUser();
+
+        if ($post->getCreateur() !== $user && !$user->isAdmin()) {
+            return $this->redirectToRoute('us_accueil');
+        }
+      
+
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
 
