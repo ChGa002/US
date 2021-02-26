@@ -91,7 +91,7 @@
 {% endblock %}
 
 {% block buttons %}
-    {% if post.createur != app.user  %}
+    {% if post.createur != app.user and is_granted("ROLE_ADMIN") == false %}
         {% if post.signale %}
             <a class="btn posBD btn-success disabled"><i class="fas fa-exclamation-circle"></i> Signaler</a>
         {% else %}
