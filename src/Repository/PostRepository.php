@@ -29,7 +29,7 @@ class PostRepository extends ServiceEntityRepository
             ->addSelect('ressources')     
             ->join('p.createur','utilisateur')
             ->join('p.modules','modules')
-            ->join('p.motsCles','motsCles')
+            ->leftjoin('p.motsCles','motsCles')
             ->join('p.ressources','ressources')
             ->andWhere('p.id = :id')
             ->setParameter('id', $id)

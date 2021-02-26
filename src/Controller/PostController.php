@@ -64,8 +64,6 @@ class PostController extends AbstractController
     public function show(PostRepository $postRepo, NoteRepository $noteRepo, $id): Response
     {
 
-        //$noteMoyenne = $noteRepo->findNoteMoyenne($id);
-
         $post = $postRepo->findPostOptimise($id);
 
         $noteMoyenne = $post->noteMoyenne($noteRepo);
@@ -93,11 +91,11 @@ class PostController extends AbstractController
     {
         $user = $this->getUser();
 
+        // on verifie que l'user qui essaie de modifier est soit le createur soit un admin
         if ($post->getCreateur() !== $user && !$user->isAdmin()) {
             return $this->redirectToRoute('us_accueil');
         }
       
-
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
 
