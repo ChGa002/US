@@ -14,7 +14,7 @@ use App\Entity\MotCle;
 use App\Entity\Note;
 use Doctrine\ORM\EntityManagerInterface;
 /**
- * @Route("/post")
+ * @Route("/us/post")
  */
 class PostController extends AbstractController
 {
@@ -42,7 +42,7 @@ class PostController extends AbstractController
             $post->setDatePubli(new \DateTime('now'));
             $post->setCreateur($this->getUser());
             $post->setSignale(false);
-            
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($post);
             $entityManager->flush();
