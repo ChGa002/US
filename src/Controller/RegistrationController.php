@@ -40,7 +40,7 @@ class RegistrationController extends AbstractController
             $userExistant->setMotDePasse(
                 $passwordEncoder->encodePassword(
                     $userExistant,
-                    $form->get('plainPassword')->getData()
+                    $form->get('motDePasse')->getData()
                 )
             );
             $userExistant->setValide(true);

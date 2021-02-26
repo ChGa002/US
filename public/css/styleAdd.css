@@ -8,10 +8,9 @@ button:focus{outline: 0;}
 
   /*Couleur*/
   --brique: #cd533d;
-  --deep: #3d4251;
-  --ocean: #666F88;
+  --deep: #475787;
+  --ocean: #93a4d3;
   --cloud: #fff;
-
 }
 .colorCloud{color:var(--cloud);}
 .colorOcean{color:var(--ocean);}
@@ -119,7 +118,6 @@ button.btn-customized.btn.btn-primary:not(:disabled):not(.disabled):active:focus
   color: var(--cloud);
   box-shadow: none;
 }
-
 
 /************ STYLE POSTS ************/
 
