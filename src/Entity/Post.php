@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Repository\NoteRepository;
 
 
 /**
@@ -299,6 +300,14 @@ class Post
         }
 
         return false;
+    }
+
+    // Retourne la note moyenne du post
+    public function noteMoyenne(NoteRepository $noteRepo): string
+    {
+        $noteMoyenne = $noteRepo->findNoteMoyenne($this);
+
+        return $noteMoyenne[1];
     }
 
     

@@ -64,11 +64,14 @@ class PostController extends AbstractController
     public function show(PostRepository $postRepo, NoteRepository $noteRepo, $id): Response
     {
 
-        $noteMoyenne = $noteRepo->findNoteMoyenne($id);
+        //$noteMoyenne = $noteRepo->findNoteMoyenne($id);
 
         $post = $postRepo->findPostOptimise($id);
 
+        $noteMoyenne = $post->noteMoyenne($noteRepo);
+
         $user = $this->getUser();
+        
         if ($post->estNoteParUtilisateur($user))
         {
             $maNote = $noteRepo->findMaNote($post, $user)->getNote();
@@ -78,7 +81,7 @@ class PostController extends AbstractController
 
         return $this->render('post/show.html.twig', [
             'post' => $post,
-            'noteMoyenne' => $noteMoyenne[1],
+            'noteMoyenne' => $noteMoyenne,
             'maNote' => $maNote
         ]);
     }
