@@ -2,9 +2,18 @@
 
 {% block titlePage %} <!-- *** BLOCK TITRE *** -->
 
-Créer un post
+    {% if action == 'creer' %}
+
+        Créer un post
+
+    {% else %}
+
+        Modifier un post
+
+    {% endif %}
 
 {% endblock %}
+
 
 {% block contenuCentral %} <!-- *** BLOCK CONTENU DU CENTRE *** -->
     
@@ -101,25 +110,19 @@ Créer un post
 
 {% block buttons %}
 
-<button type="submit" class="btn btn-danger posBD">Créer</button>
-{{form_end(form)}}
+    <button type="submit" class="btn btn-danger posBD">
+
+        {% if action == 'creer' %} 
+            Créer
+        {% else %}
+            Modifier
+        {% endif %}
+    </button>
+
+    {{form_end(form)}}
 
 {% endblock %}
 {% block Javascript %}
-
-
-<!--- * Gere les tooltips * -->
-<script>	
-
-
-// Fonction activant les tooltips (affiche les noms complets des modules en survol)
-
-	$(function () {
-  		$('[data-toggle="tooltip"]').tooltip()
-	})
-
-</script>
-
 
 <!-- * Gere l'affichage dynamique Modules/Semestres * -->
 <script>

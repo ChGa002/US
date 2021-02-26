@@ -92,16 +92,17 @@ Note moyenne: <div class='rateYo' data-rating="3" data-readonly=true></div>
 {% endblock %}
 
 {% block buttons %}
-    
-    {% if post.createur != app.user and is_granted("ROLE_ADMIN") == false %}
+    {% if post.createur != app.user  %}
         {% if post.signale %}
-            <a class="btn posBD disabled">Signaler</a>
+            <a class="btn posBD btn-success disabled"><i class="fas fa-exclamation-circle"></i> Signaler</a>
         {% else %}
-            <a class="btn posBD signaler" href="{{ path('post_signaler', {'id': post.id}) }}" role="button">Signaler</a>
+            <a class="btn btn-success posBD signaler" href="{{ path('post_signaler', {'id': post.id}) }}" role="button"> <i class="fas fa-exclamation-circle"></i> Signaler</a>
         {% endif %}
     {% else %}
-        <a class="btn posBD" href="{{ path('post_edit', {'id': post.id}) }}"> Modifier </a>
+        <div class="notation">
+        <a class="btn btn-success posBD" href="{{ path('post_edit', {'id': post.id}) }}"><i class="fas fa-pencil-alt"></i> Modifier</a> 
         {{ include('post/_delete_form.html.twig') }} 
+        </div>
     {% endif %}
 
 {% endblock %}

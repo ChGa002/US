@@ -51,9 +51,10 @@ class PostController extends AbstractController
                 'id' => $post->getId() ]);
         }
 
-        return $this->render('post/new.html.twig', [
+        return $this->render('post/ajoutModif.html.twig', [
             'post' => $post,
             'form' => $form->createView(),
+            'action' => 'creer'
         ]);
     }
 
@@ -78,12 +79,14 @@ class PostController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('post_index');
+            return $this->redirectToRoute('post_show', [
+                'id' => $post->getId() ]);
         }
 
-        return $this->render('post/new.html.twig', [
+        return $this->render('post/ajoutModif.html.twig', [
             'post' => $post,
             'form' => $form->createView(),
+            'action' => 'modifier'
         ]);
     }
 

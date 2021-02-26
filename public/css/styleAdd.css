@@ -199,7 +199,15 @@ ul, #myUL {
 .posBD{
 position:relative;
 margin-bottom:20px;
+margin-left:20px;
 float:right;
+}
+/* Boutons en bas à droite */
+.posBG{
+position:relative;
+margin-bottom:20px;
+
+float:left;
 }
 
 /* Icones étoiles en jaune */
@@ -213,5 +221,5 @@ float:right;
 position:relative;
 margin:10px;
 align-items:center;
+text-align: center;
 }
-
