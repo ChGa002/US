@@ -10,11 +10,13 @@ function onClickStarFavori(event){
     axios.get(url).then(function(response){
 
     	if(icone.classList.contains('fas')) {
-    		icone.classList.replace('fas','far');
+    		icone.classList.replace('fas','far'); // etoile vide
+            icone.classList.add('grise');        // etoile grise
     		
     	} else {
-    		icone.classList.replace('far','fas');
-    		var element = document.getElementById('js-fav-text').innerHTML="";
+    		icone.classList.replace('far','fas'); // etoile pleine
+            icone.classList.remove('grise');    // etoile dorée
+    		var element = document.getElementById('js-fav-text').innerHTML=""; // enlever text "mettre en favori"
     	}
     })        
 }
