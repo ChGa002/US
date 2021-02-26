@@ -307,6 +307,8 @@ class Post
     {
         $noteMoyenne = $noteRepo->findNoteMoyenne($this);
 
+        if($noteMoyenne[1] == null) return "0";
+
         return $noteMoyenne[1];
     }
 
