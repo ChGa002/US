@@ -4,11 +4,10 @@
 
 Créer un post
 
- 	{{form_start(form)}}
-    <button type="submit" class="btn posHD">Enregistrer</button>
 {% endblock %}
 
 {% block contenuCentral %} <!-- *** BLOCK CONTENU DU CENTRE *** -->
+    {{form_start(form)}}
 
     {{form_row(form.emplacementPhoto, {'label': 'Lien photo','attr':{ 'placeholder':'Emplacement de la vignette du post...'}})}}
 
@@ -19,7 +18,6 @@ Créer un post
     <br>
 
 <!-- SAISIES RESSOURCES -->
-		
 
 	<div class="card">
 		<div class="card-header" id="headingOne">
@@ -42,16 +40,18 @@ Créer un post
 				{% endfor %}
 
 			<!-- Permet de ne pas afficher "Ressources" a la fin du formulaire -->
-			{{ form_widget(form.ressources, {'label': ''}) }}		
+			<!-- {{ form_widget(form.ressources, {'label': ''}) }} -->		
 
 			</div>
 		</div>
 	</div>
-
+<br>
 
 	
 
 {{ form_row(form.motsCles, {'label': 'Mots clés','attr':{ 'placeholder':'algorithmique'}}) }}
+    
+
     
 {% endblock %}
 
@@ -86,11 +86,17 @@ Créer un post
 				</li>
 					</ul>
 	
-	{{form_end(form)}}
+
 
 
 {% endblock %}
 
+{% block buttons %}
+
+<button type="submit" class="btn btn-danger posBD">Créer</button>
+{{form_end(form)}}
+
+{% endblock %}
 {% block Javascript %}
 
 
@@ -121,21 +127,6 @@ Créer un post
 
 </script>
 
-
-<!-- * Gere la generation dynamique d'un nouveau form de Ressource * -->
-<script>	
-<script>
-
-	var toggler = document.getElementsByClassName('caret');
-	var i;
-
-	for (i = 0; i < toggler.length; i++) {
-		toggler[i].addEventListener('click', function() {
-		this.parentElement.querySelector('.nested').classList.toggle('active');						this.classList.toggle('caret-down');
-		});
-	}
-
-</script>
 <script>
 // this variable is the list in the dom, it's initiliazed when the document is ready
 var $collectionHolder;
@@ -163,6 +154,7 @@ $(document).ready(function () {
         // preventDefault() is your  homework if you don't know what it is
         // also look up preventPropagation both are usefull
         e.preventDefault();
+
         // create a new form and append it to the collectionHolder
         // and by form we mean a new panel which contains the form
         addNewForm();

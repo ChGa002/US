@@ -195,22 +195,11 @@ ul, #myUL {
 
 /*** Autre ***/
 
-/* Bouton creer */
-.posHD{
-  position: absolute;
-  top:90px;
-  right:3%;
-  background-color: var(--brique);
-  color:white;
-}
-
 /* Boutons en bas à droite */
 .posBD{
 position:relative;
-margin:10px;
+margin-bottom:20px;
 float:right;
-background-color: var(--ocean);
-color:white;
 }
 
 /* Icones étoiles en jaune */
@@ -219,7 +208,7 @@ color:white;
   color:gold;
 }
 
-/* Boutons en bas à droite */
+/* Notes des posts */
 .notation{
 position:relative;
 margin:10px;
