@@ -19,6 +19,27 @@ class PostRepository extends ServiceEntityRepository
         parent::__construct($registry, Post::class);
     }
 
+
+     public function findPostOptimise($id)
+    {
+        return $this->createQueryBuilder('p')
+            ->addSelect('utilisateur')
+            ->addSelect('modules')
+            ->addSelect('motsCles')    
+            ->addSelect('ressources')     
+            ->join('p.createur','utilisateur')
+            ->join('p.modules','modules')
+            ->join('p.motsCles','motsCles')
+            ->join('p.ressources','ressources')
+            ->andWhere('p.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult()
+
+        ;
+    }
+
+
     // /**
     //  * @return Post[] Returns an array of Post objects
     //  */

@@ -2,17 +2,16 @@
 
 
 {% block titlePage %} </h1>
-<div class="col-md-8 "> </div>
-<div class="col-md-2" style="text-align:center;">
-<!-- Notation de l'utilisateur, 'noteARemplacer' sera remplacé dynamiquement en JS -->
-<span style="display: inline-block;"> Ma note: <div class='rateYo' data-rating="5" href="{{path('post_noter', {'id':post.id, 'noteEtoiles': 'noteARemplacer'})}}"></div> </span>
+    <div class="col-md-8 "> </div>
+    <div class="col-md-2" style="text-align:center;">
+    <!-- Note de l'utilisateur, 'noteARemplacer' sera remplacé dynamiquement en JS -->
+        <span style="display: inline-block;"> Ma note: <div class='rateYo' data-rating="5" href="{{path('post_noter', {'id':post.id, 'noteEtoiles': 'noteARemplacer'})}}"></div> </span>
 
-        </div>
-<div class="col-md-2 ">
+    </div>
+    <div class="col-md-2 ">
+        Note moyenne: <div class='rateYo' data-rating={{noteMoyenne}} data-readonly=true></div>
 
-Note moyenne: <div class='rateYo' data-rating="3" data-readonly=true></div>
-
- </div>
+    </div>
 {% endblock %}
 {% block contenuCentral %}
 
@@ -119,6 +118,7 @@ Note moyenne: <div class='rateYo' data-rating="3" data-readonly=true></div>
 
     $self.rateYo({
         rating: $self.data('rating'),
+        starSvg:'<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>',
         fullStar: true,
         ratedFill: "gold",
         starWidth: "20px",

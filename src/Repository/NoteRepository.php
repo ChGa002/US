@@ -19,7 +19,7 @@ class NoteRepository extends ServiceEntityRepository
         parent::__construct($registry, Note::class);
     }
 
-     public function findNoteMoyenne($post)
+     public function findNoteMoyenne($postId)
     {
         // Recuperer le gestionnaire d'entité
 
@@ -29,10 +29,11 @@ class NoteRepository extends ServiceEntityRepository
         $requete = $entityManager->createQuery(
             'SELECT AVG(n.note)
             FROM App\Entity\Note n
-            WHERE n.post = :post');
+            JOIN n.post p
+            WHERE p.id = :postId');
 
         // Definition de la valeur du parametre
-        $requete->setParameter('post', $post);
+        $requete->setParameter('postId', $postId);
 
         // Retourner les resultats
 
