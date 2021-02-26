@@ -7,7 +7,8 @@ Créer un post
 {% endblock %}
 
 {% block contenuCentral %} <!-- *** BLOCK CONTENU DU CENTRE *** -->
-    {{form_start(form)}}
+    
+    {{form_start(form) }}
 
     {{form_row(form.emplacementPhoto, {'label': 'Lien photo','attr':{ 'placeholder':'Emplacement de la vignette du post...'}})}}
 
@@ -15,9 +16,16 @@ Créer un post
 
     {{form_row(form.description, {'attr':{'placeholder':'Description du contenu...'}})}}
 
-    <br>
+
 
 <!-- SAISIES RESSOURCES -->
+    
+       {%for error in form.vars.errors%}
+        <span class="invalid-feedback d-block"><span class="d-block">
+                    <span class="form-error-icon badge badge-danger text-uppercase">Erreur</span> <span class="form-error-message">{{error.message}}</span> 
+        </span></span>
+
+        {%endfor%}
 
 	<div class="card">
 		<div class="card-header" id="headingOne">
@@ -57,6 +65,8 @@ Créer un post
 
 {% block contenuDroit %} <!-- *** BLOCK CONTENU DE DROITE *** -->
 	
+    {{ form_errors(form.modules) }}
+
 	<ul id="myUL">
 	{% set semestreCourant = 0 %}
 	
@@ -86,8 +96,6 @@ Créer un post
 				</li>
 					</ul>
 	
-
-
 
 {% endblock %}
 

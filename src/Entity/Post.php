@@ -6,6 +6,7 @@ use App\Repository\PostRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
@@ -22,6 +23,10 @@ class Post
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      max = 100,
+     *      maxMessage = "Le titre ne doit pas dépasser {{ limit }} caractères.")
      */
     private $titre;
 
@@ -47,6 +52,10 @@ class Post
 
     /**
      * @ORM\OneToMany(targetEntity=Ressource::class, mappedBy="post", orphanRemoval=true, cascade={"persist"})
+     * @Assert\Count(
+     *      min=1,
+     *      minMessage = "Aucune ressource saisie.")
+     * @Assert\Valid
      */
     private $ressources;
 
@@ -57,6 +66,9 @@ class Post
 
     /**
      * @ORM\ManyToMany(targetEntity=Module::class, mappedBy="posts",cascade={"persist"})
+     * @Assert\Count(
+     *      min=1,
+     *      minMessage = "Pas de module selectionné.")
      */
     private $modules;
 
