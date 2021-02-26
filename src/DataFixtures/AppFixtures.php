@@ -24,7 +24,7 @@ class AppFixtures extends Fixture
         *** CREATION DES UTILISATEURS ***
         ****************************************/
 
-        for ($i=1 ; $i <= 5; $i++){
+        for ($i=1 ; $i <= 9; $i++){
             $uti = new Utilisateur();
             $uti->setNom($faker->lastName);
             $uti->setPrenom($faker->firstName);
@@ -86,7 +86,7 @@ class AppFixtures extends Fixture
             $pe->setDerniereConnexion(\DateTime::createFromFormat('Y-m-d', "2021-01-24"));
             $pe->setMotDePasse("password");
             $pe->setRoles(['ROLE_USER']);
-            $manager->persist($cg);
+            $manager->persist($pe);
 
 
         /***************************************
