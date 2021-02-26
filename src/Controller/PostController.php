@@ -178,7 +178,10 @@ class PostController extends AbstractController
             $manager->persist($note);
             $manager->flush();
 
-        return $this->json([ 'message' => 'Note mise à jour'], 200);
+            $noteMoyenne = $post->noteMoyenne($noteRepo);
+
+            return $this->json([ 'message' => 'Note mise à jour',
+                                'moyenne' => $noteMoyenne], 200);
       
         }
         
@@ -191,7 +194,10 @@ class PostController extends AbstractController
         $manager->persist($note);
         $manager->flush();
 
-        return $this->json(['message' => 'Note créée'], 200);
+        $noteMoyenne = $post->noteMoyenne($noteRepo);
+
+        return $this->json(['message' => 'Note créée',
+                            'moyenne' => $noteMoyenne], 200);
 
     }
 
