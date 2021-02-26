@@ -18,7 +18,7 @@
 
     <div class="row">
         <div class="col-md-3">
-             <img src=" {{ post.emplacementPhoto }}" class="img-thumbnail" height="100px" width="100px">  
+             <img src=" {{ post.emplacementPhoto }}"  class="img-thumbnail" height="100px" width="100px">  
         </div>
         <div class="col-md-9" style="display: flex; align-items: center;"5%;"> 
             <h3>
@@ -110,45 +110,46 @@
 {% block Javascript %}
 <script>
 
-
-
+// Initialisation des div de notation et traitement de saisie de note
 
     $.each($('.rateYo'), function(){
 
-    var $self = $(this);
+        var $self = $(this);
 
-    $self.rateYo({
-        rating: $self.data('rating'),
-        starSvg:'<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>',
-        fullStar: true,
-        ratedFill: "gold",
-        starWidth: "20px",
-        readOnly: $self.data('readonly'),
+        $self.rateYo({
+            rating: $self.data('rating'),
+            starSvg:'<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>',
+            fullStar: true,
+            ratedFill: "gold",
+            starWidth: "20px",
+            readOnly: $self.data('readonly'),
 
-        onSet: function (rating, rateYoInstance) {
-        var href = $(this).attr('href');
+            onSet: function (rating, rateYoInstance) {
+                var href = $(this).attr('href');
 
-        // on remplace la valeur 'placeholder' dans la route par la note attribuée
-        href = href.replace('noteARemplacer', rating);
+                // on remplace la valeur 'placeholder' dans la route par la note attribuée
+                href = href.replace('noteARemplacer', rating);
 
-        // puis on execute la route en ajax
-        axios.get(href).then(function(response){
-            // on recupere la div des étoiles affichant la moyenne
-            var etoilesMoyenne = document.getElementById('moyenneEtoiles');
-           
-            // on recupere la moyenne maj calculée dans la route qu'on a appelé en ajax
-            var moyenneMAJ = response.data.moyenne; 
+                // puis on execute la route en ajax
+                axios.get(href).then(function(response){
+                    // on recupere la div des étoiles affichant la moyenne
+                    var etoilesMoyenne = document.getElementById('moyenneEtoiles');
+                   
+                    // on recupere la moyenne maj calculée dans la route qu'on a appelé en ajax
+                    var moyenneMAJ = response.data.moyenne; 
 
-            // on met à jour l'affichage de la moyenne
-            $(etoilesMoyenne).rateYo("rating", moyenneMAJ);
+                    // on met à jour l'affichage de la moyenne
+                    $(etoilesMoyenne).rateYo("rating", moyenneMAJ);
 
-        }) 
-
-        } 
+                }) 
+            } 
+        });
     });
+
+    // Remplace des images non existantes par un placeholder
+    $('img').on("error", function() {
+      $(this).attr('src', 'https://screenshotlayer.com/images/assets/placeholder.png');
     });
-
-
 
 </script>
 {% endblock %}

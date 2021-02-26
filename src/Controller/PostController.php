@@ -66,6 +66,8 @@ class PostController extends AbstractController
 
         $post = $postRepo->findPostOptimise($id);
 
+        if ($post == null) { return $this->redirectToRoute('us_accueil'); }
+
         $noteMoyenne = $post->noteMoyenne($noteRepo);
 
         $user = $this->getUser();
@@ -124,7 +126,7 @@ class PostController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('post_index');
+        return $this->redirectToRoute('us_accueil');
     }
     /**
      * @Route("/{id}/signaler", name="post_signaler", methods={"GET"})
