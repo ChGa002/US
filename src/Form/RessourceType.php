@@ -16,7 +16,7 @@ class RessourceType extends AbstractType
     {
         $builder
 			->add('nom', TextType::class, [ 'attr' => ['placeholder' => 'Nom du fichier...'] ])
-            ->add('typeDeFichier', TextType::class, [ 'attr' => ['placeholder' => 'Extension du fichier... (jpeg, pdf, odt)'] ] )
+            ->add('typeDeFichier', TextType::class, [ 'attr' => ['placeholder' => 'Extension du fichier... (.jpeg, .pdf, .odt)'] ] )
             ->add('emplacement', UrlType::class, [ 'label' => 'Lien ressource', 'attr' => ['placeholder' => 'Lien vers la ressource...'] ]);         
         
     }

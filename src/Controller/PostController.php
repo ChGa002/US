@@ -47,7 +47,8 @@ class PostController extends AbstractController
             $entityManager->persist($post);
             $entityManager->flush();
 
-            return $this->redirectToRoute('post_index');
+            return $this->redirectToRoute('post_show', [
+                'id' => $post->getId() ]);
         }
 
         return $this->render('post/new.html.twig', [
@@ -80,7 +81,7 @@ class PostController extends AbstractController
             return $this->redirectToRoute('post_index');
         }
 
-        return $this->render('post/edit.html.twig', [
+        return $this->render('post/new.html.twig', [
             'post' => $post,
             'form' => $form->createView(),
         ]);

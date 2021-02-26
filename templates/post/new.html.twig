@@ -8,7 +8,7 @@ Créer un post
 
 {% block contenuCentral %} <!-- *** BLOCK CONTENU DU CENTRE *** -->
     
-    {{form_start(form) }}
+    {{form_start(form, { attr: {novalidate: 'novalidate'} }) }}
 
     {{form_row(form.emplacementPhoto, {'label': 'Lien photo','attr':{ 'placeholder':'Emplacement de la vignette du post...'}})}}
 
