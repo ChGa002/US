@@ -61,10 +61,14 @@ class PostController extends AbstractController
     /**
      * @Route("/{id}", name="post_show", methods={"GET"})
      */
-    public function show(Post $post): Response
+    public function show(Post $post, NoteRepository $noteRepo, $id): Response
     {
+
+        $noteMoyenne = $noteRepo->findNoteMoyenne($post);
+
         return $this->render('post/show.html.twig', [
             'post' => $post,
+            'noteMoyenne' => $noteMoyenne[1]
         ]);
     }
 
