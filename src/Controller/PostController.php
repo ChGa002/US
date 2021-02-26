@@ -67,9 +67,19 @@ class PostController extends AbstractController
         $noteMoyenne = $noteRepo->findNoteMoyenne($id);
 
         $post = $postRepo->findPostOptimise($id);
+
+        $user = $this->getUser();
+        if ($post->estNoteParUtilisateur($user))
+        {
+            $maNote = $noteRepo->findMaNote($post, $user)->getNote();
+
+        } else { $maNote = 0; }
+
+
         return $this->render('post/show.html.twig', [
             'post' => $post,
-            'noteMoyenne' => $noteMoyenne[1]
+            'noteMoyenne' => $noteMoyenne[1],
+            'maNote' => $maNote
         ]);
     }
 

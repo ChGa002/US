@@ -22,7 +22,6 @@ class NoteRepository extends ServiceEntityRepository
      public function findNoteMoyenne($postId)
     {
         // Recuperer le gestionnaire d'entité
-
         $entityManager = $this->getEntityManager();
 
         // Construction de la requete
@@ -38,6 +37,22 @@ class NoteRepository extends ServiceEntityRepository
         // Retourner les resultats
 
         return $requete->getSingleResult();
+    }
+
+
+      public function findMaNote($post, $user): ?Note
+    {
+        return $this->createQueryBuilder('n')
+            ->select('n')
+            ->join('n.utilisateur','u')
+            ->join('n.post','p')
+            ->andWhere('u = :user')
+            ->andWhere('p = :post')
+            ->setParameter('user', $user)
+            ->setParameter('post', $post)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
     }
     // /**
     //  * @return Note[] Returns an array of Note objects
