@@ -5,41 +5,62 @@
 {% block titlePage %} Favoris {% endblock %}
 
 {% block contenuCentral %}
+<head>
+  <style>
+    h2 { color: #cd533d; }
+  </style>
+</head>
+
 <p> 
 	Bonjour {{ app.user.pseudo }} ici vous pouvez visualiser vos favoris ! <br>
 </p>
 
-<h2> Semestres </h2>
+<h2><i class="far fa-folder-open"></i> - Semestres </h2>
+<ul class="list-group list-group-flush">
 
-{% for semestreCourant in app.user.semestresFavoris %}
-	{{ semestreCourant.nom }}<br>
-{% else %}
-<p> Aucun semestre n'est votre favoris !</p>
-{% endfor %}
+	{% for semestreCourant in app.user.semestresFavoris %}
+		<li class="list-group-item"><a href="{{ path('us_repertoires') }}">{{ semestreCourant.nom }}</a></li>
+	{% else %}
+	<ul class="list-group">
+		<li class="list-group-item list-group-item-primary">Aucun semestre n'est votre favoris !</li>
+	</ul>
+
+	{% endfor %}
+</ul>
 <br>
 
 
-<h2> Modules </h2>
+<h2><i class="far fa-folder"></i> - Modules </h2>
+<ul class="list-group list-group-flush">
 
-{% for moduleCourant in app.user.modulesFavoris %}
-	{{ moduleCourant.nom }}<br>
-{% else %}
-<p> Aucun module n'est votre favoris !</p>
-{% endfor %}
+
+	{% for moduleCourant in app.user.modulesFavoris %}
+		<li class="list-group-item" ><a href="{{ path('us_postModule' , {'id' : moduleCourant.id }) }}">{{ moduleCourant.nom }}</a></li>
+	{% else %}
+	<ul class="list-group">
+		<li class="list-group-item list-group-item-primary">Aucun module n'est votre favoris !</li>
+	</ul>
+	{% endfor %}
+</ul>
 <br>
 
 
-<h2> Posts </h2>
 
-{% for postCourant in app.user.postsFavoris %}
-	{{ postCourant.nom }} <br>
-{% else %}
-<p> Aucun post n'est votre favoris !</p>
-{% endfor %}
+<h2><i class="far fa-file"></i> - Posts </h2>
+<ul class="list-group list-group-flush">
+
+	{% for postCourant in app.user.postsFavoris %}
+		<li class="list-group-item">{{ postCourant.nom }}</li>
+	{% else %}
+	<ul class="list-group">
+		<li class="list-group-item list-group-item-primary">Aucun post n'est votre favoris !</li>
+	</ul>
+	{% endfor %}
+
+</ul>
+<br>
 <br>
 
-<br>
-<br>
 
 
 
