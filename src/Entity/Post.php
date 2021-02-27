@@ -6,6 +6,9 @@ use App\Repository\PostRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use App\Repository\NoteRepository;
+
 
 /**
  * @ORM\Entity(repositoryClass=PostRepository::class)
@@ -21,6 +24,10 @@ class Post
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      max = 100,
+     *      maxMessage = "Le titre ne doit pas dépasser {{ limit }} caractères.")
      */
     private $titre;
 
@@ -45,7 +52,11 @@ class Post
     private $emplacementPhoto;
 
     /**
-     * @ORM\OneToMany(targetEntity=Ressource::class, mappedBy="post", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Ressource::class, mappedBy="post", orphanRemoval=true, cascade={"persist"})
+     * @Assert\Count(
+     *      min=1,
+     *      minMessage = "Aucune ressource saisie.")
+     * @Assert\Valid
      */
     private $ressources;
 
@@ -55,12 +66,15 @@ class Post
     private $motsCles;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Module::class, mappedBy="posts")
+     * @ORM\ManyToMany(targetEntity=Module::class, mappedBy="posts",cascade={"persist"})
+     * @Assert\Count(
+     *      min=1,
+     *      minMessage = "Pas de module selectionné.")
      */
     private $modules;
 
     /**
-     * @ORM\OneToMany(targetEntity=Note::class, mappedBy="post", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Note::class, mappedBy="post", orphanRemoval=true, cascade={"persist"})
      */
     private $notes;
 
@@ -265,6 +279,40 @@ class Post
 
         return $this;
     }
-	
+
+
+
+    // Retourne true si l'utilisateur en question a ce post en favori
+    public function estUnFavori(Utilisateur $user): bool
+    {
+        foreach($user->getPostsFavoris() as $post)
+        {
+            if ($post == $this) return true;
+        }
+
+        return false;
+    }
+
+    // Retourne true si l'utilisateur a déjà noté ce post
+    public function estNoteParUtilisateur(Utilisateur $user): bool
+    {
+        foreach($this->getNotes() as $note)
+        {
+            if ($note->getUtilisateur() == $user) return true;
+        }
+
+        return false;
+    }
+
+    // Retourne la note moyenne du post
+    public function noteMoyenne(NoteRepository $noteRepo): string
+    {
+        $noteMoyenne = $noteRepo->findNoteMoyenne($this);
+
+        if($noteMoyenne[1] == null) return "0";
+
+        return $noteMoyenne[1];
+    }
+
 
 }

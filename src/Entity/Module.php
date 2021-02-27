@@ -35,7 +35,7 @@ class Module
     private $posts;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Semestre::class, inversedBy="modules")
+     * @ORM\ManyToOne(targetEntity=Semestre::class, inversedBy="modules",cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $semestre;

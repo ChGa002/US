@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\UtilisateurRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 use App\Entity\Semestre;
 use App\Entity\Module;
 use App\Entity\Post;
@@ -14,8 +17,10 @@ use App\Repository\ModuleRepository;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\HttpFoundation\Request;
 use App\Controller\ObjectManagerInterface;
+
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
 class USController extends AbstractController
@@ -29,6 +34,7 @@ class USController extends AbstractController
             'controller_name' => 'USController',
         ]);
     }
+
 	
 
 	/**
@@ -121,7 +127,12 @@ class USController extends AbstractController
 	 }
 	 
 
-		 
-
+         /**
+     * @Route("/us/parametre", name="us_parametre")
+     */
+    public function param(): Response
+    {
+        return $this->render('/us/parametre.html.twig');
+    }
 }
 
