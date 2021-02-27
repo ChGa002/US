@@ -14,6 +14,7 @@ use App\Entity\Post;
 use App\Repository\SemestreRepository;
 use App\Repository\PostRepository;
 use App\Repository\ModuleRepository;
+use App\Repository\NoteRepository;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -65,10 +66,18 @@ class USController extends AbstractController
 	/**
 	 * @Route("/module/{id}", name="us_postModule")
 	 */
-	 public function triPostParModule(Module $module)
+	 public function triPostParModule(Module $module, PostRepository $postRepo, NoteRepository $noteRepo)
 	 {	
+		$posts = $postRepo->findByModule($module);
+		$notesPosts = array();
+		foreach($posts as $post)
+		{	
+			$notesPosts[$post->getId()]=$post->noteMoyenne($noteRepo);
+		}
+		
+		
 			// Ici on va afficher la page définie par le fichier postParModule.html.twig en transmettant la variable $posts
-		 return $this->render('us/postParModule.html.twig', ['module' => $module]);
+		 return $this->render('us/postParModule.html.twig', ['module' => $module, 'posts' => $posts, 'notesPosts' => $notesPosts]);
 		 
 
 	 }

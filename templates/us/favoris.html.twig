@@ -50,7 +50,7 @@
 <ul class="list-group list-group-flush">
 
 	{% for postCourant in app.user.postsFavoris %}
-		<li class="list-group-item">{{ postCourant.nom }}</li>
+		<li class="list-group-item">{{ postCourant.titre}}</li>
 	{% else %}
 	<ul class="list-group">
 		<li class="list-group-item list-group-item-primary">Aucun post n'est votre favoris !</li>

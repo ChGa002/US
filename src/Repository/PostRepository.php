@@ -38,6 +38,18 @@ class PostRepository extends ServiceEntityRepository
 
         ;
     }
+	
+	
+	public function findByModule($module)
+	 {
+        return $this->createQueryBuilder('p')
+			->join('p.modules','m')
+            ->andWhere('m.id = :val')
+            ->setParameter('val', $module)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
 
     // /**
