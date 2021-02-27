@@ -97,4 +97,15 @@ class Semestre
 
         return $this;
     }
+	
+	// Retourne true si l'utilisateur en question a ce post en favori
+	public function estUnFavori(Utilisateur $user): bool
+	{
+		foreach($user->getSemestresFavoris() as $semestre)
+		{
+			if ($semestre == $this) return true;
+		}
+
+		return false;
+	}
 }

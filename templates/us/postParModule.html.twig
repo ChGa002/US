@@ -1,0 +1,53 @@
+{% extends 'templateBase.html.twig' %}
+
+{% block titleOnglet %}US - Module{% endblock %}
+
+{% block titlePage %} Posts du Module {% endblock %}
+
+{% block contenuCentral %}
+
+
+
+{% for postCourant in module.posts %}
+<div class="card">
+  <div class="card-body" >
+		<div class="row">
+			<a href="{{ path('us_accueil') }}" class="stretched-link"></a>
+
+			<div class="col-md-2" >
+				<h6>{{ postCourant.titre }}</h6>
+                {{postCourant.emplacementPhoto }}
+			</div>
+			<div class="col-md-4">
+				<p>{{ postCourant.description }}</p>
+			</div>
+			<div class="col-md-2">
+				<!--Etoile-->
+				<i>{{ postCourant.createur.pseudo }}</i>
+				<i>{{ postCourant.datePubli|date('d-m-Y') }}</i>
+			</div>
+			<div class="col-md-2">
+				<!--Boucle?semstre-->
+				
+        
+			</div>
+			<div class="col-md-2"><!--module en dessous-->
+        
+			</div>
+		</div>
+	</div>
+</div>
+
+
+{% else %}
+<p> Aucun résultat ne correspond a votre recherche </p>
+{% endfor %}
+
+
+
+
+{% endblock %}
+
+
+
+{% block boxDroit %} {% endblock %}

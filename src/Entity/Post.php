@@ -280,6 +280,8 @@ class Post
         return $this;
     }
 
+
+
     // Retourne true si l'utilisateur en question a ce post en favori
     public function estUnFavori(Utilisateur $user): bool
     {
@@ -312,5 +314,5 @@ class Post
         return $noteMoyenne[1];
     }
 
-    
+
 }
