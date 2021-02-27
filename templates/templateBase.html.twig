@@ -18,8 +18,11 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <!-- Custom styles for this template-->
     <link href="{{asset("css/sb-admin-2.css")}}" rel="stylesheet">
-    <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.css') }}" rel="stylesheet">
+    
     <link rel="stylesheet" href="{{asset("/css/styleAdd.css")}}">
+
+    <!-- CSS notation 5 étoiles (RateYo)-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
 
 </head>
 
@@ -63,7 +66,7 @@
                     <span>Répertoires</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#.html"title="Créer un post">
+                <a class="nav-link" href="{{ path('post_new') }}" title="Créer un post">
                     <i class="fas fa-file" height="20px" width="20px"></i>
                     <span>Poster</span></a><!--Info bulle créer un post-->
             </li>
@@ -227,6 +230,10 @@
                         </div>
                         {% endblock %}
                     </div>
+                    <!-- Block entre le contenu central et le footer -->
+                    {% block buttons %}
+
+                     {% endblock %}
                 </div>
                 <!-- /.container-fluid -->
 
@@ -276,12 +283,17 @@
         </div>
     </div>
 
+    <!-- Ajax axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+
     <!-- Jquery-->
     <script src="{{ asset("vendor/jquery/jquery.min.js") }}"></script>
     <script src="{{ asset("vendor/jquery-easing/jquery.easing.min.js")}}"></script>
 
     <!-- Bootstrap -->
     <script src="{{ asset("vendor/bootstrap/js/bootstrap.bundle.min.js")}}"></script>
+    <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.css') }}" rel="stylesheet">
 
     <!-- JavaScript du template-->
     <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
@@ -290,7 +302,12 @@
     <script src="{{ asset('vendor/datatables/jquery.dataTables.js') }}"></script>
     <script src="{{ asset('vendor/datatables/dataTables.bootstrap4.js') }}"></script>
 
+    <script src="{{ asset('js/scriptsPosts.js') }}"></script>
 
+    <!-- Javascript notation étoiles (RateYo) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+
+    
     <!--JavaScript additionel-->
     {% block Javascript %}{% endblock %}
 

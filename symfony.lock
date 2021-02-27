@@ -23,6 +23,9 @@
     "doctrine/common": {
         "version": "3.1.0"
     },
+    "doctrine/data-fixtures": {
+        "version": "1.5.0"
+    },
     "doctrine/dbal": {
         "version": "2.12.1"
     },
@@ -39,6 +42,18 @@
             "./config/packages/prod/doctrine.yaml",
             "./src/Entity/.gitignore",
             "./src/Repository/.gitignore"
+        ]
+    },
+    "doctrine/doctrine-fixtures-bundle": {
+        "version": "3.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.0",
+            "ref": "e5b542d4ef47d8a003c91beb35650c76907f7e53"
+        },
+        "files": [
+            "./src/DataFixtures/AppFixtures.php"
         ]
     },
     "doctrine/doctrine-migrations-bundle": {
@@ -83,6 +98,9 @@
     },
     "fzaninotto/faker": {
         "version": "v1.9.2"
+    },
+    "kartik-v/bootstrap-star-rating": {
+        "version": "4.0.x-dev"
     },
     "laminas/laminas-code": {
         "version": "3.5.1"
@@ -506,6 +524,9 @@
     },
     "symfony/yaml": {
         "version": "v4.4.17"
+    },
+    "tetranz/select2entity-bundle": {
+        "version": "v2.10.1"
     },
     "twig/extra-bundle": {
         "version": "v3.1.1"

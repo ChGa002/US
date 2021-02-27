@@ -377,4 +377,9 @@ class Utilisateur implements UserInterface
     public function eraseCredentials()
     {
     }
+
+    public function isAdmin(): bool
+    {
+       return in_array('ROLE_ADMIN', $this->getRoles(), true);
+    }
 }
