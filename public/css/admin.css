@@ -1,0 +1,92 @@
+/* === Variable === */
+:root
+{
+
+  /*Couleur*/
+        --brique: #cd533d;
+        --deep: #475787;
+        --ocean: #93a4d3;
+        --cloud: #fff;
+
+  /*Custo Easy admin*/
+  
+      --body-bg: var(--deep); /*tcheq*/
+}
+/* 
+=== SURCHARGE DU CSS DES TEMPLATES CREER PAR EASY ADMIN === 
+*/
+h1{
+    color: var(--cloud);
+}
+
+.sidebar-menu a {
+    color: var(--cloud);
+    margin-left: 5%;
+}
+.sidebar-menu a:hover {
+    color: var(--ocean);
+}
+.sidebar-menu .header{
+    color: var(--cloud);
+    font-size: 20px;
+    text-decoration: underline;
+}
+.navbar-custom-menu .user {
+    align-items: center;
+    color: var(--cloud);
+    cursor: pointer;
+    display: flex;
+    background-color: var(--brique);
+    border-radius: 7%;
+    padding: 5px;
+}
+#navigation-toggler{
+    color: var(--cloud);
+}
+.content-panel{
+    box-shadow: #000 ;
+}
+.main-header #header-logo a {
+    color: var(--cloud);
+}
+.sidebar-menu li:not(.submenu-active).active .menu-icon, .sidebar-menu li:not(.submenu-active).active a {
+    font-style: italic;
+    color: var(--cloud);
+    filter: opacity(100%);
+}
+
+.btn-primary, .btn-primary:hover, .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled):focus {
+    background-color: var(--ocean);
+    color: var(--text-on-primary);
+}
+
+@media (min-width: 1024px){
+    .main-sidebar {
+        height: 75%;
+        max-width: var(--sidebar-max-width);
+        padding: 10px;
+        position: static;
+        z-index: 1039;
+        width: auto;
+        background-color: var(--cloud);
+        border-radius: 4px;
+        box-shadow: #000;
+    }
+    .sidebar-menu a {
+        color: #000;
+        margin-left: 5%;
+    }
+    .sidebar-menu a:hover {
+        color: var(--ocean);
+    }
+    .sidebar-menu .header{
+        color: #000;
+        font-size: 20px;
+        text-decoration: underline;
+    }
+    .sidebar-menu li:not(.submenu-active).active .menu-icon, .sidebar-menu li:not(.submenu-active).active a {
+        font-style: italic;
+        color: #000;
+        filter: opacity(100%);
+    }
+}
