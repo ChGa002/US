@@ -1,0 +1,46 @@
+{% extends 'templateBase.html.twig' %}
+{% form_theme formUser 'bootstrap_4_layout.html.twig' %}
+
+
+{% block barreRecherche %} {% endblock %}
+
+{% block titleOnglet %}US - Profil{% endblock %}
+
+{% block titlePage %} Profil : {{ app.user.pseudo }} {% endblock %}
+
+{% block contenuCentral %}
+<p> 
+    {{ form_start(formUser) }}
+    <label for=""> Description</label>
+    {{ form_widget(formUser.description) }} <br>
+
+    <button type="submit" class="btn btn-dark">Enregistrer</button> <br>
+    
+</p>
+
+
+{%endblock%}
+
+{% block contenuDroit%} 
+ <div class="text-center">
+
+    <label for=""> Modifier la photo</label>
+    {{ form_widget(formUser.emplacementPhoto) }} <br>
+
+    {{ form_end(formUser) }}
+
+    <img src="{{app.user.emplacementPhoto}}" class="img-thumbnail" alt="defaultAvatar" height="100px" width="100px"> <br>
+    <strong>{{app.user.pseudo}}</strong>
+    <br>
+
+    Note moyenne de mes post
+    //mettre moyenne des étoiles
+    <br>
+    <br>
+    <br>
+
+    
+    <a href="{{ path('us_profil', {'pseudo':user.pseudo}) }}<button type="button" class="btn btn-warning mb-2">Retour au profil</button></a> <br>
+</div>
+
+{% endblock %}

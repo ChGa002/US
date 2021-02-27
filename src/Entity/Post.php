@@ -6,6 +6,7 @@ use App\Repository\PostRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\NoteRepository;
 
 /**
  * @ORM\Entity(repositoryClass=PostRepository::class)
@@ -265,4 +266,15 @@ class Post
 
         return $this;
     }
+
+    // Retourne la note moyenne du post
+    public function noteMoyenne(NoteRepository $noteRepo): string
+    {
+        $noteMoyenne = $noteRepo->findNoteMoyenne($this);
+
+         if($noteMoyenne[1] == null) return "0";
+
+         return $noteMoyenne[1];
+    }
+
 }
