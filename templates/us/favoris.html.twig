@@ -47,17 +47,43 @@
 
 
 <h2><i class="far fa-file"></i> - Posts </h2>
-<ul class="list-group list-group-flush">
 
-	{% for postCourant in app.user.postsFavoris %}
-		<li class="list-group-item">{{ postCourant.titre}}</li>
-	{% else %}
-	<ul class="list-group">
-		<li class="list-group-item list-group-item-primary">Aucun post n'est votre favoris !</li>
-	</ul>
-	{% endfor %}
+{% for postCourant in posts %}
 
-</ul>
+<div class="card">
+	<div class="card-body">
+		<div class="row">
+			<div class="col-md-1">
+				<img src = {{ postCourant.emplacementPhoto }} height=100px, width=100px, class="img-thumbnail">
+			</div>
+			<a href="{{ path('post_show', {'id' : postCourant.id }) }}" class="stretched-link"></a>
+			<div class="col-md-2">
+				<h6>{{ postCourant.titre }}</h6>
+			</div>       
+			<div class="col-md-3">
+				<p>{{ postCourant.description }}</p>
+			</div>
+			<div class="col-md-3">
+				<i>{{ postCourant.createur.pseudo }}</i>
+				<i>{{ postCourant.datePubli | date('d-m-Y')}}</i>
+				<div class='rateYo' data-rating={{notesPosts[postCourant.id]}} ></div>
+			</div>
+			<div class="col-md-1">
+				{% for semestreCourant in postCourant.modules %}
+					{{ semestreCourant.semestre.sigle }}
+				{% endfor %}
+			</div>
+			<div class="col-md-2">
+				{% for moduleCourant in postCourant.modules %}
+					{{ moduleCourant.sigle }}
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</div>
+{% else %}
+<p> Aucun résultat ne correspond a votre recherche </p>
+{% endfor %}
 <br>
 <br>
 
@@ -68,3 +94,32 @@
 {%endblock%}
 
 {% block boxDroit %} {% endblock %}
+
+{% block Javascript %}
+<script>
+
+// Initialisation des div de notation et traitement de saisie de note
+
+    $.each($('.rateYo'), function(){
+
+        var $self = $(this);
+
+        $self.rateYo({
+            rating: $self.data('rating'),
+            starSvg:'<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>',
+            fullStar: true,
+            ratedFill: "gold",
+            starWidth: "20px",
+            readOnly: true,
+
+
+        });
+    });
+
+    // Remplace des images non existantes par un placeholder
+    $('img').on("error", function() {
+      $(this).attr('src', 'https://screenshotlayer.com/images/assets/placeholder.png');
+    });
+
+</script>
+{% endblock %}

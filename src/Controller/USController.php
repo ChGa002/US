@@ -41,9 +41,16 @@ class USController extends AbstractController
 	/**
 	 *@Route("/us/favoris", name="us_favoris")
 	 */
-	 public function favoris()
+	 public function favoris(PostRepository $postRepo, NoteRepository $noteRepo)
 	 {
-		 return $this->render('us/favoris.html.twig');
+		 $user=$this->getUser();
+		 $posts = $user->getPostsFavoris();
+		 $notesPosts = array();
+		foreach($posts as $post)
+		{	
+			$notesPosts[$post->getId()]=$post->noteMoyenne($noteRepo);
+		}
+		return $this->render('us/favoris.html.twig',['posts' => $posts, 'notesPosts' => $notesPosts]);
 	 }
 	 
 	 
