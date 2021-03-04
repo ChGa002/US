@@ -19,7 +19,16 @@
 <ul class="list-group list-group-flush">
 
 	{% for semestreCourant in app.user.semestresFavoris %}
-		<li class="list-group-item"><a href="{{ path('us_repertoires') }}">{{ semestreCourant.nom }}</a></li>
+		<li class="list-group-item">
+		<a href="{{ path('semestre_enFavori', {'id':semestreCourant.id}) }}" class="btn btn-link js-favori">
+    		{% if semestreCourant.estUnFavori(app.user) %}
+        		<i class="fas fa-star"></i>
+    		{% else %}
+    		<span id="js-fav-text"></span>
+    		<i class="far fa-star"></i>
+			{% endif %}
+    	</a>
+		<a href="{{ path('us_repertoires') }}">{{ semestreCourant.nom }}</a></li>
 	{% else %}
 	<ul class="list-group">
 		<li class="list-group-item list-group-item-primary">Aucun semestre n'est votre favoris !</li>
@@ -35,7 +44,16 @@
 
 
 	{% for moduleCourant in app.user.modulesFavoris %}
-		<li class="list-group-item" ><a href="{{ path('us_postModule' , {'id' : moduleCourant.id }) }}">{{ moduleCourant.nom }}</a></li>
+		
+		<li class="list-group-item" >
+		<a href="{{ path('module_enFavori', {'id':moduleCourant.id}) }}" class="btn btn-link js-favori">
+    		{% if moduleCourant.estUnFavori(app.user) %}
+        		<i class="fas fa-star"></i>
+    		{% else %}
+    			<span id="js-fav-text"></span>
+    			<i class="far fa-star"></i>
+    		{% endif %}
+		<a href="{{ path('us_postModule' , {'id' : moduleCourant.id }) }}">{{ moduleCourant.nom }}</a></li>
 	{% else %}
 	<ul class="list-group">
 		<li class="list-group-item list-group-item-primary">Aucun module n'est votre favoris !</li>
@@ -48,7 +66,11 @@
 
 <h2><i class="far fa-file"></i> - Posts </h2>
 
+
+
 {% for postCourant in posts %}
+
+
 
 <div class="card">
 	<div class="card-body">
@@ -63,7 +85,7 @@
 			<div class="col-md-3">
 				<p>{{ postCourant.description }}</p>
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-2">
 				<i>{{ postCourant.createur.pseudo }}</i>
 				<i>{{ postCourant.datePubli | date('d-m-Y')}}</i>
 				<div class='rateYo' data-rating={{notesPosts[postCourant.id]}} ></div>
@@ -73,7 +95,7 @@
 					{{ semestreCourant.semestre.sigle }}
 				{% endfor %}
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-1">
 				{% for moduleCourant in postCourant.modules %}
 					{{ moduleCourant.sigle }}
 				{% endfor %}
@@ -81,6 +103,7 @@
 		</div>
 	</div>
 </div>
+
 {% else %}
 <p> Aucun résultat ne correspond a votre recherche </p>
 {% endfor %}
