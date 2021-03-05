@@ -43,7 +43,7 @@
         <dd class="col-sm-9">   
             {% for ressource in post.ressources %} 
 
-                    <a href="{{ressource.emplacement}}" target="_blank" style="color: var(--brique)"> {{ressource.nom}}{{ressource.typeDeFichier}} </a> <br>
+                    <a href="{{ressource.emplacement}}" target="_blank" style="color: var(--brique)"> {{ressource.nom}} ({{ressource.typeDeFichier}}) </a> <br>
 
             {% endfor %}
         </dd>
