@@ -16,8 +16,8 @@
 </p>
 
 <h2><i class="far fa-folder-open"></i> - Semestres </h2>
-<ul class="list-group list-group-flush">
 
+<ul class="list-group list-group-flush">
 	{% for semestreCourant in app.user.semestresFavoris %}
 		<li class="list-group-item">
 		<a href="{{ path('semestre_enFavori', {'id':semestreCourant.id}) }}" class="btn btn-link js-favori">
@@ -53,7 +53,7 @@
     			<span id="js-fav-text"></span>
     			<i class="far fa-star"></i>
     		{% endif %}
-		<a href="{{ path('us_postModule' , {'id' : moduleCourant.id }) }}">{{ moduleCourant.nom }}</a></li>
+		<a href="{{ path('us_postModule' , {'id' : moduleCourant.id }) }}">{{ moduleCourant.sigle }} - {{ moduleCourant.nom }}</a></li>
 	{% else %}
 	<ul class="list-group">
 		<li class="list-group-item list-group-item-primary">Aucun module n'est votre favoris !</li>
@@ -74,6 +74,13 @@
 
 <div class="card">
 	<div class="card-body">
+		<a href="{{ path('post_enFavori', {'id':postCourant.id}) }}" class="btn btn-link js-favori">
+    		{% if postCourant.estUnFavori(app.user) %}
+        		<i class="fas fa-star"></i>
+    		{% else %}
+    			<span id="js-fav-text"></span>
+    			<i class="far fa-star"></i>
+    		{% endif %}
 		<div class="row">
 			<div class="col-md-1">
 				<img src = {{ postCourant.emplacementPhoto }} height=100px, width=100px, class="img-thumbnail">
