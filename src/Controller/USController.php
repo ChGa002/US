@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 use App\Entity\Semestre;
+use App\Entity\Utilisateur;
 use App\Entity\Module;
 use App\Entity\Post;
 use App\Repository\SemestreRepository;
@@ -135,6 +136,31 @@ class USController extends AbstractController
 			 return $this->json([ 'message' => 'Favori bien supprimé'], 200);
 		 }
 	     $user->addSemestresFavori($semestre);
+		 $manager->persist($user);
+		 $manager->flush();
+
+		 return $this->json(['message' => 'Favori bien ajouté'], 200);
+
+	 }
+	 
+	 	/**
+	 * @Route("/{id}/utilisateurFavori", name="utilisateur_enFavori")
+	 */
+	 public function utilisateurEnFavori(Utilisateur $utilisateur, $id): Response
+	 {
+		 $manager=$this->getDoctrine()->getManager();
+		 $user = $this->getUser();
+
+		 if ($utilisateur->estUnFavori($user)) {
+
+			 $user->removeUtilisateursFavori($utilisateur);
+
+			 $manager->persist($user);
+			 $manager->flush();
+
+			 return $this->json([ 'message' => 'Favori bien supprimé'], 200);
+		 }
+	     $user->addUtilisateursFavori($utilisateur);
 		 $manager->persist($user);
 		 $manager->flush();
 

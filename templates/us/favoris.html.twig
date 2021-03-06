@@ -67,7 +67,6 @@
 <h2><i class="far fa-file"></i> - Posts </h2>
 
 
-
 {% for postCourant in posts %}
 
 
@@ -112,13 +111,42 @@
 </div>
 
 {% else %}
-<p> Aucun résultat ne correspond a votre recherche </p>
+<ul class="list-group">
+	<li class="list-group-item list-group-item-primary">Aucun post n'est votre favoris !</li>
+</ul>
 {% endfor %}
 <br>
 <br>
 
 
+<h2><i class="far fa-user"></i> - Utilisateurs </h2>
 
+
+
+{% for utilisateurCourant in app.user.utilisateursFavoris %}
+	<div class="card" style="width: 18rem;">
+		<div class="card-body">
+			<h5 class="card-title">{{ utilisateurCourant.pseudo }}</h5>
+			<a href="{{ path('utilisateur_enFavori', {'id':utilisateurCourant.id}) }}" class="btn btn-link js-favori">
+    		{% if utilisateurCourant.estUnFavori(app.user) %}
+        		<i class="fas fa-star"></i>
+    		{% else %}
+    			<span id="js-fav-text"></span>
+    			<i class="far fa-star"></i>
+    		{% endif %}
+			</a>
+			<img src = {{ utilisateurCourant.emplacementPhoto }} height=100px, width=100px, class="img-thumbnail">
+			<p class="card-text">{{ utilisateurCourant.description }}</p>
+		</div>
+	</div>
+{% else %}
+	<ul class="list-group">
+		<li class="list-group-item list-group-item-primary">Aucun utilisateur n'est votre favoris !</li>
+	</ul>
+{% endfor %}
+
+		
+	
 
 
 {%endblock%}

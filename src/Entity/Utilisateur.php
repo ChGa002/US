@@ -382,4 +382,15 @@ class Utilisateur implements UserInterface
     {
        return in_array('ROLE_ADMIN', $this->getRoles(), true);
     }
+	
+	    // Retourne true si l'utilisateur en question a ce post en favori
+    public function estUnFavori(Utilisateur $user): bool
+    {
+        foreach($user->getUtilisateursFavoris() as $utilisateur)
+        {
+            if ($utilisateur == $this) return true;
+        }
+
+        return false;
+    }
 }
