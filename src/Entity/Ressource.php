@@ -27,8 +27,6 @@ class Ressource
     /**
      * @ORM\Column(type="string", length=30)
      * @Assert\NotBlank
-     * @Assert\Regex(pattern="#\A\.[a-zA-Z0-9]*#", message="L'extension est invalide. Elle doit commencer par un point.")
-     * @Assert\Regex(pattern="#\s#", match=false, message="Une extension ne comporte pas d'espaces.")
      */
     private $typeDeFichier;
 
