@@ -50,7 +50,7 @@ function onClickSignaler(event){
  signaler = document.querySelector('a.signaler')
  if (signaler != null) signaler.addEventListener('click', onClickSignaler);
 
-
+// Fonction qui permet de noter un post dynamiquement en ajax
  function onClickNoter(event){
 
     event.preventDefault();
@@ -71,6 +71,24 @@ function onClickSignaler(event){
 
     }
    
- noter = document.querySelector('div.starrr')
- if (noter != null) noter.addEventListener('click', onClickNoter);
+    noter = document.querySelector('div.starrr')
+    if (noter != null) noter.addEventListener('click', onClickNoter);
 
+
+// Permet de mettre une image par défaut sur toutes les liens d'images cassés 
+
+    fixBrokenImages = function( url ){
+        var img = document.getElementsByTagName('img');
+        var i=0, l=img.length;
+        for(;i<l;i++){
+            var t = img[i];
+            if(t.naturalWidth === 0){
+                //this image is broken
+                t.src = url;
+            }
+        }
+    }
+
+    window.onload = function() {
+    fixBrokenImages('https://screenshotlayer.com/images/assets/placeholder.png');
+    }

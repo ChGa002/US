@@ -10,8 +10,12 @@
 <br>
 <br>
  <div class="text-center">
- 
-    <img alt="https://i.ibb.co/XS1SX70/av-Default.png" src="{{app.user.emplacementPhoto}}" class="img-thumbnail" alt="defaultAvatar" height="100px" width="100px"> <br>
+
+    {% if  user.emplacementPhoto == null %}
+        <img src="{{asset('/img/avDefault.png')}}" class="img-thumbnail" height="100px" width="100px">
+    {% else %}
+        <img src="{{user.emplacementPhoto}}" class="img-thumbnail" height="100px" width="100px">
+    {% endif %}<br>
     <strong>{{app.user.pseudo}}</strong>
     <br>
 
@@ -32,10 +36,7 @@
     {%endif%}
 {%else%}
 
-<form action={{path('us_delete')}}"
-    <input type="hidden" name="_method" value="DELETE">
-    <input type="hidden" name="token" value="{{
-    csrf_token('delete' ~ post.id) }}">>
+<form action="{{path('us_deletePostProfile')}}" onsubmit="return confirm('Voulez vous vraiment supprimer ce(s) post(s)? Cette action est irréversible...'');">
 
 {% for postCourant in posts %}
 <div class="card">

@@ -47,7 +47,7 @@
                     <div class="text-center">
 
                         {% if  app.user.emplacementPhoto == null %}
-                        <img src="{{asset('/img/avDefault.png')}}" class="img-thumbnail" alt="defaultAvatar" height="100px" width="100px">
+                        <img src="{{asset('/img/avDefault.png')}}" class="img-thumbnail" height="100px" width="100px">
                         {% else %}
                         <img src="{{app.user.emplacementPhoto}}" class="img-thumbnail" alt="defaultAvatar" height="100px" width="100px">
                         {% endif %}

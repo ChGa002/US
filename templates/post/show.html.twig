@@ -33,7 +33,8 @@
 
     <dl class="row">
         <dt class="col-sm-3">Createur</dt>
-        <dd class="col-sm-9"> {{ post.createur.pseudo }} </dd>
+        <dd class="col-sm-9"> 
+            <a href="{{path('us_profil',{'pseudo':post.createur.pseudo})}}"> {{ post.createur.pseudo }} </a></dd>
 
         <dt class="col-sm-3">Date</dt>
         <dd class="col-sm-9"> {{ post.datePubli|date('d-m-Y') }} </dd>
@@ -148,10 +149,6 @@
         });
     });
 
-    // Remplace des images non existantes par un placeholder
-    $('img').on("error", function() {
-      $(this).attr('src', 'https://screenshotlayer.com/images/assets/placeholder.png');
-    });
 
 </script>
 {% endblock %}
