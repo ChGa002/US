@@ -85,7 +85,6 @@ class NoteRepository extends ServiceEntityRepository
     $requete->setParameter('utilisateurId', $utilisateurId);
 
     // Retourner les resultats
-
     return $requete->getSingleResult();
 }
 }

@@ -68,10 +68,11 @@ class UserController extends AbstractController
     /**
      * @Route("/us/moduser", name="us_moduser")
      */
-    public function modifierUser(Request $request, EntityManagerInterface $manager)
+    public function modifierUser(Request $request, EntityManagerInterface $manager, NoteRepository $noteRepo, PostRepository $postRepo): Response
     {
-        $utilisateur = $this->getUser();              
-
+        $utilisateur = $this->getUser();
+        $noteUtilisateur = $utilisateur->noteMoyenne($noteRepo);    
+        
         $form = $this->createFormBuilder($utilisateur)
                 ->add('description', TextareaType::class, [
                     'attr' => [
@@ -99,19 +100,30 @@ class UserController extends AbstractController
 
         //Page qui affiche le formulaire
         return $this->render('profil/moduser.html.twig',
-            ['formUser' => $form->createView() ]);
+            [ 'formUser' => $form->createView(), 'noteUtilisateur' => $noteUtilisateur, 'user' => $utilisateur
+            ]);
     }
+
+
+
 
     /**
      * @Route("/us/profile/{pseudo}/modpost", name="us_modpost")
      */
-    public function modifierPost(Utilisateur $user, PostRepository $postRepo): Response
+    public function modifierPost(Utilisateur $user, PostRepository $postRepo, NoteRepository $noteRepo): Response
     {
         // Méthode findBy qui permet de récupérer les données avec des critères de filtre et de tri
         $posts = $postRepo->findBy(array('createur'=> $user),array('datePubli'=>'desc'));
 
+        $notesPosts = array();
+
+        foreach($posts as $post)
+        {
+            $notesPosts[$post->getId()] = $post->noteMoyenne($noteRepo);
+        }
+
         return $this->render('profil/modpost.html.twig', [
-            'posts' => $posts, 'notes' => 'note', 'user' => $user
+            'posts' => $posts, 'notesPosts' => $notesPosts, 'user' => $user
         ]);
     }
     
