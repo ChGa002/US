@@ -18,7 +18,46 @@ class NoteRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Note::class);
     }
+	
+	
+	
+	
 
+     public function findNoteMoyenne($postId)
+    {
+        // Recuperer le gestionnaire d'entité
+        $entityManager = $this->getEntityManager();
+
+        // Construction de la requete
+        $requete = $entityManager->createQuery(
+            'SELECT AVG(n.note)
+            FROM App\Entity\Note n
+            JOIN n.post p
+            WHERE p.id = :postId');
+
+        // Definition de la valeur du parametre
+        $requete->setParameter('postId', $postId);
+
+        // Retourner les resultats
+
+        return $requete->getSingleResult();
+    }
+
+
+      public function findMaNote($post, $user): ?Note
+    {
+        return $this->createQueryBuilder('n')
+            ->select('n')
+            ->join('n.utilisateur','u')
+            ->join('n.post','p')
+            ->andWhere('u = :user')
+            ->andWhere('p = :post')
+            ->setParameter('user', $user)
+            ->setParameter('post', $post)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
     // /**
     //  * @return Note[] Returns an array of Note objects
     //  */

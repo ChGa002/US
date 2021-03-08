@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9d210c4db760edd2eff8f30ea8852179",
+    "content-hash": "237eb4dbf024f95897cafd20004ee666",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -1445,6 +1445,56 @@
             ],
             "abandoned": true,
             "time": "2020-12-11T09:56:16+00:00"
+        },
+        {
+            "name": "kartik-v/bootstrap-star-rating",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/bootstrap-star-rating.git",
+                "reference": "274395ae326a50ea01648e43879a01a256a072dd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/bootstrap-star-rating/zipball/274395ae326a50ea01648e43879a01a256a072dd",
+                "reference": "274395ae326a50ea01648e43879a01a256a072dd",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.0.x-dev"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "A simple yet powerful JQuery star rating plugin for Bootstrap.",
+            "homepage": "https://github.com/kartik-v/bootstrap-star-rating",
+            "keywords": [
+                "Rating",
+                "awesome",
+                "bootstrap",
+                "font",
+                "glyphicon",
+                "star",
+                "svg"
+            ],
+            "funding": [
+                {
+                    "url": "https://opencollective.com/bootstrap-star-rating",
+                    "type": "open_collective"
+                }
+            ],
+            "time": "2020-10-29T04:18:51+00:00"
         },
         {
             "name": "laminas/laminas-code",
@@ -6666,6 +6716,53 @@
             "time": "2020-11-24T12:28:30+00:00"
         },
         {
+            "name": "tetranz/select2entity-bundle",
+            "version": "v2.10.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tetranz/select2entity-bundle.git",
+                "reference": "1d4b184e41bdb76a61d7462b748d9cf0ecade47a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tetranz/select2entity-bundle/zipball/1d4b184e41bdb76a61d7462b748d9cf0ecade47a",
+                "reference": "1d4b184e41bdb76a61d7462b748d9cf0ecade47a",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/orm": ">=2.4",
+                "php": ">=5.4.0",
+                "twig/twig": ">=2.9"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": []
+            },
+            "autoload": {
+                "psr-4": {
+                    "Tetranz\\Select2EntityBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ross Keatinge",
+                    "email": "tetranz@gmail.com"
+                }
+            ],
+            "description": "A Symfony bundle that integrates Select2 as a drop-in replacement for a standard entity field on a Symfony form.",
+            "keywords": [
+                "autocomplete",
+                "select2",
+                "symfony",
+                "typeahead"
+            ],
+            "time": "2019-07-14T02:30:34+00:00"
+        },
+        {
             "name": "twig/extra-bundle",
             "version": "v3.1.1",
             "source": {
@@ -7766,7 +7863,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "kartik-v/bootstrap-star-rating": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

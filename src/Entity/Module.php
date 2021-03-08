@@ -35,7 +35,7 @@ class Module
     private $posts;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Semestre::class, inversedBy="modules")
+     * @ORM\ManyToOne(targetEntity=Semestre::class, inversedBy="modules",cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $semestre;
@@ -109,4 +109,15 @@ class Module
 
         return $this;
     }
+	
+	
+		public function estUnFavori(Utilisateur $user): bool
+	{
+		foreach($user->getModulesFavoris() as $module)
+		{
+			if ($module == $this) return true;
+		}
+
+		return false;
+	}
 }

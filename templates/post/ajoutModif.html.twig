@@ -1,0 +1,241 @@
+{% extends 'templateBase.html.twig' %}
+
+{% block titlePage %} <!-- *** BLOCK TITRE *** -->
+
+    {% if action == 'creer' %}
+
+        Créer un post
+
+    {% else %}
+
+        Modifier un post
+
+    {% endif %}
+
+{% endblock %}
+
+
+{% block contenuCentral %} <!-- *** BLOCK CONTENU DU CENTRE *** -->
+    
+    {{form_start(form, { attr: {novalidate: 'novalidate'} }) }}
+
+    {{form_row(form.emplacementPhoto, {'label': 'Lien photo','attr':{ 'placeholder':'Emplacement de la vignette du post...'}})}}
+
+    {{form_row(form.titre, {'attr':{'placeholder':'Titre du post...'}})}}
+
+    {{form_row(form.description, {'attr':{'placeholder':'Description du contenu...'}})}}
+
+
+
+<!-- SAISIES RESSOURCES -->
+    
+       {%for error in form.vars.errors%}
+        <span class="invalid-feedback d-block"><span class="d-block">
+                    <span class="form-error-icon badge badge-danger text-uppercase">Erreur</span> <span class="form-error-message">{{error.message}}</span> 
+        </span></span>
+
+        {%endfor%}
+
+	<div class="card">
+		<div class="card-header" id="headingOne">
+  			<button class="btn btn-light"  type="button" data-toggle="collapse" data-target="#collapseRessources" aria-expanded="false" aria-controls="collapseRessources">
+    			Ressources
+  			</button>
+		</div>
+		<div class="collapse show" id="collapseRessources">
+  			<div class="card card-body" id="exp_list" data-prototype="{{ form_widget(form.ressources.vars.prototype)|e('html_attr') }}">
+
+				{% for row in form.ressources %}
+					<div class="panel panel-warning">
+						<div class="panel-heading">
+							<strong>{{ row.vars.value.nom }}</strong>
+						</div>
+						<div class="panel-body">
+							{{ form_row(row) }}
+						</div>
+					</div>
+				{% endfor %}
+
+			<!-- Permet de ne pas afficher "Ressources" a la fin du formulaire -->
+			<!-- {{ form_widget(form.ressources, {'label': ''}) }} -->		
+
+			</div>
+		</div>
+	</div>
+<br>
+
+	
+
+{{ form_row(form.motsCles, {'label': 'Mots clés','attr':{ 'placeholder':'algorithmique'}}) }}
+    
+
+    
+{% endblock %}
+
+{% block contenuDroit %} <!-- *** BLOCK CONTENU DE DROITE *** -->
+	
+    {{ form_errors(form.modules) }}
+
+	<ul id="myUL">
+	{% set semestreCourant = 0 %}
+	
+	{% for module in form.modules %}
+
+		{% set semestreModule = module.vars.label|slice(1,1) %}
+
+		{% if semestreModule > semestreCourant %}
+
+			{% set semestreCourant = semestreModule %}
+
+			{% if loop.first == false %}
+				</li>
+					</ul> 
+			{% endif %}
+
+				<li><span class='caret'> Semestre {{semestreCourant}} </span>
+					<ul class='nested'> 
+		{% endif %}
+		
+		<span data-toggle="tooltip" title="{{ module.vars.attr[module.vars.label]}}" data-placement="left"> 
+			<li> {{ form_widget(module) }} </li>
+		</span>
+	
+	{% endfor %}
+	
+				</li>
+					</ul>
+	
+
+{% endblock %}
+
+{% block buttons %}
+
+    <button type="submit" class="btn btn-danger posBD">
+
+        {% if action == 'creer' %} 
+            Créer
+        {% else %}
+            Enregistrer
+        {% endif %}
+    </button>
+
+    {{form_end(form)}}
+
+{% endblock %}
+{% block Javascript %}
+
+<!-- * Gere l'affichage dynamique Modules/Semestres * -->
+<script>
+
+	var toggler = document.getElementsByClassName('caret');
+	var i;
+
+	for (i = 0; i < toggler.length; i++) {
+		toggler[i].addEventListener('click', function() {
+		this.parentElement.querySelector('.nested').classList.toggle('active');						this.classList.toggle('caret-down');
+		});
+	}
+
+</script>
+
+<script>
+// this variable is the list in the dom, it's initiliazed when the document is ready
+var $collectionHolder;
+// the link which we click on to add new items
+var $addNewItem = $('<a href="#" class="btn btn-light"><i class="far fa-plus-square"></i> Ajouter une ressource</a>');
+// when the page is loaded and ready
+$(document).ready(function () {
+    // get the collectionHolder, initilize the var by getting the list;
+    $collectionHolder = $('#exp_list');
+    // append the add new item link to the collectionHolder
+    $collectionHolder.append($addNewItem);
+    // add an index property to the collectionHolder which helps track the count of forms we have in the list
+    $collectionHolder.data('index', $collectionHolder.find('.panel').length)
+    // finds all the panels in the list and foreach one of them we add a remove button to it
+    // add remove button to existing items
+    $collectionHolder.find('.panel').each(function () {
+        // $(this) means the current panel that we are at
+        // which means we pass the panel to the addRemoveButton function
+        // inside the function we create a footer and remove link and append them to the panel
+        // more informations in the function inside
+        addRemoveButton($(this));
+    });
+    // handle the click event for addNewItem
+    $addNewItem.click(function (e) {
+        // preventDefault() is your  homework if you don't know what it is
+        // also look up preventPropagation both are usefull
+        e.preventDefault();
+
+        // create a new form and append it to the collectionHolder
+        // and by form we mean a new panel which contains the form
+        addNewForm();
+    })
+});
+/*
+ * creates a new form and appends it to the collectionHolder
+ */
+function addNewForm() {
+    // getting the prototype
+    // the prototype is the form itself, plain html
+    var prototype = $collectionHolder.data('prototype');
+    // get the index
+    // this is the index we set when the document was ready, look above for more info
+    var index = $collectionHolder.data('index');
+    // create the form
+    var newForm = prototype;
+    // replace the __name__ string in the html using a regular expression with the index value
+    newForm = newForm.replace(/__name__/g, index);
+    // incrementing the index data and setting it again to the collectionHolder
+    $collectionHolder.data('index', index+1);
+    // create the panel
+    // this is the panel that will be appending to the collectionHolder
+    var $panel = $('<div class="panel panel-warning"><div class="panel-heading"></div></div>');
+    // create the panel-body and append the form to it
+    var $panelBody = $('<div class="panel-body"></div>').append(newForm);
+    // append the body to the panel
+    $panel.append($panelBody);
+    // append the removebutton to the new panel
+    addRemoveButton($panel);
+    // append the panel to the addNewItem
+    // we are doing it this way to that the link is always at the bottom of the collectionHolder
+    $addNewItem.before($panel);
+}
+
+/**
+ * adds a remove button to the panel that is passed in the parameter
+ * @param $panel
+ */
+function addRemoveButton ($panel) {
+    // create remove button
+    var $removeButton = $('<a href="#" class="btn btn-light"><i class="fas fa-trash"></i> Supprimer</a><hr>');
+    // appending the removebutton to the panel footer
+    var $panelFooter = $('<div class="panel-footer"></div>').append($removeButton);
+    // handle the click event of the remove button
+    $removeButton.click(function (e) {
+        e.preventDefault();
+        // gets the parent of the button that we clicked on "the panel" and animates it
+        // after the animation is done the element (the panel) is removed from the html
+        $(e.target).parents('.panel').slideUp(1000, function () {
+            $(this).remove();
+        })
+    });
+    // append the footer to the panel
+    $panel.append($panelFooter);
+}
+
+</script>
+
+<!-- * Bundle select2 permet l'affichage de saisie à la volee des mots-cles * -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script src="{{ asset('bundles/tetranzselect2entity/js/select2entity.js') }}"></script>
+
+<script>
+  const select = document.querySelector('.js-select2');
+  $(select).select2({
+    tags: true,
+  });
+</script>
+
+{% endblock %}

@@ -28,7 +28,7 @@ class Note
     private $date;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Post::class, inversedBy="notes")
+     * @ORM\ManyToOne(targetEntity=Post::class, inversedBy="notes", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $post;
@@ -91,4 +91,5 @@ class Note
 
         return $this;
     }
+
 }

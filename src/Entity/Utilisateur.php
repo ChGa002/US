@@ -379,6 +379,7 @@ class Utilisateur implements UserInterface
     {
     }
 
+
     // Retourne true si l'utilisateur en question a ce post en favori
     public function estUnFavori(Utilisateur $user): bool
     {
@@ -388,7 +389,7 @@ class Utilisateur implements UserInterface
     }
 
     return false;
-}
+    }
 
     // Retourne la note moyenne du post
     public function noteMoyenne(NoteRepository $noteRepo): string
@@ -398,5 +399,10 @@ class Utilisateur implements UserInterface
     if($noteMoyenne[1] == null) return "0";
 
     return $noteMoyenne[1];
+    }
+
+    public function isAdmin(): bool
+    {
+       return in_array('ROLE_ADMIN', $this->getRoles(), true);
     }
 }

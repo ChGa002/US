@@ -99,6 +99,9 @@
     "fzaninotto/faker": {
         "version": "v1.9.2"
     },
+    "kartik-v/bootstrap-star-rating": {
+        "version": "4.0.x-dev"
+    },
     "laminas/laminas-code": {
         "version": "3.5.1"
     },
@@ -521,6 +524,9 @@
     },
     "symfony/yaml": {
         "version": "v4.4.17"
+    },
+    "tetranz/select2entity-bundle": {
+        "version": "v2.10.1"
     },
     "twig/extra-bundle": {
         "version": "v3.1.1"
