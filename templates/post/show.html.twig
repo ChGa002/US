@@ -5,7 +5,9 @@
     <div class="col-md-8 "> </div>
     <div class="col-md-2" style="text-align:center;">
     <!-- Note de l'utilisateur, 'noteARemplacer' sera remplacé dynamiquement en JS -->
-        <span style="display: inline-block;"> Ma note: <div class='rateYo' data-rating={{maNote}} href="{{path('post_noter', {'id':post.id, 'noteEtoiles': 'noteARemplacer'})}}"></div> </span>
+        {% if app.user != post.createur %}
+            <span style="display: inline-block;"> Ma note: <div class='rateYo' data-rating={{maNote}} href="{{path('post_noter', {'id':post.id, 'noteEtoiles': 'noteARemplacer'})}}"></div> </span>
+        {% endif %}
 
     </div>
     <div class="col-md-2 ">
