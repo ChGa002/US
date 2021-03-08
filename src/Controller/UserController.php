@@ -128,7 +128,7 @@ class UserController extends AbstractController
     }
     
     /**
-        * @Route("/us/modpost/delete", name="us_delete")
+        * @Route("/us/modpost/delete", name="us_deletePostProfile")
     */ 
     public function deletePost(Request $request, PostRepository $postRepo){
 

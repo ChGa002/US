@@ -32,10 +32,8 @@
     {%endif%}
 {%else%}
 
-<form action={{path('us_delete')}}"
-    <input type="hidden" name="_method" value="DELETE">
-    <input type="hidden" name="token" value="{{
-    csrf_token('delete' ~ post.id) }}">>
+<form action="{{path('us_deletePostProfile')}}" onsubmit="return confirm('Voulez vous vraiment supprimer ce(s) post(s)? Cette action est irréversible...'');">
+
 
 {% for postCourant in posts %}
 <div class="card">
