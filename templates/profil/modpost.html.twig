@@ -1,0 +1,106 @@
+{% extends 'templateBase.html.twig' %}
+
+{% block barreRecherche %} {% endblock %}
+
+{% block titleOnglet %}US - Modification {% endblock %}
+
+{% block titlePage %} Suppression de posts {% endblock %}
+
+{% block contenuDroit%} 
+<br>
+<br>
+ <div class="text-center">
+ 
+    <img alt="https://i.ibb.co/XS1SX70/av-Default.png" src="{{app.user.emplacementPhoto}}" class="img-thumbnail" alt="defaultAvatar" height="100px" width="100px"> <br>
+    <strong>{{app.user.pseudo}}</strong>
+    <br>
+
+
+    <br><br>
+    <a href="{{path('us_profil',{'pseudo':app.user.pseudo})}}"> <button type="button" class="btn btn-warning mb-2">Retour au profil</button></a> <br>
+</div>
+
+{% endblock %}
+
+{% block contenuCentral %}
+<p>
+{% if posts == NULL %}
+    {% if user == app.user %}
+        Vous n'avez pas encore posté.
+    {%else%}
+        Cet utilisateur n'a pas de posts.
+    {%endif%}
+{%else%}
+
+<form action={{path('us_delete')}}"
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="token" value="{{
+    csrf_token('delete' ~ post.id) }}">>
+
+{% for postCourant in posts %}
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-1">
+                <center><input type="checkbox" id="{{postCourant.id}}" method='Post' name='postASupprimer[]' value={{postCourant.id}}></center>
+            </div>
+            <div class="col-md-1">
+                <img src = {{ postCourant.emplacementPhoto }} height=100px, width=100px, class="img-thumbnail">
+            </div>
+            <div class="col-md-2">
+                <h6>{{ postCourant.titre }}</h6>
+            </div>
+            <div class="col-md-3">
+                <p>{{ postCourant.description }}</p>
+            </div>
+            <div class="col-md-3">
+                <i>{{ postCourant.createur.pseudo }}</i>
+                <i>{{ postCourant.datePubli | date('d-m-Y')}}</i>
+                <div class='rateYo' data-rating={{notesPosts[postCourant.id]}} ></div>
+            </div>
+            <div class="col-md-1">
+            {% for semestreCourant in postCourant.modules %}
+                {{ semestreCourant.semestre.sigle }} <br>
+            {% endfor %}
+            </div>
+            <div class="col-md-1">
+            {% for moduleCourant in postCourant.modules %}
+                {{ moduleCourant.sigle }}
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+{% endfor %}
+{%endif%} 
+
+
+<br>
+
+
+    <button class="btn btn-success posBD"> <i class="fas fa-trash"></i> Supprimer</button>
+
+</form>  
+</p>
+{%endblock%}
+
+{%block Javascript%}
+<script>
+$(document).ready(function(){
+
+$.each($('.rateYo'), function(){
+
+ var $self = $(this);
+
+ $self.rateYo({
+    rating: $self.data('rating'),
+    starSvg:'<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>',
+    fullStar: true,
+    ratedFill: "gold",
+    starWidth: "20px",
+    readOnly: true }); });
+});
+
+</script>
+{%endblock%}

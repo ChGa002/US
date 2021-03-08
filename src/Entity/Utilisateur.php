@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UtilisateurRepository;
+use App\Repository\NoteRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -376,6 +377,28 @@ class Utilisateur implements UserInterface
 
     public function eraseCredentials()
     {
+    }
+
+
+    // Retourne true si l'utilisateur en question a ce post en favori
+    public function estUnFavori(Utilisateur $user): bool
+    {
+        foreach($user->getUtilisateursFavoris() as $user)
+    {
+        if ($user == $this) return true;
+    }
+
+    return false;
+    }
+
+    // Retourne la note moyenne du post
+    public function noteMoyenne(NoteRepository $noteRepo): string
+    {    
+        $noteMoyenne = $noteRepo->findNoteMoyenneUser($this);
+
+    if($noteMoyenne[1] == null) return "0";
+
+    return $noteMoyenne[1];
     }
 
     public function isAdmin(): bool
