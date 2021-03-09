@@ -4,16 +4,17 @@ namespace App\Controller\Admin;
 
 use App\Entity\Post;
 use App\Entity\Module;
+use App\Entity\MotCle;
 use App\Entity\Semestre;
 use App\Entity\Utilisateur;
 use Symfony\Component\HttpFoundation\Response;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use Symfony\Component\Routing\Annotation\Route;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Router\CrudUrlGenerator;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 
 
 class AdminDashboardController extends AbstractDashboardController
@@ -49,11 +50,11 @@ class AdminDashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         return [
-            MenuItem::section('Utilisateurs'),
             MenuItem::linkToCrud('Utilisateurs', 'fa fa-user', Utilisateur::class),
 
-            MenuItem::section('Posts'),
+            MenuItem::section('Publications'),
             MenuItem::linkToCrud('Posts', 'fa fa-file', Post::class),
+            MenuItem::linkToCrud('Mots-Clés','fa fa-list',MotCle::class),
 
             MenuItem::section('Repertoires'),
             MenuItem::linkToCrud('Modules', 'fa fa-folder', Module::class),

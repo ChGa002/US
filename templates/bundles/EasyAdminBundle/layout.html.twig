@@ -95,7 +95,11 @@
                                     <div class="popover-content-section user-menu">
                                         {% for item in ea.userMenu.items %}
                                             {% if item.isMenuSection %}
-                                                <hr class="m-0" />
+                                                <a href="{{ path('us_accueil') }}" class="user-action {{ item.cssClass }}">
+                                                   <i class="fas fa-arrow-left"></i>
+                                                    <span>Retour</span>
+                                                </a>
+                                                <hr class="m-0" /> 
                                             {% else %}
                                                 <a href="{{ item.linkUrl }}" class="user-action {{ item.cssClass }}" target="{{ item.linkTarget }}" rel="{{ item.linkRel }}" referrerpolicy="origin-when-cross-origin">
                                                     {% if item.icon is not empty %}<i class="fa fa-fw {{ item.icon }}"></i>{% endif %}
