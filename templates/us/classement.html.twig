@@ -26,15 +26,16 @@
 			{% for place in classement %}
 				
 
-				<tr class='clickable-row' data-href='{{path('us_profil',{'pseudo':place['user'].pseudo})}}' 
+				<tr class='clickable-row
+
 
 
 					{% if monRang == loop.index %}
 
-						style="background-color:#e4e3e8"
+						bleuTransparent'
 
 					{% endif %}
-					>
+					' data-href='{{path('us_profil',{'pseudo':place['user'].pseudo})}}'>
 					<th scope="row"> {{loop.index}} </th>
 	      				<td>
 	      		 
@@ -61,8 +62,8 @@
 
     				</tr>
 			{% endfor %}
-			{% if monRang == false or monRang > 10 %}
-				<tr style="background-color:#e4e3e8">
+			{% if monRang == 'Non classé' or monRang > 10 %}
+				<tr class="bleuTransparent" >
 
 					<td> {{monRang}} </td>
 					<td> <img src="

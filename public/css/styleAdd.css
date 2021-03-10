@@ -225,3 +225,7 @@ text-align: center;
 .grise{
 color:grey;
 }
+
+.bleuTransparent{
+  background-color:rgba(147, 164, 211, .5);
+}

@@ -163,18 +163,20 @@ class USController extends AbstractController
 
     	// On cherche le rang de l'utilisateur courant
     	$monRang = array_search($moi, array_column($classerUsers, 'user'));
- 	
+ 		
+ 		if ($monRang == false) $monRang = 'Non classé';
+ 		else $monRang+=1;
     	$mesPoints = pow($moi->noteMoyenne($noteRepo),2)*$moi->getPosts()->count();
     	$maMoyenne = $moi->noteMoyenne($noteRepo);
     	
-    
+
 
     	// On ne garde que le top 10
     	$classement = array_slice($classerUsers, 0, 10);
 
     	return $this->render('/us/classement.html.twig', [
     			'classement' => $classement, 'mesPoints' => $mesPoints,
-    				'monRang' => $monRang+1, 'maMoyenne' => $maMoyenne]);
+    				'monRang' => $monRang, 'maMoyenne' => $maMoyenne]);
     }
 }
 
