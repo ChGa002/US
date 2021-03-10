@@ -14,6 +14,7 @@ use App\Entity\Post;
 use App\Repository\SemestreRepository;
 use App\Repository\PostRepository;
 use App\Repository\ModuleRepository;
+use App\Repository\NoteRepository;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -127,12 +128,53 @@ class USController extends AbstractController
 	 }
 	 
 
-         /**
+     /**
      * @Route("/us/parametre", name="us_parametre")
      */
     public function param(): Response
     {
         return $this->render('/us/parametre.html.twig');
+    }
+
+
+    /**
+     * @Route("/us/classement", name="us_classement")
+     */
+    public function classement(UtilisateurRepository $userRepo, NoteRepository $noteRepo): Response
+    {	
+    	$moi = $this->getUser();
+    	$users = $userRepo->findUtilisateursNotes();
+
+    	$classerUsers = array();
+    	
+    	foreach($users as $user) 
+    	{
+    		$moy = $user->noteMoyenne($noteRepo);
+    		$nbPosts = $user->getPosts()->count();
+
+    		$points = pow($moy,2) * $nbPosts;
+
+    		$classerUsers[] = array('user'=> $user, 'points' => $points, 'moyenne' => $moy, 'nbPosts' => $nbPosts);
+    		
+    	} 
+
+    	// On trie par points  décroissants
+    	array_multisort(array_column($classerUsers, 'points'), SORT_DESC, $classerUsers);
+
+    	// On cherche le rang de l'utilisateur courant
+    	$monRang = array_search($moi, array_column($classerUsers, 'user'));
+ 	
+    	$mesPoints = pow($moi->noteMoyenne($noteRepo),2)*$moi->getPosts()->count();
+    	$maMoyenne = $moi->noteMoyenne($noteRepo);
+    	
+    
+
+    	// On ne garde que le top 10
+    	$classement = array_slice($classerUsers, 0, 10);
+
+    	return $this->render('/us/classement.html.twig', [
+    			'classement' => $classement, 'mesPoints' => $mesPoints,
+    				'monRang' => $monRang+1, 'maMoyenne' => $maMoyenne]);
     }
 }
 

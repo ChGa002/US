@@ -18,6 +18,25 @@ class UtilisateurRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Utilisateur::class);
     }
+    
+    // Retourne la liste d'utilisateurs ayant des posts notés
+     public function findUtilisateursNotes()
+    {
+      // Recuperer le gestionnaire d'entité
+     $entityManager = $this->getEntityManager();
+
+    // Construction de la requete
+    $requete = $entityManager->createQuery(
+        'SELECT u
+        FROM App\Entity\Utilisateur u
+        JOIN u.posts p
+        JOIN p.notes n
+        ');
+
+    // Retourner les resultats
+    return $requete->getResult();
+    }
+
 
     // /**
     //  * @return Utilisateur[] Returns an array of Utilisateur objects
