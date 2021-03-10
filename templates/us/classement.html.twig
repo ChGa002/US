@@ -7,9 +7,9 @@
 
 {% block contenuCentral %}
 	
-	Mes points: {{mesPoints|number_format}} <br>
-	Mon rang: {{monRang}}
+	Mes points totaux: {{mesPointsTotaux|number_format}} <br>
 
+	Date du dernier reset: {{dateReset|date('d-M-Y')}}
 	<hr>
 	<table class="table table-hover">
   		<thead>
@@ -17,7 +17,7 @@
 		      	<th scope="col">Place</th>
 		      	<th scope="col">Profil</th>
 		      	<th scope="col">Points</th>
-		      	<th scope="col">Moyenne</th>
+		      	<th scope="col">Moyenne depuis reset</th>
 
     		</tr>
  		 </thead>

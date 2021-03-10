@@ -142,19 +142,19 @@ class USController extends AbstractController
      */
     public function classement(UtilisateurRepository $userRepo, NoteRepository $noteRepo): Response
     {	
+    	$date = new \DateTime('2021-02-09');
     	$moi = $this->getUser();
-    	$users = $userRepo->findUtilisateursNotes();
+
+    	$users = $userRepo->findUtilisateursNotes($date);
 
     	$classerUsers = array();
-    	
+  
     	foreach($users as $user) 
     	{
-    		$moy = $user->noteMoyenne($noteRepo);
-    		$nbPosts = $user->getPosts()->count();
+    		
+    		$points = pow($user[1],2) * $user[2];
 
-    		$points = pow($moy,2) * $nbPosts;
-
-    		$classerUsers[] = array('user'=> $user, 'points' => $points, 'moyenne' => $moy, 'nbPosts' => $nbPosts);
+    		$classerUsers[] = array('user'=> $user[0], 'points' => $points, 'moyenne' => $user[1]);
     		
     	} 
 
@@ -164,19 +164,29 @@ class USController extends AbstractController
     	// On cherche le rang de l'utilisateur courant
     	$monRang = array_search($moi, array_column($classerUsers, 'user'));
  		
- 		if ($monRang == false) $monRang = 'Non classé';
- 		else $monRang+=1;
-    	$mesPoints = pow($moi->noteMoyenne($noteRepo),2)*$moi->getPosts()->count();
-    	$maMoyenne = $moi->noteMoyenne($noteRepo);
-    	
 
+ 		if ($monRang == false) {
+
+ 			$monRang = 'Non classé';
+ 			$mesPoints = 0;
+ 			$maMoyenne = 0;
+
+		} else {
+			$mesPoints = pow($users[$monRang][1],2) * $users[$monRang][2];
+			$maMoyenne = $users[$monRang][1];
+			$monRang+=1;
+		}
+
+    	$mesPointsTotaux = pow($moi->noteMoyenne($noteRepo),2)*$moi->getPosts()->count();
+    	$maMoyenneTotale = $moi->noteMoyenne($noteRepo);
+    	
 
     	// On ne garde que le top 10
     	$classement = array_slice($classerUsers, 0, 10);
 
     	return $this->render('/us/classement.html.twig', [
-    			'classement' => $classement, 'mesPoints' => $mesPoints,
-    				'monRang' => $monRang, 'maMoyenne' => $maMoyenne]);
+    			'classement' => $classement, 'mesPoints' => $mesPoints, 'mesPointsTotaux' => $mesPointsTotaux,
+    				'monRang' => $monRang, 'maMoyenneTotale' => $maMoyenneTotale, 'maMoyenne' => $maMoyenne, 'dateReset' => $date]);
     }
 }
 
