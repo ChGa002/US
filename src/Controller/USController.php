@@ -9,11 +9,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 use App\Entity\Semestre;
+use App\Entity\Utilisateur;
 use App\Entity\Module;
 use App\Entity\Post;
 use App\Repository\SemestreRepository;
 use App\Repository\PostRepository;
 use App\Repository\ModuleRepository;
+use App\Repository\NoteRepository;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -40,9 +42,16 @@ class USController extends AbstractController
 	/**
 	 *@Route("/us/favoris", name="us_favoris")
 	 */
-	 public function favoris()
+	 public function favoris(PostRepository $postRepo, NoteRepository $noteRepo)
 	 {
-		 return $this->render('us/favoris.html.twig');
+		 $user=$this->getUser();
+		 $posts = $user->getPostsFavoris();
+		 $notesPosts = array();
+		foreach($posts as $post)
+		{	
+			$notesPosts[$post->getId()]=$post->noteMoyenne($noteRepo);
+		}
+		return $this->render('us/favoris.html.twig',['posts' => $posts, 'notesPosts' => $notesPosts]);
 	 }
 	 
 	 
@@ -65,10 +74,18 @@ class USController extends AbstractController
 	/**
 	 * @Route("/module/{id}", name="us_postModule")
 	 */
-	 public function triPostParModule(Module $module)
+	 public function triPostParModule(Module $module, PostRepository $postRepo, NoteRepository $noteRepo)
 	 {	
+		$posts = $postRepo->findByModule($module);
+		$notesPosts = array();
+		foreach($posts as $post)
+		{	
+			$notesPosts[$post->getId()]=$post->noteMoyenne($noteRepo);
+		}
+		
+		
 			// Ici on va afficher la page définie par le fichier postParModule.html.twig en transmettant la variable $posts
-		 return $this->render('us/postParModule.html.twig', ['module' => $module]);
+		 return $this->render('us/postParModule.html.twig', ['module' => $module, 'posts' => $posts, 'notesPosts' => $notesPosts]);
 		 
 
 	 }
@@ -119,6 +136,31 @@ class USController extends AbstractController
 			 return $this->json([ 'message' => 'Favori bien supprimé'], 200);
 		 }
 	     $user->addSemestresFavori($semestre);
+		 $manager->persist($user);
+		 $manager->flush();
+
+		 return $this->json(['message' => 'Favori bien ajouté'], 200);
+
+	 }
+	 
+	 	/**
+	 * @Route("/{id}/utilisateurFavori", name="utilisateur_enFavori")
+	 */
+	 public function utilisateurEnFavori(Utilisateur $utilisateur, $id): Response
+	 {
+		 $manager=$this->getDoctrine()->getManager();
+		 $user = $this->getUser();
+
+		 if ($utilisateur->estUnFavori($user)) {
+
+			 $user->removeUtilisateursFavori($utilisateur);
+
+			 $manager->persist($user);
+			 $manager->flush();
+
+			 return $this->json([ 'message' => 'Favori bien supprimé'], 200);
+		 }
+	     $user->addUtilisateursFavori($utilisateur);
 		 $manager->persist($user);
 		 $manager->flush();
 
