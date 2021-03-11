@@ -1,6 +1,6 @@
 {% extends 'templateBase.html.twig' %}
 
-
+{% block barreRecherche %}{% endblock %}
 {% block titleOnglet %}US - Classement {% endblock %}
 
 {% block titlePage %} Classement {% endblock %}
@@ -27,19 +27,19 @@
     		<tr>
 		      	<th scope="col">Place</th>
 		      	<th scope="col">Profil</th>
+		      	<th scope="col">Moyenne actuelle</th>
+		      	<th scope="col">Posts notés</th>
 		      	<th scope="col">Points</th>
-		      	<th scope="col">Moyenne depuis reset</th>
 
     		</tr>
  		 </thead>
   		<tbody>
    			
-			{% for place in classement %}
-				
-
+   			{% set pointsPrecedent = null %}
+   			
+			{% for key,place in classement %}
+				{% set first = null %}
 				<tr class='clickable-row
-
-
 
 					{% if monRang == loop.index %}
 
@@ -47,7 +47,19 @@
 
 					{% endif %}
 					' data-href='{{path('us_profil',{'pseudo':place['user'].pseudo})}}'>
-					<th scope="row"> {{loop.index}} </th>
+
+					<th scope="row"> 
+		
+						{% if place['points']|number_format == pointsPrecedent|number_format %}
+						{{ rang }}
+							{% if place['points']|number_format == classement[0]['points']|number_format %}
+								{% set first = true %} 
+							{% endif %}
+						{% else %} 
+							{{loop.index}}  
+						{% endif %}
+					
+					</th>
 	      				<td>
 	      		 
            
@@ -63,13 +75,18 @@
 		      				&nbsp;
 		      				&nbsp;
 	      			
-	      					{% if loop.first %}
-	      						<i class="fas fa-trophy fa-3x" style="color:gold; margin:20px"></i>
+	      					{% if loop.first or first %}
+	      						<center style="display:inline-block;"><i class="fas fa-trophy fa-2x" style="color:gold; margin:20px"></i> </center>
 	      					{% endif %}
 
 	      				</td>
-	     				<td> {{place['points']|number_format}} </td>
+	     				
 	     				<td> <div class='rateYo' data-rating={{place['moyenne']}} ></div> </td>
+	     				<td> {{place['nbPostsNotes']}} </td>
+	     				<td> {{place['points']|number_format}} </td>
+
+	     				{% set pointsPrecedent = place['points'] %}
+	     				{% set rang = loop.index %}
 
     				</tr>
 			{% endfor %}
@@ -88,8 +105,10 @@
 	      			&nbsp;
 	      			&nbsp;
 	      			</td>
-					<td> {{ mesPoints|number_format}}</td>
+					
 					<td> <div class='rateYo' data-rating={{maMoyenne}} ></div> </td>
+					<td> {{ nbPostsNotes }}</td>
+					<td> {{ mesPoints|number_format}}</td>
 				</tr>
 		
 

@@ -197,7 +197,7 @@ class USController extends AbstractController
     		
     		$points = pow($user[1],2) * $user[2];
 
-    		$classerUsers[] = array('user'=> $user[0], 'points' => $points, 'moyenne' => $user[1]);
+    		$classerUsers[] = array('user'=> $user[0], 'points' => $points, 'moyenne' => $user[1], 'nbPostsNotes' => $user[2]);
     		
     	} 
 
@@ -209,14 +209,15 @@ class USController extends AbstractController
  		
 
  		if ($monRang === false) {
-
  			$monRang = 'Non classé';
  			$mesPoints = 0;
  			$maMoyenne = 0;
+ 			$nbPostsNotes = 0;
 
 		} else {
 			$mesPoints = pow($users[$monRang][1],2) * $users[$monRang][2];
 			$maMoyenne = $users[$monRang][1];
+			$nbPostsNotes = $users[$monRang][2];
 			$monRang+=1;
 		}
 
@@ -229,7 +230,7 @@ class USController extends AbstractController
    
     	return $this->render('/us/classement.html.twig', [
     			'classement' => $classement, 'mesPoints' => $mesPoints, 'mesPointsTotaux' => $mesPointsTotaux,
-    				'monRang' => $monRang, 'maMoyenneTotale' => $maMoyenneTotale, 'maMoyenne' => $maMoyenne, 'dateReset' => $date]);
+    				'monRang' => $monRang, 'maMoyenneTotale' => $maMoyenneTotale, 'maMoyenne' => $maMoyenne, 'nbPostsNotes' => $nbPostsNotes, 'dateReset' => $date]);
     }
 
 }
