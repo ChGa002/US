@@ -95,7 +95,7 @@ class UserController extends AbstractController
             $manager->persist($utilisateur);
             $manager->flush();
             //Rediriger l'utilisateur vers sa page de profil
-            return $this->redirectToRoute('us_profil');
+            return $this->redirectToRoute('us_profil',['pseudo'=>$utilisateur->getPseudo()]);
         }
 
         //Page qui affiche le formulaire
