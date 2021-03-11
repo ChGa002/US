@@ -167,7 +167,7 @@ class USController extends AbstractController
     	$monRang = array_search($moi, array_column($classerUsers, 'user'));
  		
 
- 		if ($monRang == false) {
+ 		if ($monRang === false) {
 
  			$monRang = 'Non classé';
  			$mesPoints = 0;
@@ -185,7 +185,7 @@ class USController extends AbstractController
 
     	// On ne garde que le top 10
     	$classement = array_slice($classerUsers, 0, 10);
-
+   
     	return $this->render('/us/classement.html.twig', [
     			'classement' => $classement, 'mesPoints' => $mesPoints, 'mesPointsTotaux' => $mesPointsTotaux,
     				'monRang' => $monRang, 'maMoyenneTotale' => $maMoyenneTotale, 'maMoyenne' => $maMoyenne, 'dateReset' => $date]);

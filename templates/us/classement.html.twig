@@ -6,11 +6,22 @@
 {% block titlePage %} Classement {% endblock %}
 
 {% block contenuCentral %}
-	
-	Mes points totaux: {{mesPointsTotaux|number_format}} <br>
+	<div class="row">
+    	<div class="col-sm">
+    		<strong> Depuis le début: </strong> <br>
+     		Mes points: {{mesPointsTotaux|number_format}} <br>
+			Ma moyenne: <div class='rateYo' data-rating={{maMoyenneTotale}} style="display: inline-block"></div> 
+    	</div>
+    	<div class="col-sm">
+      		<strong> Dernière remise à zéro: </strong> {{dateReset|date('d-m-Y')}}
+    	</div>
+	</div>
 
-	Date du dernier reset: {{dateReset|date('d-M-Y')}}
+	<br>
+	
+
 	<hr>
+	<h3> Classement actuel </h3> 
 	<table class="table table-hover">
   		<thead>
     		<tr>
