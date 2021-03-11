@@ -281,7 +281,6 @@ class Post
     }
 
 
-
     // Retourne true si l'utilisateur en question a ce post en favori
     public function estUnFavori(Utilisateur $user): bool
     {
@@ -308,11 +307,10 @@ class Post
     public function noteMoyenne(NoteRepository $noteRepo): string
     {
         $noteMoyenne = $noteRepo->findNoteMoyenne($this);
-
+      
         if($noteMoyenne[1] == null) return "0";
 
         return $noteMoyenne[1];
     }
-
 
 }

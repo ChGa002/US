@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 
 class RessourceType extends AbstractType
@@ -16,7 +17,17 @@ class RessourceType extends AbstractType
     {
         $builder
 			->add('nom', TextType::class, [ 'attr' => ['placeholder' => 'Nom du fichier...'] ])
-            ->add('typeDeFichier', TextType::class, [ 'attr' => ['placeholder' => 'Extension du fichier... (.jpeg, .pdf, .odt)'] ] )
+            ->add('typeDeFichier', ChoiceType::class, 
+                [ 'choices' => ['Document (.docx, .odt, diaporama...)' => 'document',
+                                'Texte (html, css, sql...)' => 'texte',
+                                'Exécutable'=> 'exécutable', 
+                                'Image' => 'image', 
+                                'Vidéo' => 'vidéo', 
+                                'Audio' => 'audio', 
+                                'Site web' => 'site web',
+                                'Compressé' => 'compressé',
+                                'Autre' => 'autre'
+            ] ] )
             ->add('emplacement', UrlType::class, [ 'label' => 'Lien ressource', 'attr' => ['placeholder' => 'Lien vers la ressource...'] ]);         
         
     }

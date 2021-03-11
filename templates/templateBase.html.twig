@@ -27,6 +27,9 @@
     <!-- CSS notation 5 étoiles (RateYo)-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
 
+    <!-- CSS notation 5 étoiles (RateYo)-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+
 </head>
 
 <body id="page-top">
@@ -40,10 +43,11 @@
             <!-- Sidebar - Brand -->
 
             <li class="nav-item">
-                <a class="nav-link" href="#.html" title="Profil">
+                <a class="nav-link" href="{{path('us_profil',{'pseudo':app.user.pseudo})}}" title="Profil">
                     <div class="text-center">
+
                         {% if  app.user.emplacementPhoto == null %}
-                        <img src="{{asset('/img/avDefault.png')}}" class="img-thumbnail" alt="defaultAvatar" height="100px" width="100px">
+                        <img src="{{asset('/img/avDefault.png')}}" class="img-thumbnail" height="100px" width="100px">
                         {% else %}
                         <img src="{{app.user.emplacementPhoto}}" class="img-thumbnail" alt="defaultAvatar" height="100px" width="100px">
                         {% endif %}
@@ -59,8 +63,7 @@
 
             <!-- Nav Item -->
             <li class="nav-item">
-
-                <a class="nav-link" href="{{ path('us_accueil') }}" title="Accueil">
+                <a class="nav-link" href="{{path('us_accueil')}}" title="Accueil">
 
                     <i class="fas fa-home" height="20px" width="20px"></i>
                     <span>Accueil</span></a>
@@ -252,7 +255,7 @@
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
                         <img src="{{ asset("/img/us_logo.png") }}" alt="logo page" height="25px" width="25px">
-                        <span>Copyright &copy; University Share 2021</span>
+                        <span>Copyright © University Share 2021</span>
                         <img src="{{ asset("/img/iut_logo.png") }}" alt="logo iut" height="25px" width="25px">
                     </div>
                 </div>
@@ -290,11 +293,9 @@
         </div>
     </div>
 
-
     <!-- Ajax axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-
 
     <!-- Jquery-->
     <script src="{{ asset("vendor/jquery/jquery.min.js") }}"></script>
@@ -312,7 +313,6 @@
     <script src="{{ asset('vendor/datatables/dataTables.bootstrap4.js') }}"></script>
 
     <script src="{{ asset('js/scriptsPosts.js') }}"></script>
-    
 
     <!-- Javascript notation étoiles (RateYo) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>

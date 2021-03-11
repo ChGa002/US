@@ -1,0 +1,119 @@
+{% extends 'templateBase.html.twig' %}
+
+{% block barreRecherche %} {% endblock %}
+
+{% block titleOnglet %}US - Profil {% endblock %}
+
+{% block titlePage %} Profil {% endblock %}
+
+{% block contenuCentral %}
+<b>Description : </b>
+<p> 
+    {{user.description}}
+</p>
+<br>
+<br>
+<br>
+
+<b>Post récents : </b>
+<p> 
+{% if posts == NULL %}
+    {% if user == app.user %}
+        Vous n'avez pas encore posté.
+    {%else%}
+        Cet utilisateur n'a pas de posts.
+    {%endif%}
+{%else%}
+{% for postCourant in posts %}
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-1">
+                <img src = {{ postCourant.emplacementPhoto }} height=100px, width=100px, class="img-thumbnail">
+            </div>
+            <a href="#" class="stretched-link"></a>
+            <div class="col-md-2">
+                <h6>{{ postCourant.titre }}</h6>
+            </div>
+            <div class="col-md-3">
+                <p>{{ postCourant.description }}</p>
+            </div>
+            <div class="col-md-3">
+                <i>{{ postCourant.createur.pseudo }}</i>
+                <i>{{ postCourant.datePubli | date('d-m-Y')}}</i>
+                <div class='rateYo' data-rating={{notesPosts[postCourant.id]}} ></div>
+            </div>
+            <div class="col-md-1">
+            {% for semestreCourant in postCourant.modules %}
+                {{ semestreCourant.semestre.sigle }}
+            {% endfor %}
+            </div>
+            <div class="col-md-2">
+            {% for moduleCourant in postCourant.modules %}
+                {{ moduleCourant.sigle }}
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{%endif%}
+
+    
+</p>
+{%endblock%}
+
+{% block contenuDroit%} 
+<br>
+<br>
+ <div class="text-center">
+    {% if  user.emplacementPhoto == null %}
+        <img src="{{asset('/img/avDefault.png')}}" class="img-thumbnail" height="100px" width="100px">
+    {% else %}
+        <img src="{{user.emplacementPhoto}}" class="img-thumbnail" height="100px" width="100px">
+    {% endif %}
+    <br>
+    <strong>{{user.pseudo}}</strong>
+    <br>
+    Note moyenne des posts :  
+    <center><div class='rateYo' data-rating={{noteUtilisateur}} ></div></center>    
+    
+<br>
+{% if user == app.user %}      
+    <a href="/us/moduser"><button type="button" class="btn btn-warning mb-2">Modifier mon profil</a></button>
+    <a href="{{path('us_modpost',{'pseudo':user.pseudo}) }}"><button type="button" class="btn btn-warning mb-2">Modifier mes posts</a></button>
+{%else%}
+    <div style="text-align:center;">
+        <a href="{{ path('utilisateur_enFavori', {'pseudo':user.pseudo}) }}" class="btn js-favori">
+        {% if user.estUnFavori(app.user) %}
+            <i class="fas fa-star"></i>
+        {% else %}
+            <span id="js-fav-text"> <b> Mettre en favori </b> </span>
+            <i class="far fa-star"></i>
+        {% endif %}
+    </a>
+    </div>
+{%endif%}
+</div>
+
+{% endblock %}
+
+{%block Javascript%}
+<script>
+$(document).ready(function(){
+
+$.each($('.rateYo'), function(){
+
+ var $self = $(this);
+
+ $self.rateYo({
+    rating: $self.data('rating'),
+    starSvg:'<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>',
+    fullStar: true,
+    ratedFill: "gold",
+    starWidth: "20px",
+    readOnly: true }); });
+});
+
+</script>
+{%endblock%}

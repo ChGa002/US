@@ -58,6 +58,28 @@ class NoteRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
+
+
+    public function findNoteMoyenneUser($utilisateurId)
+    {
+      // Recuperer le gestionnaire d'entité
+     $entityManager = $this->getEntityManager();
+
+    // Construction de la requete
+    $requete = $entityManager->createQuery(
+        'SELECT AVG(n.note)
+        FROM App\Entity\Note n
+        JOIN n.post p
+        WHERE p.createur = :utilisateurId');
+
+    // Definition de la valeur du parametre
+    $requete->setParameter('utilisateurId', $utilisateurId);
+
+    // Retourner les resultats
+    return $requete->getSingleResult();
+    }
+
+    
     // /**
     //  * @return Note[] Returns an array of Note objects
     //  */
@@ -86,4 +108,6 @@ class NoteRepository extends ServiceEntityRepository
         ;
     }
     */
+
+
 }
