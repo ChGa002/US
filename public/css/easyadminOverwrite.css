@@ -12,6 +12,22 @@
   
       --body-bg: var(--deep); /*tcheq*/
 }
+
+/* --------- PERSO ---------*/
+
+.btnBrique{
+    background-color: var(--brique);
+    border-radius: 4px;
+    width: auto; height: auto;
+    padding: 4px;
+    color: var(--cloud);
+    box-shadow: none;
+    border-color: var(--brique);
+   }
+
+   .btnBrique:hover{
+       background-color: #db624c;
+   }
 /* 
 === SURCHARGE DU CSS DES TEMPLATES CREER PAR EASY ADMIN === 
 */

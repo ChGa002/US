@@ -50,7 +50,7 @@ class Utilisateur implements UserInterface
     /**
      * @ORM\Column(type="boolean")
      */
-    private $valide;
+    private $valide=0;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -376,5 +376,10 @@ class Utilisateur implements UserInterface
 
     public function eraseCredentials()
     {
+    }
+
+    public function __toString()
+    {
+        return $this->pseudo;
     }
 }

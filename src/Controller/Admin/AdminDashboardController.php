@@ -9,7 +9,9 @@ use App\Entity\Semestre;
 use App\Entity\Utilisateur;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Router\CrudUrlGenerator;
@@ -66,4 +68,5 @@ class AdminDashboardController extends AbstractDashboardController
     {
         return Assets::new()->addCssFile('css/admin.css');
     }
+
 }

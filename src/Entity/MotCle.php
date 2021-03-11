@@ -77,4 +77,9 @@ class MotCle
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->motCle;
+    }
 }

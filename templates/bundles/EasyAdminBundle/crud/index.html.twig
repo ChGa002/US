@@ -7,10 +7,12 @@
 {# TODO: change this when reenabling batch actions #}
 {% set has_batch_actions = false and batch_form is defined and ea.crud.actions.batchActions|length > 0 %}
 
-{% block body_id entities|length > 0 ? 'ea-index-' ~ entities|first.name : '' %}
+{# {% block body_id entities|length > 0 ? 'ea-index-' ~ entities|first.name : '' %} #}
 {% block body_class 'index' ~ (entities|length > 0 ? ' index-' ~ entities|first.name : '') %}
 
 {% block content_title %}
+<button class="btnBrique">Importer CSV</button>
+<button class="btnBrique">  <i class="fas fa-envelope"></i> Envoyer Mail</button>
     {%- apply spaceless -%}
         {% set default_title = ea.crud.defaultPageTitle('index')|trans(ea.i18n.translationParameters, 'EasyAdminBundle') %}
         {{ ea.crud.customPageTitle is null ? default_title|raw : ea.crud.customPageTitle('index')|trans(ea.i18n.translationParameters)|raw }}
@@ -21,8 +23,6 @@
     {% block global_actions %}
         {% for action in global_actions %}
             {{ include(action.templatePath, { action: action }, with_context = false) }}
-            <button class="{{ action.cssClass }}">Importer CSV</button>
-            <button class="{{ action.cssClass }}">  <i class="fas fa-envelope"></i> Envoyer Mail</button>
         {% endfor %}
     {% endblock global_actions %}
 
@@ -30,7 +30,6 @@
 
 {% block content_header %}
     {{ parent() }}
-
     {# TODO:
     {% block batch_actions %}
         {% for batchAction in ea.crud.actions.batchActions %}
@@ -136,7 +135,7 @@
                                 {% endif %}
                             </th>
                         {% endfor %}
-
+                            
                         <th {% if ea.crud.showEntityActionsAsDropdown %}width="10px"{% endif %} dir="{{ ea.i18n.textDirection }}">
                             <span class="sr-only">{{ 'action.entity_actions'|trans(ea.i18n.translationParameters, 'EasyAdminBundle') }}</span>
                         </th>

@@ -3,6 +3,9 @@
 namespace App\Controller\Admin;
 
 use App\Entity\MotCle;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class MotCleCrudController extends AbstractCrudController
@@ -22,4 +25,10 @@ class MotCleCrudController extends AbstractCrudController
         ];
     }
     */
+    public function configureActions(Actions $actions): Actions
+    {
+        return $actions
+            ->update(Crud::PAGE_INDEX, Action::EDIT, function (Action $action){return $action->setIcon('fa fa-edit')->setLabel(false);})
+            ->update(Crud::PAGE_INDEX, Action::DELETE, function (Action $action){ return $action->setIcon('fa fa-times-circle')->setLabel(false); });
+    }
 }
