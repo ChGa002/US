@@ -18,7 +18,6 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <!-- Custom styles for this template-->
     <link href="{{asset("css/sb-admin-2.css")}}" rel="stylesheet">
-    
     <link rel="stylesheet" href="{{asset("/css/styleAdd.css")}}">
 	
 	<!-- CSS notation 5 étoiles (RateYo)-->
@@ -47,9 +46,9 @@
                     <div class="text-center">
 
                         {% if  app.user.emplacementPhoto == null %}
-                        <img src="{{asset('/img/avDefault.png')}}" class="img-thumbnail" height="100px" width="100px">
+                        <img src="{{asset('/img/avDefault.png')}}" class="img-thumbnail" alt="Image par défaut US" height="100px" width="100px">
                         {% else %}
-                        <img src="{{app.user.emplacementPhoto}}" class="img-thumbnail" alt="defaultAvatar" height="100px" width="100px">
+                        <img src="{{app.user.emplacementPhoto}}" class="img-thumbnail" alt="Avatar de l'utilisateur" height="100px" width="100px">
                         {% endif %}
                     </div>
                 </a>
@@ -92,7 +91,7 @@
             </li>
             {% if is_granted("ROLE_ADMIN") %}
             <li class="nav-item">
-                <a class="nav-link" href="#.html" title="Gestion des utilisateurs et de l'arborescense.">
+                <a class="nav-link" href=" {{ path('us_admin_dash') }}" title="Gestion des utilisateurs et de l'arborescense.">
                     <i class="fas fa-user" height="20px" width="20px"></i>
                     <span>Admin</span></a>
             </li>
@@ -308,15 +307,10 @@
     <!-- JavaScript du template-->
     <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
 
-    <!-- Additional Plugin Datables-->
-    <!--<script src="{{ asset('vendor/datatables/jquery.dataTables.js') }}"></script>
-    <script src="{{ asset('vendor/datatables/dataTables.bootstrap4.js') }}"></script> -->
-
     <script src="{{ asset('js/scriptsPosts.js') }}"></script>
 
     <!-- Javascript notation étoiles (RateYo) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
-
 
     <!--JavaScript additionel-->
     {% block Javascript %}{% endblock %}

@@ -38,8 +38,6 @@ class USController extends AbstractController
         ]);
     }
 
-	
-
 	/**
 	 *@Route("/us/favoris", name="us_favoris")
 	 */
@@ -169,7 +167,6 @@ class USController extends AbstractController
 
 	 }
 	 
-
      /**
      * @Route("/us/parametre", name="us_parametre")
      */
@@ -177,7 +174,6 @@ class USController extends AbstractController
     {
         return $this->render('/us/parametre.html.twig');
     }
-
 
     /**
      * @Route("/us/classement", name="us_classement")

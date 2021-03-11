@@ -1,0 +1,141 @@
+/* === Variable === */
+:root
+{
+
+  /*Couleur*/
+        --brique: #cd533d;
+        --deep: #475787;
+        --ocean: #93a4d3;
+        --cloud: #fff;
+
+  /*Custo Easy admin*/
+  
+      --body-bg: var(--deep); /*tcheq*/
+}
+
+/* --------- PERSO ---------*/
+
+.btnBrique{
+    background-color: var(--brique);
+    border-radius: 4px;
+    width: auto; height: auto;
+    padding: 4px;
+    color: var(--cloud);
+    box-shadow: none;
+    border-color: var(--brique);
+   }
+
+   .btnBrique:hover{
+       background-color: #db624c;
+   }
+/* 
+=== SURCHARGE DU CSS DES TEMPLATES CREER PAR EASY ADMIN === 
+*/
+html, body{
+    background:  linear-gradient(#52659e,#475787);
+}
+
+.content-header,.content-header::before,.content-header::after{
+    background-color: var(--cloud);
+}
+.content-header::before,.content-header::after{
+    border-radius: 4px;
+}
+
+h1{
+    color: var(--cloud);
+}
+
+.sidebar-menu a {
+    color: var(--cloud);
+    margin-left: 5%;
+}
+.sidebar-menu a:hover {
+    color: var(--ocean);
+}
+.sidebar-menu .header{
+    color: var(--cloud);
+    font-size: 20px;
+    text-decoration: underline;
+}
+.navbar-custom-menu .user {
+    align-items: center;
+    color: var(--cloud);
+    cursor: pointer;
+    display: flex;
+    background-color: var(--brique);
+    border-radius: 7%;
+    padding: 5px;
+}
+#navigation-toggler{
+    color: var(--cloud);
+}
+.content-panel{
+    box-shadow: #000 ;
+}
+.main-header #header-logo a {
+    color: var(--cloud);
+}
+.sidebar-menu li:not(.submenu-active).active .menu-icon, .sidebar-menu li:not(.submenu-active).active a {
+    font-style: italic;
+    color: var(--cloud);
+    filter: opacity(100%);
+}
+
+.btn-primary, .btn-primary:hover, .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled):focus {
+    background-color: var(--ocean);
+    color: var(--text-on-primary);
+}
+
+@media (min-width: 1024px){
+    .main-sidebar {
+        height: 100%;
+        max-width: var(--sidebar-max-width);
+        padding: 10px;
+        position: relative;
+        z-index: 1039;
+        width: auto;
+        background-color: var(--cloud);
+        border-radius: 4px;
+        box-shadow: #000;
+        left: 0;
+    }
+    .sidebar-menu a {
+        color: #000;
+        margin-left: 5%;
+    }
+    .sidebar-menu a:hover {
+        color: var(--ocean);
+    }
+    .sidebar-menu .header{
+        color: #000;
+        font-size: 20px;
+        text-decoration: underline;
+    }
+    .sidebar-menu li:not(.submenu-active).active .menu-icon, .sidebar-menu li:not(.submenu-active).active a {
+        font-style: italic;
+        color: #000;
+        filter: opacity(100%);
+    }
+}
+
+.datagrid-header-tools {
+    display: flex;
+    padding: 0 0 10px;
+    align-items: center;
+}
+.datagrid-header-tools .datagrid-search {
+    flex: 1;
+    max-width: 480px;
+    margin-right: 15px;
+    left: 25%;
+    position: relative;
+}
+
+p .user-details-name{
+    align-content: center;
+}
+
+.content-header{
+
+}

@@ -379,7 +379,6 @@ class Utilisateur implements UserInterface
     {
     }
 
-
     // Retourne true si l'utilisateur en question a ce post en favori
     public function estUnFavori(Utilisateur $user): bool
     {
@@ -410,5 +409,5 @@ class Utilisateur implements UserInterface
     {
         return $this->pseudo;
     }
-	
+
 }
