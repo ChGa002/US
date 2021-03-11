@@ -29,9 +29,10 @@ class MotCle
      */
     private $posts;
 
-    public function __construct()
+    public function __construct(string $value='')
     {
         $this->posts = new ArrayCollection();
+        $this->motCle = $value;
     }
 
     public function getId(): ?int
@@ -78,8 +79,11 @@ class MotCle
         return $this;
     }
 
+
     public function __toString()
     {
         return $this->motCle;
     }
 }
+
+

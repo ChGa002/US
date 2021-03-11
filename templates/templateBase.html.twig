@@ -19,6 +19,15 @@
     <!-- Custom styles for this template-->
     <link href="{{asset("css/sb-admin-2.css")}}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset("/css/styleAdd.css")}}">
+	
+	<!-- CSS notation 5 étoiles (RateYo)-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+
+    <!-- CSS notation 5 étoiles (RateYo)-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+
+    <!-- CSS notation 5 étoiles (RateYo)-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
 
 </head>
 
@@ -33,8 +42,9 @@
             <!-- Sidebar - Brand -->
 
             <li class="nav-item">
-                <a class="nav-link" href="#.html" title="Profil">
+                <a class="nav-link" href="{{path('us_profil',{'pseudo':app.user.pseudo})}}" title="Profil">
                     <div class="text-center">
+
                         {% if  app.user.emplacementPhoto == null %}
                         <img src="{{asset('/img/avDefault.png')}}" class="img-thumbnail" alt="Image par défaut US" height="100px" width="100px">
                         {% else %}
@@ -52,27 +62,30 @@
 
             <!-- Nav Item -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ path('us_accueil') }}" title="Accueil du site.">
+                <a class="nav-link" href="{{path('us_accueil')}}" title="Accueil">
+
                     <i class="fas fa-home" height="20px" width="20px"></i>
                     <span>Accueil</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#.html" title="Accès à l'arborescense.">
+
+                <a class="nav-link" href="{{ path('us_repertoires') }}" title="Repertoires">
+
                     <i class="fas fa-folder" height="20px" width="20px"></i>
                     <span>Répertoires</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#.html"title="Créer un post">
+                <a class="nav-link" href="{{ path('post_new') }}" title="Créer un post">
                     <i class="fas fa-file" height="20px" width="20px"></i>
                     <span>Poster</span></a><!--Info bulle créer un post-->
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#.html" title="Accèder à mes favoris">
+                <a class="nav-link" href="{{ path('us_favoris') }}" title="Accèder à mes favoris">
                     <i class="fas fa-star" height="20px" width="20px"></i>
                     <span>Favoris</span></a><!--Accès a mes favoris-->
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#.html" title="Accès au classement des utilisateurs.">
+                <a class="nav-link" href="{{ path('us_classement') }}" title="Accès au classement des utilisateurs.">
                     <i class="fas fa-chart-bar" height="20px" width="20px"></i>
                     <span>Classement</span></a>
             </li>
@@ -226,6 +239,10 @@
                         </div>
                         {% endblock %}
                     </div>
+                    <!-- Block entre le contenu central et le footer -->
+                    {% block buttons %}
+
+                     {% endblock %}
                 </div>
                 <!-- /.container-fluid -->
 
@@ -237,7 +254,7 @@
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
                         <img src="{{ asset("/img/us_logo.png") }}" alt="logo page" height="25px" width="25px">
-                        <span>Copyright &copy; University Share 2021</span>
+                        <span>Copyright © University Share 2021</span>
                         <img src="{{ asset("/img/iut_logo.png") }}" alt="logo iut" height="25px" width="25px">
                     </div>
                 </div>
@@ -275,15 +292,25 @@
         </div>
     </div>
 
+    <!-- Ajax axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+
     <!-- Jquery-->
     <script src="{{ asset("vendor/jquery/jquery.min.js") }}"></script>
     <script src="{{ asset("vendor/jquery-easing/jquery.easing.min.js")}}"></script>
 
     <!-- Bootstrap -->
     <script src="{{ asset("vendor/bootstrap/js/bootstrap.bundle.min.js")}}"></script>
+    <!-- <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.css') }}" rel="stylesheet"> -->
 
     <!-- JavaScript du template-->
     <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
+
+    <script src="{{ asset('js/scriptsPosts.js') }}"></script>
+
+    <!-- Javascript notation étoiles (RateYo) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
 
     <!--JavaScript additionel-->
     {% block Javascript %}{% endblock %}

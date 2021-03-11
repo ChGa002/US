@@ -1,0 +1,21 @@
+{% extends 'templateBase.html.twig' %}
+
+{% block titleOnglet %}US - Ajout de favoris{% endblock %}
+
+{% block titlePage %} Ajout de favoris {% endblock %}
+
+
+{% block contenuCentral %}
+
+{{ form_start(vueFormulaire) }}
+
+	{{ form_row(vueFormulaire.semestresFavoris, {'label':"Semestres"}) }}
+	{{ form_row(vueFormulaire.modulesFavoris, {'label':"Modules"}) }}
+
+
+
+{{ form_end(vueFormulaire) }}
+
+{%endblock%}
+
+{% block boxDroit %} {% endblock %}

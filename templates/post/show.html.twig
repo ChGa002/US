@@ -1,0 +1,154 @@
+{% extends 'templateBase.html.twig' %}
+
+
+{% block titlePage %} </h1>
+    <div class="col-md-8 "> </div>
+    <div class="col-md-2" style="text-align:center;">
+    <!-- Note de l'utilisateur, 'noteARemplacer' sera remplacé dynamiquement en JS -->
+        {% if app.user != post.createur %}
+            <span style="display: inline-block;"> Ma note: <div class='rateYo' data-rating={{maNote}} href="{{path('post_noter', {'id':post.id, 'noteEtoiles': 'noteARemplacer'})}}"></div> </span>
+        {% endif %}
+
+    </div>
+    <div class="col-md-2 ">
+        Note moyenne: <div class='rateYo' id="moyenneEtoiles" data-rating={{noteMoyenne}} data-readonly=true></div>
+
+    </div>
+
+{% endblock %}
+{% block contenuCentral %}
+
+    <div class="row">
+        <div class="col-md-3">
+             <img src=" {{ post.emplacementPhoto }}"  class="img-thumbnail" height="100px" width="100px">  
+        </div>
+        <div class="col-md-9" style="display: flex; align-items: center;"5%;"> 
+            <h3>
+                 {{post.titre}}
+            </h3>  
+        </div>
+    </div>
+     <hr>
+
+
+    <dl class="row">
+        <dt class="col-sm-3">Createur</dt>
+        <dd class="col-sm-9"> 
+            <a href="{{path('us_profil',{'pseudo':post.createur.pseudo})}}"> {{ post.createur.pseudo }} </a></dd>
+
+        <dt class="col-sm-3">Date</dt>
+        <dd class="col-sm-9"> {{ post.datePubli|date('d-m-Y') }} </dd>
+
+        <dt class="col-sm-3">Description</dt>
+        <dd class="col-sm-9"> {{ post.description }} </dd>
+
+        <dt class="col-sm-3">Ressources</dt>
+        <dd class="col-sm-9">   
+            {% for ressource in post.ressources %} 
+
+                    <a href="{{ressource.emplacement}}" target="_blank" style="color: var(--brique)"> {{ressource.nom}} ({{ressource.typeDeFichier}}) </a> <br>
+
+            {% endfor %}
+        </dd>
+
+        <dt class="col-sm-3">Mots clés</dt>
+        <dd class="col-sm-9">   
+            {% for motCle in post.motsCles %} 
+
+                    {{ motCle.motCle }}
+                    {% if loop.last == false %} , {% endif %}
+
+            {% endfor %}
+        </dd>
+    </dl>
+
+
+    
+{% endblock %}
+
+{% block contenuDroit %}
+    <div style="text-align:center;">
+        <a href="{{ path('post_enFavori', {'id':post.id}) }}" class="btn js-favori">
+            {% if post.estUnFavori(app.user) %}
+                <i class="fas fa-star"></i>
+            {% else %}
+                <span id="js-fav-text"> <b> Mettre en favori </b> </span>
+                <i class="far fa-star grise"></i>
+            {% endif %}
+        </a>
+    </div>    
+    <br>
+
+    <b> Modules: </b> 
+
+
+    {% for module in post.modules %} 
+        <br>
+        <span data-toggle="tooltip" title="{{ module.nom }}" data-placement="left"> 
+        
+            {{module.sigle}}
+
+        </span>
+    
+    {% endfor %}
+
+{% endblock %}
+
+{% block buttons %}
+    {% if post.createur != app.user and is_granted("ROLE_ADMIN") == false %}
+        {% if post.signale %}
+            <a class="btn posBD btn-success disabled"><i class="fas fa-exclamation-circle"></i> Signaler</a>
+        {% else %}
+            <a class="btn btn-success posBD signaler" href="{{ path('post_signaler', {'id': post.id}) }}" role="button"> <i class="fas fa-exclamation-circle"></i> Signaler</a>
+        {% endif %}
+    {% else %}
+        <div class="notation">
+        <a class="btn btn-success posBD" href="{{ path('post_edit', {'id': post.id}) }}"><i class="fas fa-pencil-alt"></i> Modifier</a> 
+        {{ include('post/_delete_form.html.twig') }} 
+        </div>
+    {% endif %}
+
+{% endblock %}
+
+{% block Javascript %}
+<script>
+
+// Initialisation des div de notation et traitement de saisie de note
+
+    $.each($('.rateYo'), function(){
+
+        var $self = $(this);
+
+        $self.rateYo({
+            rating: $self.data('rating'),
+            starSvg:'<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>',
+            fullStar: true,
+            ratedFill: "gold",
+            starWidth: "20px",
+            readOnly: $self.data('readonly'),
+
+            onSet: function (rating, rateYoInstance) {
+                var href = $(this).attr('href');
+
+                // on remplace la valeur 'placeholder' dans la route par la note attribuée
+                href = href.replace('noteARemplacer', rating);
+
+                // puis on execute la route en ajax
+                axios.get(href).then(function(response){
+                    // on recupere la div des étoiles affichant la moyenne
+                    var etoilesMoyenne = document.getElementById('moyenneEtoiles');
+                   
+                    // on recupere la moyenne maj calculée dans la route qu'on a appelé en ajax
+                    var moyenneMAJ = response.data.moyenne; 
+
+                    // on met à jour l'affichage de la moyenne
+                    $(etoilesMoyenne).rateYo("rating", moyenneMAJ);
+
+                }) 
+            } 
+        });
+    });
+
+
+</script>
+{% endblock %}
