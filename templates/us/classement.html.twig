@@ -1,0 +1,128 @@
+{% extends 'templateBase.html.twig' %}
+
+
+{% block titleOnglet %}US - Classement {% endblock %}
+
+{% block titlePage %} Classement {% endblock %}
+
+{% block contenuCentral %}
+	<div class="row">
+    	<div class="col-sm">
+    		<strong> Depuis le début: </strong> <br>
+     		Mes points: {{mesPointsTotaux|number_format}} <br>
+			Ma moyenne: <div class='rateYo' data-rating={{maMoyenneTotale}} style="display: inline-block"></div> 
+    	</div>
+    	<div class="col-sm">
+      		<strong> Dernière remise à zéro: </strong> {{dateReset|date('d-m-Y')}}
+    	</div>
+	</div>
+
+	<br>
+	
+
+	<hr>
+	<h3> Classement actuel </h3> 
+	<table class="table table-hover">
+  		<thead>
+    		<tr>
+		      	<th scope="col">Place</th>
+		      	<th scope="col">Profil</th>
+		      	<th scope="col">Points</th>
+		      	<th scope="col">Moyenne depuis reset</th>
+
+    		</tr>
+ 		 </thead>
+  		<tbody>
+   			
+			{% for place in classement %}
+				
+
+				<tr class='clickable-row
+
+
+
+					{% if monRang == loop.index %}
+
+						bleuTransparent'
+
+					{% endif %}
+					' data-href='{{path('us_profil',{'pseudo':place['user'].pseudo})}}'>
+					<th scope="row"> {{loop.index}} </th>
+	      				<td>
+	      		 
+           
+	      					<img src="
+	      					{% if place['user'].emplacementPhoto == null %}
+                       				{{asset('/img/avDefault.png')}}" 
+                    		{% else %}
+                       				{{place['user'].emplacementPhoto}}" 
+                   			{% endif %}
+                   			class="img-thumbnail" height="100px" width="100px">
+	      			
+	                    	&nbsp; {{ place['user'].pseudo }} 
+		      				&nbsp;
+		      				&nbsp;
+	      			
+	      					{% if loop.first %}
+	      						<i class="fas fa-trophy fa-3x" style="color:gold; margin:20px"></i>
+	      					{% endif %}
+
+	      				</td>
+	     				<td> {{place['points']|number_format}} </td>
+	     				<td> <div class='rateYo' data-rating={{place['moyenne']}} ></div> </td>
+
+    				</tr>
+			{% endfor %}
+			{% if monRang == 'Non classé' or monRang > 10 %}
+				<tr class="bleuTransparent" >
+
+					<td> {{monRang}} </td>
+					<td> <img src="
+	      			{% if app.user.emplacementPhoto == null %}
+                       {{asset('/img/avDefault.png')}}" 
+                    {% else %}
+                        {{app.user.emplacementPhoto}}" 
+                    {% endif %}
+                    class="img-thumbnail" height="100px" width="100px">
+                    &nbsp; {{ app.user.pseudo }} 
+	      			&nbsp;
+	      			&nbsp;
+	      			</td>
+					<td> {{ mesPoints|number_format}}</td>
+					<td> <div class='rateYo' data-rating={{maMoyenne}} ></div> </td>
+				</tr>
+		
+
+			{% endif %}
+  		</tbody>
+	</table>
+
+{% endblock %}
+
+{% block boxDroit %}{% endblock %}
+
+{% block Javascript %}
+<script>
+$(document).ready(function(){
+
+$.each($('.rateYo'), function(){
+
+ var $self = $(this);
+
+ $self.rateYo({
+    rating: $self.data('rating'),
+    starSvg:'<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>',
+    fullStar: true,
+    ratedFill: "gold",
+    starWidth: "20px",
+    readOnly: true }); });
+});
+
+
+jQuery(document).ready(function($) {
+    $(".clickable-row").click(function() {
+        window.location = $(this).data("href");
+    });
+});
+</script>
+{% endblock %}

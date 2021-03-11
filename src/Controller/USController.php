@@ -12,6 +12,7 @@ use App\Entity\Semestre;
 use App\Entity\Utilisateur;
 use App\Entity\Module;
 use App\Entity\Post;
+use App\Repository\DateResetRepository;
 use App\Repository\SemestreRepository;
 use App\Repository\PostRepository;
 use App\Repository\ModuleRepository;
@@ -24,9 +25,9 @@ use App\Controller\ObjectManagerInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-
 class USController extends AbstractController
 {
+
     /**
      * @Route("/us/accueil", name="us_accueil")
      */
@@ -169,12 +170,67 @@ class USController extends AbstractController
 	 }
 	 
 
-         /**
+     /**
      * @Route("/us/parametre", name="us_parametre")
      */
     public function param(): Response
     {
         return $this->render('/us/parametre.html.twig');
     }
+
+
+    /**
+     * @Route("/us/classement", name="us_classement")
+     */
+    public function classement(UtilisateurRepository $userRepo, NoteRepository $noteRepo, DateResetRepository $dateRepo): Response
+    {	
+
+    	$date = ($dateRepo->findAll())[0]->getDate();
+    	$moi = $this->getUser();
+
+    	$users = $userRepo->findUtilisateursNotes($date);
+
+    	$classerUsers = array();
+  
+    	foreach($users as $user) 
+    	{
+    		
+    		$points = pow($user[1],2) * $user[2];
+
+    		$classerUsers[] = array('user'=> $user[0], 'points' => $points, 'moyenne' => $user[1]);
+    		
+    	} 
+
+    	// On trie par points  décroissants
+    	array_multisort(array_column($classerUsers, 'points'), SORT_DESC, $classerUsers);
+
+    	// On cherche le rang de l'utilisateur courant
+    	$monRang = array_search($moi, array_column($classerUsers, 'user'));
+ 		
+
+ 		if ($monRang === false) {
+
+ 			$monRang = 'Non classé';
+ 			$mesPoints = 0;
+ 			$maMoyenne = 0;
+
+		} else {
+			$mesPoints = pow($users[$monRang][1],2) * $users[$monRang][2];
+			$maMoyenne = $users[$monRang][1];
+			$monRang+=1;
+		}
+
+    	$mesPointsTotaux = pow($moi->noteMoyenne($noteRepo),2)*$moi->getPosts()->count();
+    	$maMoyenneTotale = $moi->noteMoyenne($noteRepo);
+    	
+
+    	// On ne garde que le top 10
+    	$classement = array_slice($classerUsers, 0, 10);
+   
+    	return $this->render('/us/classement.html.twig', [
+    			'classement' => $classement, 'mesPoints' => $mesPoints, 'mesPointsTotaux' => $mesPointsTotaux,
+    				'monRang' => $monRang, 'maMoyenneTotale' => $maMoyenneTotale, 'maMoyenne' => $maMoyenne, 'dateReset' => $date]);
+    }
+
 }
 
