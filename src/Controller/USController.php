@@ -11,6 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Semestre;
 use App\Entity\Module;
 use App\Entity\Post;
+use App\Repository\DateResetRepository;
 use App\Repository\SemestreRepository;
 use App\Repository\PostRepository;
 use App\Repository\ModuleRepository;
@@ -23,9 +24,9 @@ use App\Controller\ObjectManagerInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-
 class USController extends AbstractController
 {
+
     /**
      * @Route("/us/accueil", name="us_accueil")
      */
@@ -140,9 +141,10 @@ class USController extends AbstractController
     /**
      * @Route("/us/classement", name="us_classement")
      */
-    public function classement(UtilisateurRepository $userRepo, NoteRepository $noteRepo): Response
+    public function classement(UtilisateurRepository $userRepo, NoteRepository $noteRepo, DateResetRepository $dateRepo): Response
     {	
-    	$date = new \DateTime('2021-02-09');
+
+    	$date = ($dateRepo->findAll())[0]->getDate();
     	$moi = $this->getUser();
 
     	$users = $userRepo->findUtilisateursNotes($date);
@@ -188,5 +190,6 @@ class USController extends AbstractController
     			'classement' => $classement, 'mesPoints' => $mesPoints, 'mesPointsTotaux' => $mesPointsTotaux,
     				'monRang' => $monRang, 'maMoyenneTotale' => $maMoyenneTotale, 'maMoyenne' => $maMoyenne, 'dateReset' => $date]);
     }
+
 }
 
