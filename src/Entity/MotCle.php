@@ -81,7 +81,7 @@ class MotCle
 
     public function __toString() {
     return $this->motCle;
-}
+    }
 }
 
 
