@@ -22,20 +22,20 @@ class PostCrudController extends AbstractCrudController
     }
 
     
-    public function configureFields(string $pageName): iterable
-    {
-        return [
-            IdField::new('id')->hideOnForm(),
-            TextField::new('titre'),
-            TextEditorField::new('description'),
-            TextEditorField::new('emplacementPhoto')->hideOnIndex(),
-            BooleanField::new('signale')->hideOnForm(),
-            TextField::new('createur'),
-            CollectionField::new('motsCles')->hideOnIndex(),
-            CollectionField::new('ressources')->hideOnIndex(),
-            CollectionField::new('modules')->hideOnIndex(),
-        ];
-    }
+    // public function configureFields(string $pageName): iterable
+    // {
+    //     return [
+    //         IdField::new('id')->hideOnForm(),
+    //         TextField::new('titre'),
+    //         TextEditorField::new('description'),
+    //         TextEditorField::new('emplacementPhoto')->hideOnIndex(),
+    //         BooleanField::new('signale')->hideOnForm(),
+    //         TextField::new('createur'),
+    //         CollectionField::new('motsCles')->hideOnIndex(),
+    //         CollectionField::new('ressources')->hideOnIndex(),
+    //         CollectionField::new('modules')->hideOnIndex(),
+    //     ];
+    // }
     public function configureActions(Actions $actions): Actions
     {
         return $actions
