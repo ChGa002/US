@@ -13,30 +13,44 @@
 <div class="card">
 	<div class="card-body">
 		<div class="row">
-			<div class="col-md-1">
-				<img src = {{ postCourant.emplacementPhoto }} height=100px, width=100px, class="img-thumbnail">
+			<div class="col-md-1 align-self-center">
+				<a href="{{ path('post_enFavori', {'id':postCourant.id}) }}" class="btn btn-link js-favori">
+					{% if postCourant.estUnFavori(app.user) %}
+						<i class="fas fa-star"></i>
+					{% else %}
+						<span id="js-fav-text"></span>
+						<i class="far fa-star"></i>
+					{% endif %}
+				</a>
 			</div>
-			<a href="{{ path('post_show', {'id' : postCourant.id }) }}" class="stretched-link"></a>
-			<div class="col-md-2">
-				<h6>{{ postCourant.titre }}</h6>
-			</div>       
-			<div class="col-md-3">
-				<p>{{ postCourant.description }}</p>
-			</div>
-			<div class="col-md-3">
-				<i>{{ postCourant.createur.pseudo }}</i>
-				<i>{{ postCourant.datePubli | date('d-m-Y')}}</i>
-				<div class='rateYo' data-rating={{notesPosts[postCourant.id]}} ></div>
-			</div>
-			<div class="col-md-1">
-				{% for semestreCourant in postCourant.modules %}
-					{{ semestreCourant.semestre.sigle }}
-				{% endfor %}
-			</div>
-			<div class="col-md-2">
-				{% for moduleCourant in postCourant.modules %}
-					{{ moduleCourant.sigle }}
-				{% endfor %}
+			<div class="col-md-11">
+				<div class="row">
+					<div class="col-md-1">
+						<img src = "{{ postCourant.emplacementPhoto }}" class="img-thumbnail">
+					</div>
+					<a href="{{ path('post_show', {'id' : postCourant.id }) }}" class="stretched-link"></a>
+					<div class="col-md-2">
+						<h6>{{ postCourant.titre }}</h6>
+					</div>       
+					<div class="col-md-3">
+						<p>{{ postCourant.description }}</p>
+					</div>
+					<div class="col-md-3">
+						<i>{{ postCourant.createur.pseudo }}</i>
+						<i>{{ postCourant.datePubli | date('d-m-Y')}}</i>
+						<div class='rateYo' data-rating={{notesPosts[postCourant.id]}} ></div>
+					</div>
+					<div class="col-md-1">
+						{% for semestreCourant in postCourant.modules %}
+							{{ semestreCourant.semestre.sigle }}
+						{% endfor %}
+					</div>
+					<div class="col-md-2">
+						{% for moduleCourant in postCourant.modules %}
+							{{ moduleCourant.sigle }}
+						{% endfor %}
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

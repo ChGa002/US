@@ -230,3 +230,22 @@ color:grey;
   background-color:rgba(147, 164, 211, .5);
 }
 
+.img-thumbnail {
+  padding: 0.25rem;
+  background-color: #fff;
+  border: 1px solid #dddfeb;
+  border-radius: 0.35rem;
+  max-width: 100%;
+  min-width: 100px;
+  height: 100px; width: 100px;
+}
+.card{
+  width: auto;
+}
+
+.bg-hov{
+}
+
+.bg-hov:hover{
+  background-color: #93a4d33f;
+}
