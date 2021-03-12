@@ -214,6 +214,10 @@ float:left;
   color:gold;
 }
 
+.fa-heart{
+  color:var(--brique);
+}
+
 /* Notes des posts */
 .notation{
 position:relative;

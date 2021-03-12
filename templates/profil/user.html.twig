@@ -28,15 +28,15 @@
 <div class="card">
     <div class="card-body">
         <div class="row">
-            <div class="col-md-1">
+            <div class="col-md-2">
                 <img src = {{ postCourant.emplacementPhoto }} height=100px, width=100px, class="img-thumbnail">
             </div>
             <a href="#" class="stretched-link"></a>
             <div class="col-md-2">
                 <h6>{{ postCourant.titre }}</h6>
             </div>
-            <div class="col-md-3">
-                <p>{{ postCourant.description }}</p>
+            <div class="col-md-2">
+                <p>{{ postCourant.description |length > 40 ? postCourant.description|slice(0, 40) ~ '...' : postCourant.description}}</p>
             </div>
             <div class="col-md-3">
                 <i>{{ postCourant.createur.pseudo }}</i>
@@ -86,10 +86,10 @@
     <div style="text-align:center;">
         <a href="{{ path('utilisateur_enFavori', {'pseudo':user.pseudo}) }}" class="btn js-favori">
         {% if user.estUnFavori(app.user) %}
-            <i class="fas fa-star"></i>
+            <i class="fas fa-heart"></i>
         {% else %}
             <span id="js-fav-text"> <b> Mettre en favori </b> </span>
-            <i class="far fa-star"></i>
+            <i class="far fa-heart grise"></i>
         {% endif %}
     </a>
     </div>

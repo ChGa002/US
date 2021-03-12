@@ -10,8 +10,8 @@ function onClickStarFavori(event){
     axios.get(url).then(function(response){
 
     	if(icone.classList.contains('fas')) {
-    		icone.classList.replace('fas','far'); // etoile vide
-            icone.classList.add('grise');        // etoile grise
+    		icone.classList.replace('fas','far'); // coeur vide
+            icone.classList.add('grise');        // coeur grise
     		
     	} else {
     		icone.classList.replace('far','fas'); // etoile pleine

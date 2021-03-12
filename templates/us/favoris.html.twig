@@ -2,7 +2,7 @@
 
 {% block titleOnglet %}US - Favoris{% endblock %}
 
-{% block titlePage %} Favoris {% endblock %}
+{% block titlePage %} Mes favoris {% endblock %}
 
 {% block contenuCentral %}
 <head>
@@ -11,28 +11,18 @@
   </style>
 </head>
 
-<p> 
-	Bonjour {{ app.user.pseudo }} ici vous pouvez visualiser vos favoris ! <br>
-</p>
-
 <h2><i class="far fa-folder-open"></i> - Semestres </h2>
 
 <ul class="list-group list-group-flush">
 	{% for semestreCourant in app.user.semestresFavoris %}
 		<li class="list-group-item">
 		<a href="{{ path('semestre_enFavori', {'id':semestreCourant.id}) }}" class="btn btn-link js-favori">
-    		{% if semestreCourant.estUnFavori(app.user) %}
-        		<i class="fas fa-star"></i>
-    		{% else %}
-    		<span id="js-fav-text"></span>
-    		<i class="far fa-star"></i>
-			{% endif %}
+        		<i class="fas fa-heart"></i>	
     	</a>
 		<a href="{{ path('us_repertoires') }}">{{ semestreCourant.nom }}</a></li>
 	{% else %}
-	<ul class="list-group">
-		<li class="list-group-item list-group-item-primary">Aucun semestre n'est votre favoris !</li>
-	</ul>
+
+		Vous n'avez aucun semestre en favori !
 
 	{% endfor %}
 </ul>
@@ -47,17 +37,12 @@
 		
 		<li class="list-group-item" >
 		<a href="{{ path('module_enFavori', {'id':moduleCourant.id}) }}" class="btn btn-link js-favori">
-    		{% if moduleCourant.estUnFavori(app.user) %}
-        		<i class="fas fa-star"></i>
-    		{% else %}
-    			<span id="js-fav-text"></span>
-    			<i class="far fa-star"></i>
-    		{% endif %}
+        		<i class="fas fa-heart"></i>
 		<a href="{{ path('us_postModule' , {'id' : moduleCourant.id }) }}">{{ moduleCourant.sigle }} - {{ moduleCourant.nom }}</a></li>
 	{% else %}
-	<ul class="list-group">
-		<li class="list-group-item list-group-item-primary">Aucun module n'est votre favoris !</li>
-	</ul>
+	
+		Vous n'avez aucun module en favori !
+	
 	{% endfor %}
 </ul>
 <br>
@@ -76,12 +61,7 @@
 		<div class="row">
 			<div class="col-md-1 align-self-center">
 				<a href="{{ path('post_enFavori', {'id':postCourant.id}) }}" class="btn btn-link js-favori">
-					{% if postCourant.estUnFavori(app.user) %}
-						<i class="fas fa-star"></i>
-					{% else %}
-						<span id="js-fav-text"></span>
-						<i class="far fa-star"></i>
-					{% endif %}
+						<i class="fas fa-heart"></i>
 				</a>
 			</div>
 			<div class="col-md-11">
@@ -94,7 +74,7 @@
 						<h6>{{ postCourant.titre }}</h6>
 					</div>       
 					<div class="col-md-2">
-						<p>{{ postCourant.description }}</p>
+						<p>{{ postCourant.description |length > 40 ? postCourant.description|slice(0, 40) ~ '...' : postCourant.description }}</p>
 					</div>
 					<div class="col-md-2">
 						<i>{{ postCourant.createur.pseudo }}</i><br>
@@ -106,7 +86,7 @@
 							{{ semestreCourant.semestre.sigle }}
 						{% endfor %}
 					</div>
-					<div class="col-md-1">
+					<div class="col-md-2">
 						{% for moduleCourant in postCourant.modules %}
 							{{ moduleCourant.sigle }}
 						{% endfor %}
@@ -118,9 +98,7 @@
 </div>
 
 {% else %}
-<ul class="list-group">
-	<li class="list-group-item list-group-item-primary">Aucun post n'est votre favoris !</li>
-</ul>
+Vous n'avez aucun post en favori !
 {% endfor %}
 <br>
 <br>
@@ -134,17 +112,12 @@
 	<div class="card bg-hov">
 			<div class="card-body">
 				<div class="row">
-					<div class="col-md-2 align-self-center">
+					<div class="col-md-1 align-self-center">
 						<a href="{{ path('utilisateur_enFavori', {'pseudo':utilisateurCourant.pseudo}) }}" class="btn btn-link js-favori">
-							{% if utilisateurCourant.estUnFavori(app.user) %}
-								<i class="fas fa-star"></i>
-							{% else %}
-								<span id="js-fav-text"></span>
-								<i class="far fa-star"></i>
-							{% endif %}
+								<i class="fas fa-heart"></i>
 							</a>
 					</div>
-					<div class="col-md-10">
+					<div class="col-md-11">
 						<div class="row">
 							<a href="{{ path('us_profil', {'pseudo' : utilisateurCourant.pseudo }) }}" class="stretched-link"></a>
 							<div class="col-md-2">
@@ -153,9 +126,7 @@
 							<div class="col-md-2 align-self-center">
 								<h5 class="card-title">{{ utilisateurCourant.pseudo }}</h5>
 							</div>
-							<div class="col-md-8 align-self-center">
-								<p class="card-text">{{ utilisateurCourant.description }}</p>
-							</div>
+							
 						</div>
 					</div>
 				</div>
@@ -163,9 +134,9 @@
 		</a>
 	</div>
 {% else %}
-	<ul class="list-group">
-		<li class="list-group-item list-group-item-primary">Aucun utilisateur n'est votre favoris !</li>
-	</ul>
+
+Vous n'avez aucun utilisateur en favori !
+
 {% endfor %}
 
 		
@@ -197,10 +168,6 @@
         });
     });
 
-    // Remplace des images non existantes par un placeholder
-    $('img').on("error", function() {
-      $(this).attr('src', 'https://screenshotlayer.com/images/assets/placeholder.png');
-    });
 
 </script>
 {% endblock %}
