@@ -119,5 +119,10 @@ class Module
 		}
 
 		return false;
-	}
+    }
+    
+    public function __toString()
+    {
+        return $this->sigle;
+    }
 }

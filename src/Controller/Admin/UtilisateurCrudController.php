@@ -34,6 +34,7 @@ class UtilisateurCrudController extends AbstractCrudController
             BooleanField::new('valide'),
             ArrayField::new('roles'),
             TextEditorField::new('description')->hideOnIndex(),
+            TextField::new('emplacementPhoto')->hideOnIndex(),
             DateTimeField::new('derniereConnexion')->hideOnIndex(),
             TextField::new('motDePasse')->hideOnIndex(),
             TextField::new('emplacementPhoto')->hideOnIndex(),
@@ -42,13 +43,14 @@ class UtilisateurCrudController extends AbstractCrudController
 
     public function configureActions(Actions $actions): Actions
     {
-        $seeAction = Action::new('seeAccount', 'Redirection', 'fas fa-eye')
-        ->setLabel(false)
-        ->linkToRoute('us_profil', ['pseudo'=>getPseudo()]);
+
+        // $seeAction = Action::new('seeAccount', 'Redirection', 'fas fa-eye')
+        // ->setLabel(false)
+        // ->linkToRoute('us_profil','/us/profile/'.$pseudo->getPseudo());
         return $actions
             ->update(Crud::PAGE_INDEX, Action::EDIT, function (Action $action){ return $action->setIcon('fa fa-edit')->setLabel(false); })
             ->update(Crud::PAGE_INDEX, Action::DELETE, function (Action $action){ return $action->setIcon('fa fa-times-circle')->setLabel(false); })
-            ->add(Crud::PAGE_INDEX, $seeAction)
+            // ->add(Crud::PAGE_INDEX, $seeAction)
             ;
     }
     
