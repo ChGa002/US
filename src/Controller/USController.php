@@ -58,7 +58,7 @@ class USController extends AbstractController
 
 
 	/**
-	 * @Route("/repertoires", name="us_repertoires")
+	 * @Route("/us/repertoires", name="us_repertoires")
 	 */
 	 public function repertoires(SemestreRepository $semestreRepository)
 	 {
@@ -71,7 +71,7 @@ class USController extends AbstractController
 	 
 	 
 	/**
-	 * @Route("/module/{id}", name="us_postModule")
+	 * @Route("/us/module/{id}", name="us_postModule")
 	 */
 	 public function triPostParModule(Module $module, PostRepository $postRepo, NoteRepository $noteRepo)
 	 {	
@@ -168,7 +168,7 @@ class USController extends AbstractController
 	 }
 	 
      /**
-     * @Route("/us/parametre", name="us_parametre")
+     * @Route("/us/parametres", name="us_parametre")
      */
     public function param(): Response
     {

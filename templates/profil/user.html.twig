@@ -79,7 +79,7 @@
     
 <br> <br>
 {% if user == app.user %}      
-    <a class="btn btn-success mb-3" href="{{path('us_moduser')}}">Modifier mon profil</a>
+    <a class="btn btn-success mb-3" href="{{path('us_moduser', {'pseudo':user.pseudo})}}">Modifier mon profil</a>
     <a href="{{path('us_modpost',{'pseudo':user.pseudo}) }}" class="btn btn-success">Modifier mes posts</a>
 {%else%}
     <div style="text-align:center;">
