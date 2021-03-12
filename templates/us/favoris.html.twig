@@ -71,7 +71,7 @@
 
 
 
-<div class="card">
+<div class="card bg-hov">
 	<div class="card-body">
 		<div class="row">
 			<div class="col-md-1 align-self-center">
@@ -131,8 +131,7 @@
 
 
 {% for utilisateurCourant in app.user.utilisateursFavoris %}
-	<div class="card">
-		<a href="">
+	<div class="card bg-hov">
 			<div class="card-body">
 				<div class="row">
 					<div class="col-md-2 align-self-center">
@@ -147,13 +146,14 @@
 					</div>
 					<div class="col-md-10">
 						<div class="row">
+							<a href="{{ path('us_profil', {'pseudo' : utilisateurCourant.pseudo }) }}" class="stretched-link"></a>
 							<div class="col-md-2">
 								<img src = "{{ utilisateurCourant.emplacementPhoto }}"  class="img-thumbnail"> 
 							</div>
 							<div class="col-md-2 align-self-center">
 								<h5 class="card-title">{{ utilisateurCourant.pseudo }}</h5>
 							</div>
-							<div class="col-md-8">
+							<div class="col-md-8 align-self-center">
 								<p class="card-text">{{ utilisateurCourant.description }}</p>
 							</div>
 						</div>

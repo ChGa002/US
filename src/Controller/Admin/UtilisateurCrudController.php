@@ -40,12 +40,10 @@ class UtilisateurCrudController extends AbstractCrudController
 
     public function configureActions(Actions $actions): Actions
     {
-        $editAction = Action::new('editAccount', 'Edition', 'fa fa-edit')
-        ->linkToRoute('us_moduser');
-        $seeAction = Action::new('seeAccount', 'Redirection', 'fa fa-eye')
-        ->linkToRoute('us_profil');
+        $editAction = Action::new('editAccount', 'Edition', 'fa fa-edit')->linkToRoute('us_moduser');
+        $seeAction = Action::new('seeAccount', 'Redirection', 'fa fa-eye')->linkToRoute('us_profil');
         return $actions
-            ->remove(Crud::PAGE_INDEX, Action::EDIT)
+            ->update(Crud::PAGE_INDEX, Action::EDIT)
             ->update(Crud::PAGE_INDEX, Action::DELETE, function (Action $action){ return $action->setIcon('fa fa-times-circle')->setLabel(false); })
             ->add(Crud::PAGE_DETAIL, $editAction)
             ->add(Crud::PAGE_DETAIL, $seeAction)

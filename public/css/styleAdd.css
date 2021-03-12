@@ -243,6 +243,9 @@ color:grey;
   width: auto;
 }
 
-.stretched-link:hover{
-  background-color: #93a4d37c;
+.bg-hov{
+}
+
+.bg-hov:hover{
+  background-color: #93a4d33f;
 }
