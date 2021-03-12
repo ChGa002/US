@@ -12,8 +12,7 @@
     {{user.description}}
 </p>
 <br>
-<br>
-<br>
+
 
 <b>Post récents : </b>
 <p> 
@@ -31,7 +30,7 @@
             <div class="col-md-2">
                 <img src = {{ postCourant.emplacementPhoto }} height=100px, width=100px, class="img-thumbnail">
             </div>
-            <a href="#" class="stretched-link"></a>
+            <a href="{{path('post_show', {'id' : postCourant.id})}}" class="stretched-link"></a>
             <div class="col-md-2">
                 <h6>{{ postCourant.titre }}</h6>
             </div>
@@ -65,7 +64,6 @@
 
 {% block contenuDroit%} 
 <br>
-<br>
  <div class="text-center">
     {% if  user.emplacementPhoto == null %}
         <img src="{{asset('/img/avDefault.png')}}" class="img-thumbnail" height="100px" width="100px">
@@ -75,13 +73,14 @@
     <br>
     <strong>{{user.pseudo}}</strong>
     <br>
+    <br>
     Note moyenne des posts :  
     <center><div class='rateYo' data-rating={{noteUtilisateur}} ></div></center>    
     
-<br>
+<br> <br>
 {% if user == app.user %}      
-    <a href="/us/moduser"><button type="button" class="btn btn-warning mb-2">Modifier mon profil</a></button>
-    <a href="{{path('us_modpost',{'pseudo':user.pseudo}) }}"><button type="button" class="btn btn-warning mb-2">Modifier mes posts</a></button>
+    <a class="btn btn-success mb-3" href="{{path('us_moduser')}}">Modifier mon profil</a>
+    <a href="{{path('us_modpost',{'pseudo':user.pseudo}) }}" class="btn btn-success">Modifier mes posts</a>
 {%else%}
     <div style="text-align:center;">
         <a href="{{ path('utilisateur_enFavori', {'pseudo':user.pseudo}) }}" class="btn js-favori">

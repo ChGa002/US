@@ -9,61 +9,36 @@
 {% block titlePage %} Profil : {{ app.user.pseudo }} {% endblock %}
 
 {% block contenuCentral %}
-<p> 
-    {{ form_start(formUser) }}
-    <label for=""> Description</label>
-    {{ form_widget(formUser.description) }} <br>
 
-    <button type="submit" class="btn btn-dark">Enregistrer</button> <br>
+    {{ form_start(formUser) }}
+    Description:
+    {{ form_widget(formUser.description) }} <br>
     
-</p>
+    Modifier la photo de profil:
+    {{ form_widget(formUser.emplacementPhoto) }} <br>
+
+    <button type="submit"  class="btn btn-danger posBD">Enregistrer</button>
+    {{ form_end(formUser) }}
 
 
 {%endblock%}
 
 {% block contenuDroit%} 
  <div class="text-center">
-
-    <label for=""> Modifier la photo</label>
-    {{ form_widget(formUser.emplacementPhoto) }} <br>
-
-    {{ form_end(formUser) }}
     
     {% if  user.emplacementPhoto == null %}
         <img src="{{asset('/img/avDefault.png')}}" class="img-thumbnail" height="100px" width="100px">
     {% else %}
         <img src="{{user.emplacementPhoto}}" class="img-thumbnail" height="100px" width="100px">
     {% endif %}
+    <br>
     <strong>{{app.user.pseudo}}</strong>
-    <br>
-
-    Note moyenne de mes post
-    <center><div class='rateYo' data-rating={{noteUtilisateur}} ></div></center> 
-    <br>
+    <br> <br>
     
-    <a href="{{path('us_profil',{'pseudo':app.user.pseudo})}}"> <button type="button" class="btn btn-warning mb-2">Retour au profil</button></a> <br>
+    <a href="{{path('us_profil',{'pseudo':app.user.pseudo})}}"class="btn btn-success mb-2">Retour au profil</a> <br>
 </div>
 
 {% endblock %}
 
-{%block Javascript%}
-<script>
-$(document).ready(function(){
-
-$.each($('.rateYo'), function(){
-
- var $self = $(this);
-
- $self.rateYo({
-    rating: $self.data('rating'),
-    starSvg:'<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>',
-    fullStar: true,
-    ratedFill: "gold",
-    starWidth: "20px",
-    readOnly: true }); });
-});
-
-</script>
-{% endblock %}
 
 

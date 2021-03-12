@@ -67,6 +67,7 @@
 {% endblock %}
 
 {% block contenuDroit %}
+   {%  if app.user != post.createur %}
     <div style="text-align:center;">
         <a href="{{ path('post_enFavori', {'id':post.id}) }}" class="btn js-favori">
             {% if post.estUnFavori(app.user) %}
@@ -78,7 +79,7 @@
         </a>
     </div>    
     <br>
-
+    {% endif %}
     <b> Modules: </b> 
 
 
