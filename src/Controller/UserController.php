@@ -66,11 +66,10 @@ class UserController extends AbstractController
     }
    
     /**
-     * @Route("/us/moduser", name="us_moduser")
+     * @Route("/us/profil/{pseudo}/modifierProfil", name="us_moduser")
      */
-    public function modifierUser(Request $request, EntityManagerInterface $manager, NoteRepository $noteRepo, PostRepository $postRepo): Response
+    public function modifierUser(Request $request, EntityManagerInterface $manager, NoteRepository $noteRepo, PostRepository $postRepo, Utilisateur $utilisateur): Response
     {
-        $utilisateur = $this->getUser();
         $noteUtilisateur = $utilisateur->noteMoyenne($noteRepo);    
         
         $form = $this->createFormBuilder($utilisateur)
@@ -108,7 +107,7 @@ class UserController extends AbstractController
 
 
     /**
-     * @Route("/us/profile/{pseudo}/modpost", name="us_modpost")
+     * @Route("/us/profil/{pseudo}/modifierPosts", name="us_modpost")
      */
     public function modifierPost(Utilisateur $user, PostRepository $postRepo, NoteRepository $noteRepo): Response
     {

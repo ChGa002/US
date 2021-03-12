@@ -5,11 +5,71 @@
 {% block titlePage %} Accueil {% endblock %}
 
 {% block contenuCentral %}
-<ul class="list-group list-group-flush">
-    <li class="list-group-item">
-        <a href="">Eviii</a>
-    </li>
-</ul>
+
+{% if posts != NULL %}
+
+<h4> Derniers posts: </h4> <br>
+
+{% for postCourant in posts %}
+
+<div class="card bg-hov">
+	<div class="card-body">
+		<div class="row">
+			<div class="col-md-1 align-self-center">
+				<a href="{{ path('post_enFavori', {'id':postCourant.id}) }}" class="btn btn-link js-favori">
+						{% if postCourant.estUnFavori(app.user) %}
+        				<i class="fas fa-heart"></i>
+    					{% else %}
+    					<span id="js-fav-text"></span>
+    					<i class="far fa-heart grise"></i>
+    					{% endif %}
+				</a>
+			</div>
+			<div class="col-md-11">
+				<div class="row">
+					<div class="col-md-2">
+						<img src = "{{postCourant.emplacementPhoto}}"  class="img-thumbnail">
+					</div>
+					<a href="{{ path('post_show', {'id' : postCourant.id }) }}" class="stretched-link"></a>
+					<div class="col-md-2">
+						<h6>{{ postCourant.titre }}</h6>
+					</div>       
+					<div class="col-md-2">
+						<p>{{ postCourant.description |length > 40 ? postCourant.description|slice(0, 40) ~ '...' : postCourant.description }}</p>
+					</div>
+					<div class="col-md-2">
+						<i>{{ postCourant.createur.pseudo }}</i><br>
+						<i>{{ postCourant.datePubli | date('d-m-Y')}}</i><br>
+						<div class='rateYo' data-rating={{notesPosts[postCourant.id]}} ></div>
+					</div>
+					<div class="col-md-1">
+						{% for semestreCourant in postCourant.modules %}
+							{{ semestreCourant.semestre.sigle }}
+						{% endfor %}
+					</div>
+					<div class="col-md-2">
+						{% for moduleCourant in postCourant.modules %}
+							{{ moduleCourant.sigle }}
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endfor %}
+
+{% else %}
+
+<div class="alert alert-secondary alert-dismissible fade show" role="alert">
+  
+Vous n'avez aucun favori! Les posts s'affichant ici proviennent des utilisateurs, modules et semestres que vous avez en favori. <strong> Pour commencer, mettez votre semestre courant en favori en <a href="{{path('us_repertoires')}}">cliquant ici! &nbsp;<i class="fas fa-mouse-pointer"></i> </a> </strong>
+
+</div>
+
+
+
+{% endif %}
 {%endblock%}
 
 {% block boxDroit %} {% endblock %}

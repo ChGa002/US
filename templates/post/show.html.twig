@@ -67,18 +67,19 @@
 {% endblock %}
 
 {% block contenuDroit %}
+   {%  if app.user != post.createur %}
     <div style="text-align:center;">
         <a href="{{ path('post_enFavori', {'id':post.id}) }}" class="btn js-favori">
             {% if post.estUnFavori(app.user) %}
-                <i class="fas fa-star"></i>
+                <i class="fas fa-heart"></i>
             {% else %}
                 <span id="js-fav-text"> <b> Mettre en favori </b> </span>
-                <i class="far fa-star grise"></i>
+                <i class="far fa-heart grise"></i>
             {% endif %}
         </a>
     </div>    
     <br>
-
+    {% endif %}
     <b> Modules: </b> 
 
 

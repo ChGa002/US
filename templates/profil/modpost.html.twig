@@ -7,8 +7,7 @@
 {% block titlePage %} Suppression de posts {% endblock %}
 
 {% block contenuDroit%} 
-<br>
-<br>
+
  <div class="text-center">
 
     {% if  user.emplacementPhoto == null %}
@@ -17,11 +16,11 @@
         <img src="{{user.emplacementPhoto}}" class="img-thumbnail" height="100px" width="100px">
     {% endif %}<br>
     <strong>{{app.user.pseudo}}</strong>
-    <br>
+    <br> <br>
 
 
-    <br><br>
-    <a href="{{path('us_profil',{'pseudo':app.user.pseudo})}}"> <button type="button" class="btn btn-warning mb-2">Retour au profil</button></a> <br>
+    
+    <a href="{{path('us_profil',{'pseudo':app.user.pseudo})}}"class="btn btn-success mb-2">Retour au profil</a> <br>
 </div>
 
 {% endblock %}
@@ -45,14 +44,14 @@
             <div class="col-md-1">
                 <center><input type="checkbox" id="{{postCourant.id}}" method='Post' name='postASupprimer[]' value={{postCourant.id}}></center>
             </div>
-            <div class="col-md-1">
+            <div class="col-md-2">
                 <img src = {{ postCourant.emplacementPhoto }} height=100px, width=100px, class="img-thumbnail">
             </div>
             <div class="col-md-2">
                 <h6>{{ postCourant.titre }}</h6>
             </div>
-            <div class="col-md-3">
-                <p>{{ postCourant.description }}</p>
+            <div class="col-md-2">
+                <p>{{ postCourant.description |length > 40 ? postCourant.description|slice(0, 40) ~ '...' : postCourant.description}}</p>
             </div>
             <div class="col-md-3">
                 <i>{{ postCourant.createur.pseudo }}</i>
@@ -72,36 +71,13 @@
         </div>
     </div>
 </div>
-<br>
+
 {% endfor %}
 {%endif%} 
 
-
 <br>
-
-
-    <button class="btn btn-success posBD"> <i class="fas fa-trash"></i> Supprimer</button>
+<button class="btn btn-danger posBD"> <i class="fas fa-trash"></i> Supprimer</button>
 
 </form>  
 </p>
-{%endblock%}
-
-{%block Javascript%}
-<script>
-$(document).ready(function(){
-
-$.each($('.rateYo'), function(){
-
- var $self = $(this);
-
- $self.rateYo({
-    rating: $self.data('rating'),
-    starSvg:'<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>',
-    fullStar: true,
-    ratedFill: "gold",
-    starWidth: "20px",
-    readOnly: true }); });
-});
-
-</script>
 {%endblock%}

@@ -18,10 +18,10 @@
 				<h5 class="mb-0">
         	  <a href="{{ path('semestre_enFavori', {'id':semestreCourant.id}) }}" class="btn btn-link js-favori">
     					{% if semestreCourant.estUnFavori(app.user) %}
-        				<i class="fas fa-star"></i>
+        				<i class="fas fa-heart"></i>
     					{% else %}
     					<span id="js-fav-text"></span>
-    					<i class="far fa-star"></i>
+    					<i class="far fa-heart grise"></i>
     					{% endif %}
     				</a>
 					<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{ idPourDiv }}" aria-expanded="true" aria-controls="collapse{{ idPourDiv }}">
@@ -34,13 +34,13 @@
 				{% for moduleCourant in semestreCourant.modules %} <!-- Boucle parcourant les modules associés au semestre courant-->
         	<a href="{{ path('module_enFavori', {'id':moduleCourant.id}) }}" class="btn btn-link js-favori">
     					{% if moduleCourant.estUnFavori(app.user) %}
-        				<i class="fas fa-star"></i>
+        				<i class="fas fa-heart"></i>
     					{% else %}
     					<span id="js-fav-text"></span>
-    					<i class="far fa-star"></i>
+    					<i class="far fa-heart grise"></i>
     					{% endif %}
     				</a>
-					<a href="{{ path('us_postModule' , {'id' : moduleCourant.id }) }}"> {{ moduleCourant.sigle ~ '-' ~ moduleCourant.nom }} </a><br>
+					<a href="{{ path('us_postModule' , {'id' : moduleCourant.id }) }}"> {{ moduleCourant.sigle ~ ' - ' ~ moduleCourant.nom }} </a><br>
 				{% endfor %} 									<!-- ci-dessus on affiche le sigle suivi du nom du module ,séléctioné dans la boucle au préalable-->
 			</div>
 			{% set idPourDiv=idPourDiv+1 %}  <!-- On incrémente le compteur-->
@@ -48,13 +48,35 @@
 	</div>
 	{% endfor %}
 </div>
- 
-  
-	
+
+
+	{% if app.user.semestresFavoris is empty %}
+	<div id="myModal" class="modal fade">
+    <div class="modal-dialog model-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Bienvenue!</h5>
+            </div>
+            <div class="modal-body">
+                <p>Commence par mettre ton semestre actuel en favori en cliquant sur : <i class="far fa-heart grise"></i></p>
+
+                <button class="btn btn-success" style="float:right" data-dismiss="modal"> Ok! </button>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+
+{% endif %}
 {%endblock%}
 
 {%block Javascript%}
-
+<script>
+    $(document).ready(function(){
+        $("#myModal").modal('show');
+    });
+</script>
 {%endblock%}
 
 

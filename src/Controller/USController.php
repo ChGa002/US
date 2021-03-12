@@ -31,10 +31,20 @@ class USController extends AbstractController
     /**
      * @Route("/us/accueil", name="us_accueil")
      */
-    public function accueil(): Response
+    public function accueil(PostRepository $postRepo, NoteRepository $noteRepo): Response
     {
+    	$utilisateur = $this->getUser();
+
+    	$posts = $postRepo->findPostsAccueil($utilisateur, $utilisateur->getUtilisateursFavoris(), $utilisateur->getModulesFavoris(), $utilisateur->getSemestresFavoris());
+
+    	$notesPosts = array();
+		foreach($posts as $post)
+		{	
+			$notesPosts[$post->getId()]=$post->noteMoyenne($noteRepo);
+		} 
+
         return $this->render('us/accueil.html.twig', [
-            'controller_name' => 'USController',
+            'posts' => $posts,'notesPosts' => $notesPosts
         ]);
     }
 
@@ -58,7 +68,7 @@ class USController extends AbstractController
 
 
 	/**
-	 * @Route("/repertoires", name="us_repertoires")
+	 * @Route("/us/repertoires", name="us_repertoires")
 	 */
 	 public function repertoires(SemestreRepository $semestreRepository)
 	 {
@@ -71,7 +81,7 @@ class USController extends AbstractController
 	 
 	 
 	/**
-	 * @Route("/module/{id}", name="us_postModule")
+	 * @Route("/us/module/{id}", name="us_postModule")
 	 */
 	 public function triPostParModule(Module $module, PostRepository $postRepo, NoteRepository $noteRepo)
 	 {	
@@ -168,7 +178,7 @@ class USController extends AbstractController
 	 }
 	 
      /**
-     * @Route("/us/parametre", name="us_parametre")
+     * @Route("/us/parametres", name="us_parametre")
      */
     public function param(): Response
     {

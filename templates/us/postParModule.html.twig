@@ -2,7 +2,7 @@
 
 {% block titleOnglet %}US - Module{% endblock %}
 
-{% block titlePage %} Posts du Module {{ module.sigle }} - {{ module.nom }} {% endblock %}
+{% block titlePage %} Posts du module {{ module.sigle }} - {{ module.nom }} {% endblock %}
 
 {% block contenuCentral %}
 
@@ -16,24 +16,24 @@
 			<div class="col-md-1 align-self-center">
 				<a href="{{ path('post_enFavori', {'id':postCourant.id}) }}" class="btn btn-link js-favori">
 					{% if postCourant.estUnFavori(app.user) %}
-						<i class="fas fa-star"></i>
+						<i class="fas fa-heart"></i>
 					{% else %}
 						<span id="js-fav-text"></span>
-						<i class="far fa-star"></i>
+						<i class="far fa-heart grise"></i>
 					{% endif %}
 				</a>
 			</div>
 			<div class="col-md-11">
 				<div class="row">
-					<div class="col-md-1">
+					<div class="col-md-2">
 						<img src = "{{ postCourant.emplacementPhoto }}" class="img-thumbnail">
 					</div>
 					<a href="{{ path('post_show', {'id' : postCourant.id }) }}" class="stretched-link"></a>
 					<div class="col-md-2">
 						<h6>{{ postCourant.titre }}</h6>
 					</div>       
-					<div class="col-md-3">
-						<p>{{ postCourant.description }}</p>
+					<div class="col-md-2">
+						<p>{{ postCourant.description |length > 40 ? postCourant.description|slice(0, 40) ~ '...' : postCourant.description }}</p>
 					</div>
 					<div class="col-md-3">
 						<i>{{ postCourant.createur.pseudo }}</i>
@@ -58,7 +58,7 @@
 
 
 {% else %}
-<p> Aucun résultat ne correspond a votre recherche </p>
+<p> Il n'y a pas de posts dans ce module. </p>
 {% endfor %}
 
 
@@ -86,11 +86,6 @@
 
 
         });
-    });
-
-    // Remplace des images non existantes par un placeholder
-    $('img').on("error", function() {
-      $(this).attr('src', 'https://screenshotlayer.com/images/assets/placeholder.png');
     });
 
 </script>
