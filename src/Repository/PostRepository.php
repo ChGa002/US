@@ -20,6 +20,26 @@ class PostRepository extends ServiceEntityRepository
     }
 
 
+    public function findPostsAccueil($user, $favorisU, $favorisM, $favorisS)
+    {
+        return $this->createQueryBuilder('p')
+            ->addSelect('utilisateur')
+            ->addSelect('modules')
+            ->join('p.createur','utilisateur')
+            ->join('p.modules','modules')
+            ->join('modules.semestre','semestre')
+            ->andWhere('utilisateur IN (:favorisU) OR modules IN (:favorisM) OR semestre IN (:favorisS)')
+            ->andWhere('utilisateur != :user')
+            ->setParameter('favorisU', $favorisU)
+            ->setParameter('favorisM', $favorisM)
+            ->setParameter('favorisS', $favorisS)
+            ->setParameter('user', $user)
+            ->orderBy('p.datePubli', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
      public function findPostOptimise($id)
     {
         return $this->createQueryBuilder('p')

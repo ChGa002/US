@@ -31,10 +31,20 @@ class USController extends AbstractController
     /**
      * @Route("/us/accueil", name="us_accueil")
      */
-    public function accueil(): Response
+    public function accueil(PostRepository $postRepo, NoteRepository $noteRepo): Response
     {
+    	$utilisateur = $this->getUser();
+
+    	$posts = $postRepo->findPostsAccueil($utilisateur, $utilisateur->getUtilisateursFavoris(), $utilisateur->getModulesFavoris(), $utilisateur->getSemestresFavoris());
+
+    	$notesPosts = array();
+		foreach($posts as $post)
+		{	
+			$notesPosts[$post->getId()]=$post->noteMoyenne($noteRepo);
+		} 
+
         return $this->render('us/accueil.html.twig', [
-            'controller_name' => 'USController',
+            'posts' => $posts,'notesPosts' => $notesPosts
         ]);
     }
 

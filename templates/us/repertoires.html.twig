@@ -48,13 +48,35 @@
 	</div>
 	{% endfor %}
 </div>
- 
-  
-	
+
+
+	{% if app.user.semestresFavoris is empty %}
+	<div id="myModal" class="modal fade">
+    <div class="modal-dialog model-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Bienvenue!</h5>
+            </div>
+            <div class="modal-body">
+                <p>Commence par mettre ton semestre actuel en favori en cliquant sur : <i class="far fa-heart grise"></i></p>
+
+                <button class="btn btn-success" style="float:right" data-dismiss="modal"> Ok! </button>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+
+{% endif %}
 {%endblock%}
 
 {%block Javascript%}
-
+<script>
+    $(document).ready(function(){
+        $("#myModal").modal('show');
+    });
+</script>
 {%endblock%}
 
 
