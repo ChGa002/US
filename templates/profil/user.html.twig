@@ -28,7 +28,7 @@
     <div class="card-body">
         <div class="row">
             <div class="col-md-2">
-                <img src = {{ postCourant.emplacementPhoto }} height=100px, width=100px, class="img-thumbnail">
+                <img src = "{{ postCourant.emplacementPhoto }}" class="img-thumbnail">
             </div>
             <a href="{{path('post_show', {'id' : postCourant.id})}}" class="stretched-link"></a>
             <div class="col-md-2">
