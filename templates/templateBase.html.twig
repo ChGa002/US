@@ -140,20 +140,20 @@
 
                     {% block barreRecherche %}
                     <!-- Topbar Search -->
-                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-5 my-2 my-md-0 mw-100 navbar-search">
+                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-5 my-2 my-md-0 mw-100 navbar-search" action="{{path('us_recherche')}}">
                         <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Rechercher pour.."
-                                aria-label="Rechercher" aria-describedby="basic-addon2">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Rechercher..." name="motRecherche" 
+                                aria-label="Rechercher" aria-describedby="basic-addon2" required>
                             <div class="input-group-append">
-                                <button class="btn boutonColor" type="button">
+                                <button class="btn boutonColor" type="submit">
                                     <i class="fas fa-search" style="color:white;"></i>
                                 </button>
                             </div>
-                            <div class="input-group-apend" title="Recherche Avancée">
+                            <!--<div class="input-group-apend" title="Recherche Avancée">
                                 <button class="btn boutonColor" href="#">
                                     <i class="fas fa-cog" style="color:white;"></i>
                                 </button>
-                            </div>
+                            </div> -->
                         </div>                        
                     </form>
 
