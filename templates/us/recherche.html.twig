@@ -1,0 +1,165 @@
+{% extends 'templateBase.html.twig' %}
+
+{% block titleOnglet %}US - Recherche {% endblock %}
+
+{% block titlePage %} Recherche : {{mot}} {% endblock %}
+
+{% block contenuCentral %}
+
+<!-- Tabs visuels -->
+<ul class="nav nav-tabs" data-tabs="tabs">
+    <li class="tabF"><a data-toggle="tab" href="#posts">
+    		<button class="nav-link active">Posts</button></a></li>
+    <li class="tabF"><a data-toggle="tab" href="#modules">
+    		<button class="nav-link">Modules</button></a></li>
+    <li class="tabF"><a data-toggle="tab" href="#utilisateurs">
+   		 <button class="nav-link">Utilisateurs</button></a></li>
+</ul>
+
+<!-- Contenu des tabs -->
+<div class="tab-content">
+    <div class="tab-pane active" id="posts">
+       	{% if posts != NULL %}
+			<br> <strong> Posts correspondant à votre recherche: </strong> <br> <br>
+
+			{% for postCourant in posts %}
+
+				<div class="card bg-hov">
+					<div class="card-body">
+						<div class="row">
+							<div class="col-md-1 align-self-center">
+								<a href="{{ path('post_enFavori', {'id':postCourant.id}) }}" class="btn btn-link js-favori">
+										{% if postCourant.estUnFavori(app.user) %}
+				        				<i class="fas fa-heart"></i>
+				    					{% else %}
+				    					<span id="js-fav-text"></span>
+				    					<i class="far fa-heart grise"></i>
+				    					{% endif %}
+								</a>
+							</div>
+							<div class="col-md-11">
+								<div class="row">
+									<div class="col-md-2">
+										<img src = "{{postCourant.emplacementPhoto}}"  class="img-thumbnail">
+									</div>
+									<a href="{{ path('post_show', {'id' : postCourant.id }) }}" class="stretched-link"></a>
+									<div class="col-md-2">
+										<h6>{{ postCourant.titre }}</h6>
+									</div>       
+									<div class="col-md-2">
+										<p>{{ postCourant.description |length > 40 ? postCourant.description|slice(0, 40) ~ '...' : postCourant.description }}</p>
+									</div>
+									<div class="col-md-2">
+										<i>{{ postCourant.createur.pseudo }}</i><br>
+										<i>{{ postCourant.datePubli | date('d-m-Y')}}</i><br>
+										<div class='rateYo' data-rating={{notesPosts[postCourant.id]}} ></div>
+									</div>
+									<div class="col-md-1">
+										{% for semestreCourant in postCourant.modules %}
+											{{ semestreCourant.semestre.sigle }}
+										{% endfor %}
+									</div>
+									<div class="col-md-2">
+										{% for moduleCourant in postCourant.modules %}
+											{{ moduleCourant.sigle }}
+										{% endfor %}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+
+		{% else %}
+			<br> Aucun post ne correspond à votre recherche...
+		{% endif %} 
+    </div>
+
+
+    <div class="tab-pane" id="modules">
+		{% if modules != NULL %}
+			<br> <strong> Modules correspondant à votre recherche: </strong> <br> <br>
+
+    		{% for moduleCourant in modules %}
+				<a href="{{ path('module_enFavori', {'id':moduleCourant.id}) }}" class="btn btn-link js-favori">
+    				{% if moduleCourant.estUnFavori(app.user) %}
+        				<i class="fas fa-heart"></i>
+    				{% else %}
+    					<span id="js-fav-text"></span>
+    					<i class="far fa-heart grise"></i>
+    				{% endif %}
+    			</a>
+				<a href="{{ path('us_postModule' , {'id' : moduleCourant.id }) }}"> {{ moduleCourant.sigle ~ ' - ' ~ moduleCourant.nom }} </a><br>
+			{% endfor %}	
+		{% else %}
+			<br> Aucun module ne correspond à votre recherche...
+		{% endif %}
+    </div>
+
+
+    <div class="tab-pane" id="utilisateurs">
+      	{% if utilisateurs != NULL %}
+      		<br> <strong> Utilisateurs correspondant à votre recherche: </strong> <br> <br>
+
+        	{% for utilisateurCourant in utilisateurs %}
+				<div class="card bg-hov">
+					<div class="card-body">
+						<div class="row">
+							<div class="col-md-1 align-self-center">
+								<a href="{{ path('utilisateur_enFavori', {'pseudo':utilisateurCourant.pseudo}) }}" class="btn btn-link js-favori">
+									<i class="fas fa-heart"></i>
+								</a>
+							</div>
+							<div class="col-md-11">
+								<div class="row">
+									<a href="{{ path('us_profil', {'pseudo' : utilisateurCourant.pseudo }) }}" class="stretched-link"></a>
+									<div class="col-md-2">
+									<img src = "{{ utilisateurCourant.emplacementPhoto }}"  class="img-thumbnail"> 
+									</div>
+
+									<div class="col-md-9 align-self-center">
+									<h5 class="card-title">{{ utilisateurCourant.pseudo }}</h5>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			{% endfor %}	
+		{% else %}
+			<br> Aucun utilisateur ne correspond à votre recherche...
+		{% endif %}
+	</div>
+</div>
+{% endblock %}
+
+{% block boxDroit %} {% endblock %}
+
+{% block Javascript %}
+
+<script>
+// Gere l'aspect visuel de cliquer sur un tab
+function onClickTabRecherche(event){
+
+	// On enleve tous les attributs de tab actifs
+	var tabs = document.getElementsByClassName('tabF');
+	[].forEach.call(tabs, function (element) { 
+		const button = element.querySelector('button');
+		button.classList.remove('active');});
+
+	// On rend actif celui qui a été cliqué
+	const button = this.querySelector('button');
+	button.classList.add('active');
+        
+}
+
+ document.querySelectorAll('li.tabF').forEach(function(link){
+
+    link.addEventListener('click', onClickTabRecherche);
+
+})
+
+</script>
+
+{% endblock %}

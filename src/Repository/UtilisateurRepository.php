@@ -44,7 +44,16 @@ class UtilisateurRepository extends ServiceEntityRepository
     return $requete->getResult();
     }
 
-
+     public function findUtilisateursRecherche($mot)
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.prenom LIKE :mot 
+                        or u.pseudo LIKE :mot')
+            ->setParameter('mot', '%'.$mot.'%')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
 
     // /**

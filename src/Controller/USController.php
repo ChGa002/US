@@ -239,5 +239,28 @@ class USController extends AbstractController
     				'monRang' => $monRang, 'maMoyenneTotale' => $maMoyenneTotale, 'maMoyenne' => $maMoyenne, 'nbPostsNotes' => $nbPostsNotes, 'dateReset' => $date]);
     }
 
+     /**
+     * @Route("/us/recherche", name="us_recherche")
+     */
+    public function recherche(Request $request, PostRepository $postRepo, NoteRepository $noteRepo, ModuleRepository $moduleRepo, UtilisateurRepository $utiRepo): Response
+    {
+    	$mot = $request->query->get('motRecherche');
+
+    	$posts = $postRepo->findPostsRecherche($mot);
+    	$modules = $moduleRepo->findModulesRecherche($mot);
+    	$utilisateurs = $utiRepo->findUtilisateursRecherche($mot);
+
+    	$notesPosts = array();
+		foreach($posts as $post)
+		{	
+			$notesPosts[$post->getId()]=$post->noteMoyenne($noteRepo);
+		}
+		
+        return $this->render('/us/recherche.html.twig', [
+       		'mot' => $mot, 'posts' => $posts, 'notesPosts' => $notesPosts, 'modules' => $modules, 'utilisateurs' => $utilisateurs
+       	]);
+    }
+
+
 }
 

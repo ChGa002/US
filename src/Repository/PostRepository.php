@@ -19,7 +19,29 @@ class PostRepository extends ServiceEntityRepository
         parent::__construct($registry, Post::class);
     }
 
-
+      public function findPostsRecherche($mot)
+    {
+        return $this->createQueryBuilder('p')
+            ->addSelect('utilisateur')
+            ->addSelect('modules')
+            ->join('p.createur','utilisateur')
+            ->join('p.modules','modules')
+            ->join('modules.semestre','semestre')
+            ->join('p.motsCles','motsCles')
+            ->join('p.ressources','ressources')
+            ->andWhere('motsCles.motCle LIKE :mot 
+                        or p.titre LIKE :mot 
+                        or p.description LIKE :mot 
+                        or modules.nom LIKE :mot
+                        or ressources.nom LIKE :mot
+                        or ressources.typeDeFichier LIKE :mot
+                        or utilisateur.pseudo LIKE :mot')
+            ->setParameter('mot', '%'.$mot.'%')
+            ->orderBy('p.datePubli', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
     public function findPostsAccueil($user, $favorisU, $favorisM, $favorisS)
     {
         return $this->createQueryBuilder('p')

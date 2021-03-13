@@ -19,6 +19,18 @@ class ModuleRepository extends ServiceEntityRepository
         parent::__construct($registry, Module::class);
     }
 
+
+
+     public function findModulesRecherche($mot)
+    {
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.nom LIKE :mot 
+                        or m.sigle LIKE :mot')
+            ->setParameter('mot', '%'.$mot.'%')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
     // /**
     //  * @return Module[] Returns an array of Module objects
     //  */
