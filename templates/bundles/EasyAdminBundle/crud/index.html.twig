@@ -12,7 +12,8 @@
 
 {% block content_title %}
 <a href="{{ path('us_importUsersCSV') }}"><button class="btnBrique">Importer CSV</button></a>
-<a href="{{ path('us_envoyerMail') }}"><button class="btnBrique">  <i class="fas fa-envelope"></i> Envoyer Mail</button></a>
+<a href="{{ path('us_confirmEnvoie') }}"><button class="btnBrique">  <i class="fas fa-envelope"></i> Envoyer Mail</button></a>
+
     {%- apply spaceless -%}
         {% set default_title = ea.crud.defaultPageTitle('index')|trans(ea.i18n.translationParameters, 'EasyAdminBundle') %}
         {{ ea.crud.customPageTitle is null ? default_title|raw : ea.crud.customPageTitle('index')|trans(ea.i18n.translationParameters)|raw }}
