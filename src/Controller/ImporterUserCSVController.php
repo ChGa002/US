@@ -24,38 +24,6 @@ class ImporterUserCSVController extends AbstractController
         return $this->render('admin/import.html.twig');
     }
 
-
-
-    // public function upload(Request $request, EntityManagerInterface $em)
-    // {
-    //     /** @var UploadedFile $file*/
-    //     $file = $request->query->get('upload');
-    //     dump($request->files->all());
-    //     // dd($file->getPathName() );
-    //     dump($_POST);
-       
-    //     // $file2 = $request->query->get('upload')->getData();   
-    //     // $destination = $this->getParameter('kernel.project_dir').'/public/data';
-    //     // dd($file->move($destination));
-                    
-    //     // Open the file
-    //     // if (($handle = fopen($file->getPathname(), "r")) !== false) {
-    //     // // Read and process the lines. 
-    //     // // Skip the first line if the file includes a header
-    //     // while (($data = fgetcsv($handle)) !== false) {
-    //     //                     // Do the processing: Map line to entity, validate if needed
-    //     //                     $user = new Utilisateur();
-    //     //                     // Assign fields
-    //     //                     $user->setField1($data[0])
-    //     //                             ->setField1($data[1])
-    //     //                             ->setField1($data[2]);
-    //     //                     $em->persist($user);
-    //     //                 }
-    //     //                 fclose($handle);
-    //     //                 $em->flush();
-    //     //             }
-    // dump($file);
-    // }
     /** 
      * @Route("/admin/importation-utilisateurs/upload", name="us_importation_upload")
      */
