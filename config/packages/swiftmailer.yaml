@@ -1,5 +1,5 @@
 swiftmailer:
-    url: '%env(MAILER_URL)%'
+    # url: '%env(MAILER_URL)%'
     spool: { type: 'memory' }
     transport: gmail
     username: univ.share.bayonne@gmail.com
