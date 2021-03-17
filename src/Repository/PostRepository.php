@@ -42,6 +42,42 @@ class PostRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+
+    public function findPostsRechercheAvancee($mot, $champ1, $choix1, $champ2, $choix2, $champ3, $choix3, $semestre, $tdf)
+    {
+        return $this->createQueryBuilder('p')
+            ->addSelect('utilisateur')
+            ->addSelect('modules')
+            ->addSelect('AVG(n.note) AS note')
+            ->join('p.createur','utilisateur')
+            ->join('p.modules','modules')
+            ->join('modules.semestre','semestre')
+            ->join('p.motsCles','motsCles')
+            ->join('p.ressources','ressources')
+            ->join('p.notes','n')
+            ->Where('semestre.sigle LIKE :semestre and 
+                        ressources.typeDeFichier LIKE :tdf and(
+                        motsCles.motCle LIKE :mot 
+                        or p.titre LIKE :mot 
+                        or p.description LIKE :mot 
+                        or modules.nom LIKE :mot
+                        or ressources.nom LIKE :mot
+                        or ressources.typeDeFichier LIKE :mot
+                        or utilisateur.pseudo LIKE :mot)')
+            ->setParameter('mot', '%'.$mot.'%')
+            ->setParameter('semestre', $semestre.'%')
+            ->setParameter('tdf', $tdf.'%')
+            ->groupBy('p, utilisateur, modules')
+            ->orderBy($champ1, $choix1)
+            ->addOrderBy($champ2, $choix2)
+            ->addOrderBy($champ3, $choix3)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+
     public function findPostsAccueil($user, $favorisU, $favorisM, $favorisS)
     {
         return $this->createQueryBuilder('p')
@@ -56,7 +92,7 @@ class PostRepository extends ServiceEntityRepository
             ->setParameter('favorisM', $favorisM)
             ->setParameter('favorisS', $favorisS)
             ->setParameter('user', $user)
-            ->orderBy('p.datePubli', 'DESC')
+            ->orderBy('p.titre')
             ->getQuery()
             ->getResult()
         ;

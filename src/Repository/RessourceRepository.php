@@ -19,6 +19,26 @@ class RessourceRepository extends ServiceEntityRepository
         parent::__construct($registry, Ressource::class);
     }
 
+    
+     public function findTypesDeFichier()
+    {
+        // Recuperer le gestionnaire d'entité
+        $entityManager = $this->getEntityManager();
+
+        // Construction de la requete
+        $requete = $entityManager->createQuery(
+            'SELECT r.typeDeFichier
+            FROM App\Entity\Ressource r
+            GROUP BY r.typeDeFichier
+            ORDER BY r.typeDeFichier ASC');
+
+    
+        // Retourner les resultats
+
+        return $requete->getResult();
+    }
+    
+
     // /**
     //  * @return Ressource[] Returns an array of Ressource objects
     //  */
