@@ -28,7 +28,7 @@ class PostCrudController extends AbstractCrudController
             IdField::new('id')->hideOnForm(),
             TextField::new('titre'),
             TextEditorField::new('description'),
-            TextEditorField::new('emplacementPhoto')->hideOnIndex(),
+            TextField::new('emplacementPhoto')->hideOnIndex(),
             BooleanField::new('signale')->hideOnForm(),
             TextField::new('createur'),
             CollectionField::new('motsCles')->hideOnIndex(),

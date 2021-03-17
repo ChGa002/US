@@ -165,6 +165,9 @@
             "./config/packages/sensio_framework_extra.yaml"
         ]
     },
+    "swiftmailer/swiftmailer": {
+        "version": "v6.2.7"
+    },
     "symfony/asset": {
         "version": "v4.4.17"
     },
@@ -283,6 +286,15 @@
             "./src/Kernel.php"
         ]
     },
+    "symfony/google-mailer": {
+        "version": "4.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.4",
+            "ref": "f8fd4ddb9b477510f8f4bce2b9c054ab428c0120"
+        }
+    },
     "symfony/http-client": {
         "version": "v4.4.17"
     },
@@ -300,6 +312,15 @@
     },
     "symfony/intl": {
         "version": "v4.4.17"
+    },
+    "symfony/mailchimp-mailer": {
+        "version": "4.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.4",
+            "ref": "1be490e068472fc87e226cf54bc95fb6f2e49117"
+        }
     },
     "symfony/mailer": {
         "version": "4.3",
@@ -455,6 +476,20 @@
     },
     "symfony/string": {
         "version": "v5.2.3"
+    },
+    "symfony/swiftmailer-bundle": {
+        "version": "2.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.5",
+            "ref": "ae4d22af30bbd484506bc1817c5a3ef72c855b93"
+        },
+        "files": [
+            "./config/packages/dev/swiftmailer.yaml",
+            "./config/packages/swiftmailer.yaml",
+            "./config/packages/test/swiftmailer.yaml"
+        ]
     },
     "symfony/test-pack": {
         "version": "v1.0.7"

@@ -94,4 +94,10 @@ class Ressource
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->emplacement;
+    }
+
 }

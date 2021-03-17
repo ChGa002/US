@@ -31,22 +31,26 @@ class UtilisateurCrudController extends AbstractCrudController
             TextField::new('nom'),
             TextField::new('prenom'),
             EmailField::new('mail'),
-            TextEditorField::new('description')->hideOnForm(),
-            DateTimeField::new('derniereConnexion')->onlyOnDetail(),
-            BooleanField::new('valide')->hideOnForm(),
-            ArrayField::new('roles')->hideOnForm(),
+            BooleanField::new('valide'),
+            ArrayField::new('roles'),
+            TextEditorField::new('description')->hideOnIndex(),
+            TextField::new('emplacementPhoto')->hideOnIndex(),
+            DateTimeField::new('derniereConnexion')->hideOnIndex(),
+            TextField::new('motDePasse')->hideOnIndex(),
+            TextField::new('emplacementPhoto')->hideOnIndex(),
         ];
     }
 
     public function configureActions(Actions $actions): Actions
     {
-        $editAction = Action::new('editAccount', 'Edition', 'fa fa-edit')->linkToRoute('us_moduser');
-        $seeAction = Action::new('seeAccount', 'Redirection', 'fa fa-eye')->linkToRoute('us_profil');
+
+        // $seeAction = Action::new('seeAccount', 'Redirection', 'fas fa-eye')
+        // ->setLabel(false)
+        // ->linkToRoute('us_profil','/us/profile/'.$pseudo->getPseudo());
         return $actions
-            ->update(Crud::PAGE_INDEX, Action::EDIT)
+            ->update(Crud::PAGE_INDEX, Action::EDIT, function (Action $action){ return $action->setIcon('fa fa-edit')->setLabel(false); })
             ->update(Crud::PAGE_INDEX, Action::DELETE, function (Action $action){ return $action->setIcon('fa fa-times-circle')->setLabel(false); })
-            ->add(Crud::PAGE_DETAIL, $editAction)
-            ->add(Crud::PAGE_DETAIL, $seeAction)
+            // ->add(Crud::PAGE_INDEX, $seeAction)
             ;
     }
     
