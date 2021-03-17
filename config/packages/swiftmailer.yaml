@@ -3,7 +3,7 @@ swiftmailer:
     spool: { type: 'memory' }
     transport: gmail
     username: univ.share.bayonne@gmail.com
-    password: univAdministration
+    password: #mdp apk
     host: smtp.gmail.com
     port: 465
     encryption: ssl
