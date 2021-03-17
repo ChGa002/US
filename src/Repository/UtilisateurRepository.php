@@ -49,6 +49,7 @@ class UtilisateurRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('u')
             ->andWhere('u.prenom LIKE :mot 
                         or u.pseudo LIKE :mot')
+            ->andWhere('u.pseudo IS NOT NULL')
             ->setParameter('mot', '%'.$mot.'%')
             ->getQuery()
             ->getResult()

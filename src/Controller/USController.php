@@ -17,7 +17,7 @@ use App\Repository\SemestreRepository;
 use App\Repository\PostRepository;
 use App\Repository\ModuleRepository;
 use App\Repository\NoteRepository;
-
+use App\Repository\RessourceRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use App\Controller\ObjectManagerInterface;
@@ -242,11 +242,12 @@ class USController extends AbstractController
      /**
      * @Route("/us/recherche", name="us_recherche")
      */
-    public function recherche(Request $request, PostRepository $postRepo, NoteRepository $noteRepo, ModuleRepository $moduleRepo, UtilisateurRepository $utiRepo): Response
+    public function recherche(Request $request, PostRepository $postRepo, NoteRepository $noteRepo, ModuleRepository $moduleRepo, UtilisateurRepository $utiRepo, SemestreRepository $semestreRepo, RessourceRepository $ressourceRepo): Response
     {
     	$mot = $request->query->get('motRecherche');
 
     	$posts = $postRepo->findPostsRecherche($mot);
+
     	$modules = $moduleRepo->findModulesRecherche($mot);
     	$utilisateurs = $utiRepo->findUtilisateursRecherche($mot);
 
@@ -256,8 +257,94 @@ class USController extends AbstractController
 			$notesPosts[$post->getId()]=$post->noteMoyenne($noteRepo);
 		}
 		
+		$semestres = $semestreRepo->findAll();
+
+		$typesDeFichier = $ressourceRepo->findTypesDeFichier();
+
         return $this->render('/us/recherche.html.twig', [
-       		'mot' => $mot, 'posts' => $posts, 'notesPosts' => $notesPosts, 'modules' => $modules, 'utilisateurs' => $utilisateurs
+       		'mot' => $mot, 'posts' => $posts, 'notesPosts' => $notesPosts, 'modules' => $modules, 'utilisateurs' => $utilisateurs, 'semestres' => $semestres, 
+       			'typesDeFichier' => $typesDeFichier
+       	]);
+    }
+
+    /**
+     * @Route("/us/rechercheAvancee", name="us_rechercheAvancee")
+     */
+    public function rechercheAvancee(Request $request, PostRepository $postRepo, NoteRepository $noteRepo, ModuleRepository $moduleRepo, UtilisateurRepository $utiRepo, SemestreRepository $semestreRepo, RessourceRepository $ressourceRepo): Response
+    {
+
+    	$mot = $request->query->get('mot');
+
+		$semestre = $request->query->get('semestre');
+
+		$tdf = $request->query->get('typesDeFichier');
+
+		if ($semestre == '') $semestre = 'S';
+
+    	$date = $request->query->get('date');
+    	$evaluation = $request->query->get('evaluation');
+    	$titre = $request->query->get('titre');
+
+    	if ($date != null)
+    	{
+    		if ($evaluation != null)
+    		{		
+    			if ($titre != null) // tous les 3 filtres selectionnés
+    			{
+    				$posts = $postRepo->findPostsRechercheAvancee($mot,'p.datePubli',$date,'note',$evaluation, 'p.titre',$titre, $semestre, $tdf);
+    			} else { 			// filtres Date et Evaluation
+
+    				$posts = $postRepo->findPostsRechercheAvancee($mot,'p.datePubli',$date,'note',$evaluation, 'note',$evaluation, $semestre, $tdf);
+    			} 
+    			
+    		} else {
+
+    			if ($titre != null) // filtres Date et Titre
+    			{
+    				$posts = $postRepo->findPostsRechercheAvancee($mot,'p.datePubli',$date,'p.titre',$titre,'p.titre',$titre, $semestre, $tdf);
+    			} else {			// que filtre Date
+
+    				$posts = $postRepo->findPostsRechercheAvancee($mot,'p.datePubli',$date,'p.datePubli',$date,'p.datePubli',$date, $semestre, $tdf);
+    			}
+    		}
+
+    	} elseif ($evaluation != null) {
+    				
+    			if ($titre != null) // filtres Evaluation et Titre
+    			{
+    				$posts = $postRepo->findPostsRechercheAvancee($mot,'note',$evaluation,'note',$evaluation, 'p.titre',$titre, $semestre, $tdf);
+    			} else { 			// que filtre Evaluation
+
+    				$posts = $postRepo->findPostsRechercheAvancee($mot,'note',$evaluation,'note',$evaluation, 'note',$evaluation, $semestre, $tdf);
+    			} 
+
+    	} else {
+    		$posts = $postRepo->findPostsRechercheAvancee($mot,'p.titre',$titre,'p.titre',$titre,'p.titre',$titre, $semestre, $tdf);
+    	}
+
+    	// Si on ne trouve rien en bd correspondant à la recherche
+    	if ($posts == []) $listePosts = [];
+
+    	$modules = $moduleRepo->findModulesRecherche($mot);
+    	$utilisateurs = $utiRepo->findUtilisateursRecherche($mot);
+
+    	$notesPosts = array();
+		foreach($posts as $ensemble)
+		{	
+			$post = $ensemble[0];
+
+			$listePosts[] = $post;
+			$notesPosts[$post->getId()]=$ensemble['note'];
+		}
+
+		
+		$semestres = $semestreRepo->findAll();
+
+		$typesDeFichier = $ressourceRepo->findTypesDeFichier();
+		
+        return $this->render('/us/recherche.html.twig', [
+       		'mot' => $mot, 'posts' => $listePosts, 'notesPosts' => $notesPosts, 'modules' => $modules, 'utilisateurs' => $utilisateurs, 'semestres' => $semestres, 
+       			'typesDeFichier' => $typesDeFichier
        	]);
     }
 

@@ -16,6 +16,12 @@
    		 <button class="nav-link">Utilisateurs</button></a></li>
 </ul>
 
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter" style="position:absolute; right:20px; top:15px">
+  <i class="fas fa-cog" style="color:white;"></i> Recherche avancée 
+</button>
+
+
 <!-- Contenu des tabs -->
 <div class="tab-content">
     <div class="tab-pane active" id="posts">
@@ -107,7 +113,7 @@
 					<div class="card-body">
 						<div class="row">
 							<div class="col-md-1 align-self-center">
-								<a href="{{ path('utilisateur_enFavori', {'pseudo':utilisateurCourant.pseudo}) }}" class="btn btn-link js-favori">
+								<a href="{{ path('utilisateur_enFavori', {'pseudo' : utilisateurCourant.pseudo }) }}" class="btn btn-link js-favori">
 									<i class="fas fa-heart"></i>
 								</a>
 							</div>
@@ -131,6 +137,102 @@
 			<br> Aucun utilisateur ne correspond à votre recherche...
 		{% endif %}
 	</div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Recherche avancée</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{{path('us_rechercheAvancee')}}" id="avancee">
+        	<h2> Trier </h2> 
+        	<p>Choisissez une option pour de meilleurs résultats. </p>
+        	<div class="row">
+        		<div class="col-md-4">
+					<p>Titre:</p>
+				</div>
+				<div class="col-md-4">
+					<input type="radio" id="alpha" name="titre" value="ASC">
+					<label for="alpha">Alphabétique</label><br>
+				</div>
+				<div class="col-md-4">
+					<input type="radio" id="anteAlpha" name="titre" value="DESC">
+					<label for="anteAlpha">Anté-alphabétique</label><br>
+				</div>
+			</div>
+			<div class="row">
+        		<div class="col-md-4">
+					<p>Évaluation:</p>
+				</div>
+				<div class="col-md-4">
+					<input type="radio" id="eCroissante" name="evaluation" value="ASC">
+					<label for="eCroissante">Croissante</label><br>
+				</div>
+				<div class="col-md-4">
+					<input type="radio" id="eDecroissante" name="evaluation" value="DESC">
+					<label for="anteAlpha">Décroissante</label><br>
+				</div>
+			</div>
+			<div class="row">
+        		<div class="col-md-4">
+					<p>Date:</p>
+				</div>
+				<div class="col-md-4">
+					<input type="radio" id="dCroissante" name="date" value="ASC">
+					<label for="dCroissante">Croissante</label><br>
+				</div>
+				<div class="col-md-4">
+					<input type="radio" id="dDecroissante" name="date" value="DESC">
+					<label for="dDecroissante">Décroissante</label><br>
+				</div>
+			</div>
+			<br>
+			<h2> Filtrer </h2> <br>
+        	<div class="row">
+        		<div class="col-md-4">
+					<p>Semestre:</p>
+				</div>
+				<div class="col-md-4">
+					<select name="semestre" id="semestre-select" style="width:120px">
+					<option value="">Tous</option>
+					{% for semestre in semestres %}
+
+						<option value="{{semestre.sigle}}">{{semestre.nom}}</option>
+
+					{% endfor %}
+   					</select>
+				</div>
+			</div>
+			<div class="row">
+        		<div class="col-md-4">
+					<p>Type de fichier:</p>
+				</div>
+				<div class="col-md-4">
+					<select name="typeDeFichier" id="typeDeFichier-select" style="width:120px">
+					<option value="">Tous</option>
+					{% for type in typesDeFichier %}
+						<option value="{{type.typeDeFichier}}">{{type.typeDeFichier}}</option>
+					{% endfor %}
+   					</select>
+				</div>
+			</div>
+			<input type="hidden" id="mot" name="mot" value="{{mot}}">
+			<br>  
+		</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        <button type="submit" class="btn btn-success" form="avancee">Rechercher</button>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}
 
@@ -160,6 +262,22 @@ function onClickTabRecherche(event){
 
 })
 
+
+ $.each($('.rateYo'), function(){
+
+        var $self = $(this);
+
+        $self.rateYo({
+            rating: $self.data('rating'),
+            starSvg:'<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>',
+            fullStar: true,
+            ratedFill: "gold",
+            starWidth: "20px",
+            readOnly: true,
+
+
+        });
+    });
 </script>
 
 {% endblock %}
