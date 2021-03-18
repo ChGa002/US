@@ -256,7 +256,7 @@ class AppFixtures extends Fixture
 
             $ressource = new Ressource();
             $ressource->setNom("sujet");
-            $ressource->setTypeDeFichier(".pdf");
+            $ressource->setTypeDeFichier("Document");
             $ressource->setEmplacement("https://drive.google.com/file/d/1N2fh23wjwtucyonVlA8vjkHDanZ8qqpu/view?usp=sharing");
 
             $ressource->setPost($post);
@@ -264,7 +264,7 @@ class AppFixtures extends Fixture
 
             $ressource = new Ressource();
             $ressource->setNom("correction");
-            $ressource->setTypeDeFichier(".pdf");
+            $ressource->setTypeDeFichier("Document");
             $ressource->setEmplacement("https://drive.google.com/file/d/1VeDo5DMJxRizDx30SccAowA2pUgAnJ_g/view?usp=sharing");
             
             $ressource->setPost($post);
@@ -286,7 +286,7 @@ class AppFixtures extends Fixture
 
             $ressource = new Ressource();
             $ressource->setNom("UMLversC++ Rempli");
-            $ressource->setTypeDeFichier(".doc");
+            $ressource->setTypeDeFichier("Document");
             $ressource->setEmplacement("https://www.dropbox.com/s/ozqfuass5bkpcge/UMLversC%2B%2BaTrous.doc?dl=0");
 
             $ressource->setPost($post);
@@ -306,7 +306,7 @@ class AppFixtures extends Fixture
 
             $ressource = new Ressource();
             $ressource->setNom("accueil");
-            $ressource->setTypeDeFichier(".html");
+            $ressource->setTypeDeFichier("Texte");
             $ressource->setEmplacement("https://drive.google.com/file/d/1_Zyn83Z8nBvgdPBS8a6OOintyG-Ljcnj/view?usp=sharing");
 
             $ressource->setPost($post);
@@ -314,7 +314,7 @@ class AppFixtures extends Fixture
 
             $ressource = new Ressource();
             $ressource->setNom("AB");
-            $ressource->setTypeDeFichier(".html");
+            $ressource->setTypeDeFichier("Texte");
             $ressource->setEmplacement("https://drive.google.com/file/d/166ItRUEeW7K9St7AKZ9T-2_74uvAhMqR/view?usp=sharing");
 
             $ressource->setPost($post);
@@ -322,7 +322,7 @@ class AppFixtures extends Fixture
 
             $ressource = new Ressource();
             $ressource->setNom("BO");
-            $ressource->setTypeDeFichier(".html");
+            $ressource->setTypeDeFichier("Texte");
             $ressource->setEmplacement("https://drive.google.com/file/d/1pFpBRNM1S1W3dFPDRlH0RJg_3zgHvhWk/view?usp=sharing");
 
             $ressource->setPost($post);
@@ -330,7 +330,7 @@ class AppFixtures extends Fixture
 
             $ressource = new Ressource();
             $ressource->setNom("rugby-pro-d2");
-            $ressource->setTypeDeFichier(".jpeg");
+            $ressource->setTypeDeFichier("Image");
             $ressource->setEmplacement("https://drive.google.com/file/d/1YkjTDIK_fLowSqWsI0_AZBGqwD0_vJD4/view?usp=sharing");
 
             $ressource->setPost($post);
@@ -338,7 +338,7 @@ class AppFixtures extends Fixture
 
             $ressource = new Ressource();
             $ressource->setNom("AB-joueurs");
-            $ressource->setTypeDeFichier(".jpeg");
+            $ressource->setTypeDeFichier("Image");
             $ressource->setEmplacement("https://drive.google.com/file/d/1x2gicu6ENm9rXlN2-UOvCDOrvukkT-na/view?usp=sharing");
 
             $ressource->setPost($post);
@@ -360,7 +360,7 @@ class AppFixtures extends Fixture
 
             $ressource = new Ressource();
             $ressource->setNom("TD12");
-            $ressource->setTypeDeFichier(".pdf");
+            $ressource->setTypeDeFichier("Document");
             $ressource->setEmplacement("https://drive.google.com/file/d/17Iz9s0RDLJkU93ePcO-hfJgkoJjX6M0l/view?usp=sharing");
 
             $ressource->setPost($post);
@@ -384,7 +384,7 @@ class AppFixtures extends Fixture
 
             $ressource = new Ressource();
             $ressource->setNom("Track 15(1)");
-            $ressource->setTypeDeFichier(".mp3");
+            $ressource->setTypeDeFichier("Audio");
             $ressource->setEmplacement("https://drive.google.com/file/d/1c9mruETCf2WGe9YCkClfegmwJZzhy2us/view?usp=sharing");
 
             $ressource->setPost($post);
@@ -392,7 +392,7 @@ class AppFixtures extends Fixture
 
             $ressource = new Ressource();
             $ressource->setNom("Track 14(1)");
-            $ressource->setTypeDeFichier(".mp3");
+            $ressource->setTypeDeFichier("Audio");
             $ressource->setEmplacement("https://drive.google.com/file/d/1RKz8lm5el3JfXTLDGLFq6Gw4RPtnAw1T/view?usp=sharing");
 
             $ressource->setPost($post);
@@ -415,7 +415,7 @@ class AppFixtures extends Fixture
 
             $ressource = new Ressource();
             $ressource->setNom("tableJoueur");
-            $ressource->setTypeDeFichier(".sql");
+            $ressource->setTypeDeFichier("Texte");
             $ressource->setEmplacement("https://drive.google.com/file/d/1_E7UAVS6ohtDYo7_2GQi84YrCPoyzZjy/view?usp=sharing");
 
             $ressource->setPost($post);
@@ -423,7 +423,7 @@ class AppFixtures extends Fixture
 
             $ressource = new Ressource();
             $ressource->setNom("tabeEquipe");
-            $ressource->setTypeDeFichier(".sql");
+            $ressource->setTypeDeFichier("Texte");
             $ressource->setEmplacement("https://drive.google.com/file/d/1RvIcRxq5J1nYz4Hdf0_IB9-bDzcvUGxF/view?usp=sharing");
 
             $ressource->setPost($post);
@@ -444,7 +444,7 @@ class AppFixtures extends Fixture
 
             $ressource = new Ressource();
             $ressource->setNom("Analyse_bivariée");
-            $ressource->setTypeDeFichier(".xls");
+            $ressource->setTypeDeFichier("Document");
             $ressource->setEmplacement("https://drive.google.com/file/d/10x2pBjQVie8yNy4IZ7M_bWuZp_D13eCj/view?usp=sharing");
 
             $ressource->setPost($post);
@@ -465,7 +465,7 @@ class AppFixtures extends Fixture
 
             $ressource = new Ressource();
             $ressource->setNom("serveur");
-            $ressource->setTypeDeFichier(".txt");
+            $ressource->setTypeDeFichier("Texte");
             $ressource->setEmplacement("https://drive.google.com/file/d/1Ks28wCVbS5IjKAiw927QauvxFxJOFdnN/view?usp=sharing");
 
             $ressource->setPost($post);
@@ -490,7 +490,7 @@ class AppFixtures extends Fixture
 
             $ressource = new Ressource();
             $ressource->setNom("TabulaRasa");
-            $ressource->setTypeDeFichier(".rar");
+            $ressource->setTypeDeFichier("Compressé");
             $ressource->setEmplacement("https://drive.google.com/file/d/1mkOYDrGJ5ROmvrbzctH36TSVPQVp8F_p/view?usp=sharing");
 
             $ressource->setPost($post);
@@ -510,7 +510,7 @@ class AppFixtures extends Fixture
 
             $ressource = new Ressource();
             $ressource->setNom("RechercheStage");
-            $ressource->setTypeDeFichier(".odt");
+            $ressource->setTypeDeFichier("Document");
             $ressource->setEmplacement("https://drive.google.com/file/d/16NcGDGOT31j1QrKbgSrAGhsSv_gRXgqe/view?usp=sharing");
 
             $ressource->setPost($post);
@@ -518,7 +518,7 @@ class AppFixtures extends Fixture
 
             $ressource = new Ressource();
             $ressource->setNom("RechercheStage");
-            $ressource->setTypeDeFichier(".pdf");
+            $ressource->setTypeDeFichier("Document");
             $ressource->setEmplacement("https://drive.google.com/file/d/1YZKcUoReC9rAqnctHZd_5_7hjo1ntDst/view?usp=sharing");
 
             $ressource->setPost($post);
@@ -540,7 +540,7 @@ class AppFixtures extends Fixture
 
             $ressource = new Ressource();
             $ressource->setNom("balleCompilee");
-            $ressource->setTypeDeFichier(".mpc");
+            $ressource->setTypeDeFichier("Texte");
             $ressource->setEmplacement("https://drive.google.com/file/d/1uDu3RVQwXuPOX4DFVxBxPQ5zAWKwBQGf/view?usp=sharing");
 
             $ressource->setPost($post);
