@@ -30,7 +30,11 @@
         <div class="row justify-content-center">
 
             <div class="col-xl-8 col-lg-10 col-md-9">
-
+                {% for message in app.flashes('wrongMail') %}
+                    <div class="alert alert-danger">
+                        {{ message }}
+                    </div>
+                {% endfor %}
                 <div class="card o-hidden border-0 shadow-lg my-5" style="background:var(--brique);">
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
@@ -46,8 +50,9 @@
                                     {{ form_start(registrationForm) }}
                                         {{ form_row(registrationForm.pseudo, {label:false}) }}
                                         {{ form_row(registrationForm.mail, {label:false}) }}
-                                        {{ form_row(registrationForm.motDePasse, {label: false }) }}
-                                        {{ form_row(registrationForm.agreeTerms) }}
+                                        {{ form_row(registrationForm.motDePasse, {label: false }) }} <br>
+                                        <a href=""><i class="fas fa-question-circle"></i></a>
+                                        {{ form_row(registrationForm.agreeTerms) }} 
                                         <button class="btn btn-danger btn-lg" type="submit" title="S'inscrire">
                                             Créer
                                          </button>

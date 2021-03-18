@@ -30,7 +30,7 @@ class RegistrationController extends AbstractController
            $userExistant = $users->findOneByMail($user->getMail());
             if($userExistant == null || $userExistant->getValide()==true)
             {
-                throw $this->createNotFoundException('Votre adresse ne peut permettre de créer un compte.');
+                $this->addFlash('wrongMail','Votre adresse ne peut permettre de créer un compte.');
                 return $this->render('registration/register.html.twig', [
                     'registrationForm' => $form->createView(),
                 ]);
@@ -51,7 +51,6 @@ class RegistrationController extends AbstractController
             $entityManager->persist($userExistant);
             $entityManager->flush();
             // do anything else you need here, like send an email
-            dump($userExistant);
             return $guardHandler->authenticateUserAndHandleSuccess(
                 $userExistant,
                 $request,
