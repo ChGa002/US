@@ -114,7 +114,12 @@
 						<div class="row">
 							<div class="col-md-1 align-self-center">
 								<a href="{{ path('utilisateur_enFavori', {'pseudo' : utilisateurCourant.pseudo }) }}" class="btn btn-link js-favori">
-									<i class="fas fa-heart"></i>
+									{% if utilisateurCourant.estUnFavori(app.user) %}
+        								<i class="fas fa-heart"></i>
+    								{% else %}
+    									<span id="js-fav-text"></span>
+    									<i class="far fa-heart grise"></i>
+    								{% endif %}
 								</a>
 							</div>
 							<div class="col-md-11">

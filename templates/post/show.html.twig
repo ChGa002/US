@@ -5,7 +5,10 @@
 {% block barreRecherche %}{% endblock %}
 
 {% block titlePage %} </h1>
-    <div class="col-md-8 "> </div>
+    <div class="col-md-2 "> 
+    <button class="btn btn-success" onClick="window.history.back();"><i class="fas fa-arrow-left"></i> Retour </button>
+    </div>
+    <div class="col-md-6"> </div>
     <div class="col-md-2" style="text-align:center;">
     <!-- Note de l'utilisateur, 'noteARemplacer' sera remplacé dynamiquement en JS -->
         {% if app.user != post.createur %}

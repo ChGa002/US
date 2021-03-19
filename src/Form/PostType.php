@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Repository\ModuleRepository;
+use App\Repository\MotCleRepository;
 use App\Entity\Post;
 use App\Entity\Module;
 use App\Entity\MotCle;
@@ -34,6 +35,9 @@ class PostType extends AbstractType
                 'class' => 'App\Entity\MotCle',
                 'multiple' => true,
                 'attr' => ['class' => 'js-select2',],
+                'query_builder' => function (MotCleRepository $er) {
+                        return $er->createQueryBuilder('motCle')
+                        ->orderBy('motCle.motCle');}
                 ])
             ->add('modules', EntityType::class, array('class' => Module::class,
                 'choice_label' => function(Module $module)

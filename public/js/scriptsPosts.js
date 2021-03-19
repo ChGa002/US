@@ -90,5 +90,5 @@ function onClickSignaler(event){
     }
 
     window.onload = function() {
-    fixBrokenImages('https://screenshotlayer.com/images/assets/placeholder.png');
+    fixBrokenImages('/img/placeholder.png');
     }
