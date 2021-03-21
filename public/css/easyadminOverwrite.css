@@ -19,7 +19,7 @@
     background-color: var(--brique);
     border-radius: 4px;
     width: auto; height: auto;
-    padding: 4px;
+    padding: 4px; margin:10px;
     color: var(--cloud);
     box-shadow: none;
     border-color: var(--brique);
@@ -56,7 +56,7 @@ h1{
 .sidebar-menu .header{
     color: var(--cloud);
     font-size: 20px;
-    text-decoration: underline;
+    /* text-decoration: underline; */
 }
 .navbar-custom-menu .user {
     align-items: center;
@@ -110,7 +110,7 @@ h1{
     .sidebar-menu .header{
         color: #000;
         font-size: 20px;
-        text-decoration: underline;
+        /* text-decoration: underline; */
     }
     .sidebar-menu li:not(.submenu-active).active .menu-icon, .sidebar-menu li:not(.submenu-active).active a {
         font-style: italic;
@@ -134,8 +134,4 @@ h1{
 
 p .user-details-name{
     align-content: center;
-}
-
-.content-header{
-
 }

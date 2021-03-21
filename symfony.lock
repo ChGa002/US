@@ -412,6 +412,15 @@
     "symfony/polyfill-uuid": {
         "version": "v1.22.1"
     },
+    "symfony/postmark-mailer": {
+        "version": "4.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.4",
+            "ref": "84842f6791eaef80618dda244d4e3bbcbbcdf543"
+        }
+    },
     "symfony/process": {
         "version": "v4.4.17"
     },

@@ -270,6 +270,7 @@ class USController extends AbstractController
 		$em->persist($date);
 		$em->flush();
 		//us_admin_dash
+		$this->addFlash('success','Classement réinitialiser avec succès.');
 		return $this->redirectToRoute('us_admin_dash');
 	}
 }

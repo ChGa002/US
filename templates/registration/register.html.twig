@@ -53,10 +53,11 @@
                                         {{ form_row(registrationForm.motDePasse, {label: false }) }} <br>
                                         <a href=""><i class="fas fa-question-circle"></i></a>
                                         {{ form_row(registrationForm.agreeTerms) }} 
-                                        <button class="btn btn-danger btn-lg" type="submit" title="S'inscrire">
+                                        <button class="btn btn-success btn-lg" type="submit" title="S'inscrire">
                                             Créer
                                          </button>
                                     {{ form_end(registrationForm) }}
+                                    <a href=" {{ path('app_login') }}"><button class="btn btn-danger btn-lg">Retour</button></a>
                                     </div>
                                 </div>
                             </div>
