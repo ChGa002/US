@@ -27,6 +27,7 @@
         "symfony/mailchimp-mailer": "4.4.*",
         "symfony/mailer": "4.4.*",
         "symfony/monolog-bundle": "^3.1",
+        "symfony/postmark-mailer": "4.4.*",
         "symfony/process": "4.4.*",
         "symfony/property-access": "4.4.*",
         "symfony/property-info": "4.4.*",

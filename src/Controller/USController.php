@@ -348,6 +348,17 @@ class USController extends AbstractController
        	]);
     }
 
-
+	/**
+	 * @Route("/admin/classementReset", name="us_classement_reset")
+	 */
+	public function resetDateClassement(DateResetRepository $dateRepo, EntityManagerInterface $em){
+		$date = $dateRepo->findAll()[0];
+		$date->setDate(new \DateTime('now'));
+		$em->persist($date);
+		$em->flush();
+		//us_admin_dash
+		$this->addFlash('success','Classement réinitialiser avec succès.');
+		return $this->redirectToRoute('us_admin_dash');
+	}
 }
 

@@ -56,7 +56,8 @@ class ImporterUserCSVController extends AbstractController
             fclose($handle);
             $em->flush();
         }
-        return $this->redirectToRoute('us_importUsersCSV');
+        $this->addFlash('success','Importer avec succès.');
+        return $this->redirectToRoute('us_admin_dash');
     }
 }
 

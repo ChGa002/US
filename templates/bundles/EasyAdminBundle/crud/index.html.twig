@@ -11,9 +11,6 @@
 {% block body_class 'index' ~ (entities|length > 0 ? ' index-' ~ entities|first.name : '') %}
 
 {% block content_title %}
-<a href="{{ path('us_importUsersCSV') }}"><button class="btnBrique">Importer CSV</button></a>
-<a href="{{ path('us_confirmEnvoie') }}"><button class="btnBrique">  <i class="fas fa-envelope"></i> Envoyer Mail</button></a>
-
     {%- apply spaceless -%}
         {% set default_title = ea.crud.defaultPageTitle('index')|trans(ea.i18n.translationParameters, 'EasyAdminBundle') %}
         {{ ea.crud.customPageTitle is null ? default_title|raw : ea.crud.customPageTitle('index')|trans(ea.i18n.translationParameters)|raw }}
@@ -21,6 +18,9 @@
 {% endblock %}
 
 {% block page_actions %}
+<a href="{{ path('us_importUsersCSV') }}"><button class="btnBrique">Importer CSV</button></a>
+<!-- <a href="{{ path('us_confirmEnvoie') }}"><button class="btnBrique">  <i class="fas fa-envelope"></i> Envoyer Mail</button></a> -->
+<a href="{{ path('us_classement_reset') }}"><button class="btnBrique">Reset Date Classement</button></a>
     {% block global_actions %}
         {% for action in global_actions %}
             {{ include(action.templatePath, { action: action }, with_context = false) }}

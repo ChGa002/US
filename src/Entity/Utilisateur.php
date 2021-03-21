@@ -407,6 +407,13 @@ class Utilisateur implements UserInterface
 
     public function __toString()
     {
+        if($this->pseudo == null)
+        {
+            // Sert à éviter le problème d'affichage de la propriété où l'on est dans l'admin
+            // La partie utilisateur affiche l'utilisateur courant à l'édition par son pseudo
+            $this->pseudo = "";
+            return $this->pseudo;
+        }
         return $this->pseudo;
     }
 

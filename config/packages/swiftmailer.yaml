@@ -1,15 +1,15 @@
 swiftmailer:
-    # url: '%env(MAILER_URL)%'
+    url: '%env(MAILER_URL)%'
     spool: { type: 'memory' }
-    transport: gmail
-    username: univ.share.bayonne@gmail.com
-    password: #mdp apk
-    host: smtp.gmail.com
-    port: 465
-    encryption: ssl
-    auth-mode: login
-    stream_options:
-        ssl:
-            allow_self_signed: true
-            verify_peer: false
-            verify_peer_name: false
+    # transport: laposte.net
+    # username: univ.share@laposte.net
+    # password: univShareAdmin64
+    # host: smtp.laposte.net
+    # port: 587 
+    # encryption: ssl
+    # auth-mode: login
+    # stream_options:
+    #     ssl:
+    #         allow_self_signed: true
+    #         verify_peer: false
+    #         verify_peer_name: false
