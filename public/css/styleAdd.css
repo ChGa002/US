@@ -240,8 +240,8 @@ color:grey;
   border: 1px solid #dddfeb;
   border-radius: 0.35rem;
   max-width: 100%;
-  min-width: 100px;
-  height: 100px; width: 100px;
+  min-width: 80px;
+  height: 80px; width: 80px;
 }
 .card{
   width: auto;
