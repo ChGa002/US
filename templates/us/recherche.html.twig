@@ -28,51 +28,8 @@
 
 			{% for postCourant in posts %}
 
-				<div class="card bg-hov">
-					<div class="card-body">
-						<div class="row">
-							<div class="col-md-1 align-self-center">
-								<a href="{{ path('post_enFavori', {'id':postCourant.id}) }}" class="btn btn-link js-favori">
-										{% if postCourant.estUnFavori(app.user) %}
-				        				<i class="fas fa-heart"></i>
-				    					{% else %}
-				    					<span id="js-fav-text"></span>
-				    					<i class="far fa-heart grise"></i>
-				    					{% endif %}
-								</a>
-							</div>
-							<div class="col-md-11">
-								<div class="row">
-									<div class="col-md-2">
-										<img src = "{{postCourant.emplacementPhoto}}"  class="img-thumbnail">
-									</div>
-									<a href="{{ path('post_show', {'id' : postCourant.id }) }}" class="stretched-link"></a>
-									<div class="col-md-2">
-										<h6>{{ postCourant.titre }}</h6>
-									</div>       
-									<div class="col-md-2">
-										<p>{{ postCourant.description |length > 40 ? postCourant.description|slice(0, 40) ~ '...' : postCourant.description }}</p>
-									</div>
-									<div class="col-md-2">
-										<i>{{ postCourant.createur.pseudo }}</i><br>
-										<i>{{ postCourant.datePubli | date('d-m-Y')}}</i><br>
-										<div class='rateYo' data-rating={{notesPosts[postCourant.id]}} ></div>
-									</div>
-									<div class="col-md-1">
-										{% for semestreCourant in postCourant.modules %}
-											{{ semestreCourant.semestre.sigle }}
-										{% endfor %}
-									</div>
-									<div class="col-md-2">
-										{% for moduleCourant in postCourant.modules %}
-											{{ moduleCourant.sigle }}
-										{% endfor %}
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+				{{ include('us/listerPosts.html.twig') }} 
+
 			{% endfor %}
 
 		{% else %}
@@ -265,22 +222,7 @@ function onClickTabRecherche(event){
 
 })
 
-
- $.each($('.rateYo'), function(){
-
-        var $self = $(this);
-
-        $self.rateYo({
-            rating: $self.data('rating'),
-            starSvg:'<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>',
-            fullStar: true,
-            ratedFill: "gold",
-            starWidth: "20px",
-            readOnly: true,
-
-
-        });
-    });
 </script>
+<script src="{{ asset('js/scriptNoteMoyennePost.js') }}"></script>
 
 {% endblock %}
