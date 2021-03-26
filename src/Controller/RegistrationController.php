@@ -30,7 +30,7 @@ class RegistrationController extends AbstractController
            $userExistant = $users->findOneByMail($user->getMail());
             if($userExistant == null || $userExistant->getValide()==true)
             {
-                $this->addFlash('wrongMail','Votre adresse ne peut permettre de créer un compte.');
+                $this->addFlash('wrongMail','Votre adresse ne vous permet pas de créer un compte.');
                 return $this->render('registration/register.html.twig', [
                     'registrationForm' => $form->createView(),
                 ]);

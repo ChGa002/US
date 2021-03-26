@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Template de stratBootstrap template remis à jour">
+    <meta name="description" content="Template de Bootstrap personnalisée">
     <meta name="author" content="Ewen Blandin">
     <link rel="shortcut icon" href="{{ asset('/img/us_logo.png') }}"/>
     <title>{% block titleOnglet %}US - University Share{% endblock %}</title>
@@ -21,12 +21,6 @@
     <link rel="stylesheet" href="{{asset("/css/styleAdd.css")}}">
 	
 	<!-- CSS notation 5 étoiles (RateYo)-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
-
-    <!-- CSS notation 5 étoiles (RateYo)-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
-
-    <!-- CSS notation 5 étoiles (RateYo)-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
 
 </head>
@@ -161,28 +155,29 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                         <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                            <a class="nav-link dropdown-toggle" id="searchDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Afficher/masquer bar de recherche">
                                 <i class="fas fa-search fa-fw" style="color:white;"></i>
                             </a>
                             <!-- Dropdown - Messages -->
                             <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
                                 aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
+                                <form class="form-inline mr-auto w-100 navbar-search" action="{{path('us_recherche')}}">
                                     <div class="input-group">
                                         <input type="text" class="form-control bg-light border-0 small"
                                             placeholder="Rechercher pour.." aria-label="Search"
-                                            aria-describedby="basic-addon2">
+                                            aria-describedby="basic-addon2" name="motRecherche">
                                         <div class="input-group-append">
-                                            <button class="btn boutonMinRech" type="button">
+                                            <button class="btn boutonMinRech" type="submit">
                                                 <i class="fas fa-search fa-sm" style="color:white;"></i>
                                             </button>
                                         </div> 
+                                        <!--
                                         <div class="input-group-apend" title="Recherche Avancée">
                                             <button class="btn boutonMinRech" href="#">
                                                 <i class="fas fa-cog" style="color:white;"></i>
                                             </button>
-                                        </div>                                                                          
+                                        </div> -->                                                                         
                                     </div>
                                     <div class="text-center d-none d-md-inline" title="Paramètre Avancé">
                                         <button class="btn btn-primary btn-customized bouton-menu" href="#" style="background-color:#666F88">

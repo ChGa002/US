@@ -75,13 +75,13 @@ class UserController extends AbstractController
         $form = $this->createFormBuilder($utilisateur)
                 ->add('description', TextareaType::class, [
                     'attr' => [
-                        'placeholder' => "Entrez une description..",
+                        'placeholder' => "Entrez une description...",
                         "style"=> "resize:none", "rows"=> "3"
                     ]
                 ])
                 ->add('emplacementPhoto', TextType::class, [
                     'attr' => [
-                        'placeholder' => "URL de la photo.."
+                        'placeholder' => "URL de la photo..."
                     ]
                 ])
                 ->getForm();

@@ -19,7 +19,7 @@ class RessourceType extends AbstractType
 			->add('nom', TextType::class, [ 'attr' => ['placeholder' => 'Nom du fichier...'] ])
             ->add('typeDeFichier', ChoiceType::class, 
                 [ 'choices' => ['Document (.docx, .odt, diaporama...)' => 'document',
-                                'Texte (html, css, sql...)' => 'texte',
+                                'Code (html, css, sql...)' => 'code',
                                 'Exécutable'=> 'exécutable', 
                                 'Image' => 'image', 
                                 'Vidéo' => 'vidéo', 
