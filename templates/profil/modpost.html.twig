@@ -60,12 +60,12 @@
             </div>
             <div class="col-md-1">
             {% for semestreCourant in postCourant.modules %}
-                {{ semestreCourant.semestre.sigle }} <br>
+                {{ semestreCourant.semestre.sigle }}{% if loop.last == false %},{% endif %}
             {% endfor %}
             </div>
             <div class="col-md-1">
             {% for moduleCourant in postCourant.modules %}
-                {{ moduleCourant.sigle }}
+                {{ moduleCourant.sigle }}{% if loop.last == false %},{% endif %}
             {% endfor %}
             </div>
         </div>
@@ -80,4 +80,8 @@
 
 </form>  
 </p>
+{%endblock%}
+
+{%block Javascript%}
+    <script src="{{ asset('js/scriptNoteMoyennePost.js') }}"></script>
 {%endblock%}

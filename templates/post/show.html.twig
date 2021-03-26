@@ -61,8 +61,7 @@
         <dd class="col-sm-9">   
             {% for motCle in post.motsCles %} 
 
-                    {{ motCle.motCle }}
-                    {% if loop.last == false %} , {% endif %}
+                    {{ motCle.motCle }}{% if loop.last == false %},{% endif %}
 
             {% endfor %}
         </dd>
