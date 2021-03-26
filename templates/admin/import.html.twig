@@ -8,7 +8,7 @@
     <meta name="description" content="Template personalisé pour la partie admin importation">
     <meta name="author" content="Ewen Blandin">
     <link rel="shortcut icon" href="{{ asset('/img/us_logo.png') }}"/>
-    <title>US - Admin - Importation  Utilisateur</title>
+    <title>US - Admin - Importation Utilisateurs</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -33,11 +33,13 @@
                         {% endfor %}
                         <!-- Nested Row within Card Body -->
                         <div class="row justify-content-center">
-                            <div class="col-lg-6">
+                            <div class="col-lg-8">
                                 {# <div class="p-5"> #}
                                         {# Placement du formulaire #}
                                         <h1 class="colorCloud">Importer vos utilisateurs</h1>
                                         <h2 class="colorCloud"><i>(Utilisez un fichier csv)</i></h2><br>
+                                        <p class="colorCloud"> Il faut que les informations soient présentées comme ceci: <br>
+                                        nom; prenom; mail </p> 
                                         <form action="{{ path('us_importation_upload') }}" enctype="multipart/form-data" method="POST" class="form-group align-self-center">
                                             <input type="hidden" name="MAX_FILE_SIZE" value="100000" class="">
                                             <input type="file" name="upload" id="" accept=".csv" class="form-control"><br>
