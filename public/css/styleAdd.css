@@ -253,3 +253,12 @@ color:grey;
 .bg-hov:hover{
   background-color: #93a4d33f;
 }
+
+.liensNoirs{
+
+  color:black;
+}
+.ok{
+
+  align-content: center;
+}
