@@ -3,7 +3,7 @@
 </p>
 <h1 align="center">University Share</h1>
 
-Read this in [English](README.md)
+*Lire en [anglais](README.md).*
 
 ## Introduction
 
@@ -18,6 +18,7 @@ votre parcours.
 ## Démo
 [!Demo](https://user-images.githubusercontent.com/75143414/151706233-0948994a-22eb-4966-89dd-528d01ff0dde.mp4)
 
+L'utilisateur présenté ici est un administrateur, les utilisateurs normaux n'ont pas accès à "Admin" dans le menu.
 ## Développement
 ### -  Technologies utilisées </h3>
  
