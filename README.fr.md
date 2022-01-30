@@ -3,7 +3,9 @@
 </p>
 <h1 align="center">University Share</h1>
 
-<h2>Introduction</h2>
+Read this in [English](README.md)
+
+## Introduction
 
 >US, autrement dit University Share, créé par nous, étudiants du DUT Informatique pour les étudiants du DUT Informatique. 
 Une centralisation des données pour un bien commun, au sein d’un même site web résponsif (disponible sur toutes les plateformes et même vos smartphones).
@@ -13,20 +15,21 @@ Ce dernier présente les 10 premiers utilisateurs, les mieux notés, ce qui cert
 Le but est donc simple, retrouvez dans cette centralisation d'informations, le post qui vous est utile pour mener à bien
 votre parcours.
 
-<h2> Développement </h2>
-  <h3> -  Technologies utilisées </h3>
-  Le projet est donc un site web conçu en <em>HTML</em> , <em>CSS</em> , <em>Javascript</em> , <em>PHP</em> (sous le framework Symfony, version 4.4)
+## Démo
+[!Demo](https://user-images.githubusercontent.com/75143414/151706233-0948994a-22eb-4966-89dd-528d01ff0dde.mp4)
+
+## Développement
+### -  Technologies utilisées </h3>
+ 
+Le projet est donc un site web conçu en **HTML**, **CSS**, **Javascript**, **PHP** (sous le framework Symfony, version 4.4)
   
-  <h3> -  Auteurs </h3>
-  US a été conçu et développé dans le cadre d'un projet du DUT Informatique de l'IUT de Bayonne et du Pays Basque par le groupe composé de :
-  <ul>
-    <li> BLANDIN Ewen (Chef de Projet) </li>
-    <li> CAZABAT Alix </li>
-    <li> GANDOLFI Chiara (Chef de Projet) </li>
-    <li> MASSIAS Paul </li>
-   </ul>
-   <em style="font-size:10px;"> (Nous avons été nos propres commanditaires) </em> <br>
-   <br> Le projet a été suivi et tutoré par : Patrick Etcheverry.
-   
-   <h3> -  Documentation </h3>
-   (à venir)
+### -  Auteurs </h3>
+
+US a été conçu et développé dans le cadre d'un projet du DUT Informatique de l'IUT de Bayonne et du Pays Basque par le groupe composé de :
+* BLANDIN Ewen (Chef de Projet)
+* CAZABAT Alix
+* GANDOLFI Chiara (Chef de Projet)
+* MASSIAS Paul
+
+Le projet a été suivi et tutoré par : Patrick Etcheverry.
+
